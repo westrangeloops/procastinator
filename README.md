@@ -5,6 +5,7 @@
    <br>
     <br>
         My config is provided too much bleeding-edge. If you blindly run my install script, you got headache
+    Now My Main WM is niri the Goat 
     </br>
       <img src="./.github/assets/pallet/macchiato.png" width="600px" /> <br>
 
