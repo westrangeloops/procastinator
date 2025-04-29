@@ -42,7 +42,7 @@
    <img src="./.github/assets/screenshots/7.png" style="margin-bottom: 10px;"/> <br>
    <img src="./.github/assets/screenshots/hyprlock.png" style="margin-bottom: 10px;"/> <br>
 
-  Screenshots last updated <b>2025-3-12</b>
+  Screenshots last updated <b>2025-4-29</b>
 </p>
 
 ### 🖼️ Gallery for Niri the Goat
@@ -56,7 +56,7 @@
    <img src="./.github/assets/screenshots/niri-6.png" style="margin-bottom: 10px;"/> <br>  
    <img src="./.github/assets/screenshots/hyprlock.png" style="margin-bottom: 10px;"/> <br>
 
-  Screenshots last updated <b>2025-3-12</b>
+  Screenshots last updated <b>2025-4-29</b>
 </p>
 
 
