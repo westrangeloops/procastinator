@@ -4,7 +4,7 @@
 
 #  hostname = "${hostname}";
 #  username = "${username}";
-  configDirectory = "/home/antonio/NixOS-Hyprland/";
+  configDirectory = "/home/antonio/shizuru/";
   gitUsername = "maotseantonio";
   gitEmail = "thetzinantonio@gmail.com";
 

@@ -4,7 +4,7 @@
   inputs,
   ...
 }: let
-  configDirectory = "/home/antonio/NixOS-Hyprland/";
+  configDirectory = "/home/antonio/shizuru/";
   hostname = "shizuru";
 
   nixy =
@@ -55,8 +55,8 @@
       elif [[ $1 == "cb" ]];then
         sudo /run/current-system/bin/switch-to-configuration boot
       elif [[ $1 == "remote" ]];then
-        cd ~/NixOS-Hyprland/ && git add . && git commit -m "update" && git push
-        ssh jack -S -C "cd /home/antonio/NixOS-Hyprland && git pull && sudo -S nixos-rebuild switch --flake ~/NixOS-Hyprland/hosts/.#shizuru"
+        cd ~/shizuru/ && git add . && git commit -m "update" && git push
+        ssh jack -S -C "cd /home/antonio/shizuru && git pull && sudo -S nixos-rebuild switch --flake ~/shizuru/hosts/.#shizuru"
       elif [[ $1 == "loop" ]];then
         while true; do
           nixy
