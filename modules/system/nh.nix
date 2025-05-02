@@ -11,7 +11,7 @@
 }: {
   programs.nh = {
     enable = true;
-    flake = "/home/antonio/NixOS-Hyprland";
+    flake = "/home/antonio/shizuru/";
     clean = {
       enable = true;
       extraArgs = "--keep-since 3d --keep 3";

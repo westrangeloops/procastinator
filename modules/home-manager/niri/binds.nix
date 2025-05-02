@@ -9,7 +9,7 @@
     brillo = spawn "${pkgs.brillo}/bin/brillo" "-q" "-u" "300000";
     playerctl = spawn "${pkgs.playerctl}/bin/playerctl";
     control-center = spawn "env" "XDG_CURRENT_DESKTOP=gnome" "gnome-control-center";
-    clipboard = spawn "sh" "-c" "~/.config/hypr/scripts/ClipManager.sh";
+    wallPicker = spawn "walker" "-m" "wallpaper";
     walker-clip = spawn "walker" "-m" "clipboard";
   in {
     "XF86AudioMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
@@ -38,10 +38,12 @@
     "Ctrl+Alt+L".action = spawn "hyprlock";
     "Mod+T".action = spawn "thunar";
     "Mod+U".action = control-center;
+    "Mod+E".action = wallPicker;
     "Mod+Backspace".action = spawn "wlogout-new";
     "Mod+Q".action = close-window;
     "Mod+S".action = switch-preset-column-width;
     "Mod+F".action = maximize-column;
+    "Mod+M".action = spawn "niri-edit";
     # "Mod+Shift+F".action = fullscreen-window;
     "Mod+Shift+F".action = expand-column-to-available-width;
     "Mod+Space".action = toggle-window-floating;

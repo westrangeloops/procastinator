@@ -1,0 +1,323 @@
+input {
+    keyboard {
+        xkb {
+            layout "us,mm"
+            variant ",tamilnet"
+            options "grp:ctrl_space_toggle"
+        }
+    }
+
+    // Omitting touchpad settings disables them, or leaves them at their default values.
+touchpad {
+        tap
+         dwt
+         dwtp
+         natural-scroll
+        accel-speed 0.000000
+        accel-profile "adaptive"
+        scroll-method "two-finger"
+        click-method "button-areas"
+        tap-button-map "left-right-middle"
+        scroll-factor 0.700000
+    }
+
+mouse {
+        // natural-scroll
+        // accel-speed 0.2
+        // accel-profile "flat"
+    }
+
+    // Uncomment this to make the mouse warp to the center of newly focused windows.
+    // warp-mouse-to-focus
+
+    // Focus windows and outputs automatically when moving the mouse into them.
+    focus-follows-mouse
+}
+
+layout {
+    // Set gaps around windows in logical pixels.
+    gaps 6
+    center-focused-column "never"
+    always-center-single-column
+preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+
+        // fixed 1920
+    }
+
+focus-ring {
+        off
+    }
+
+border {
+        width 3
+        active-gradient angle=45 from="#f7768e" relative-to="window" to="#bb9af7"
+        inactive-gradient angle=45 from="#414868" relative-to="window" to="#f7768e"
+    }
+shadow {
+        on
+        softness 10
+        spread 3
+        offset x=0 y=2
+        draw-behind-window false
+        color "#00000080"
+        inactive-color "#00000060"
+    }
+insert-hint {
+        // off
+        color "#ffc87f80"
+        gradient from="#ffbb6680" to="#ffc88080" angle=45 relative-to="workspace-view"
+    }
+tab-indicator {
+        // off
+        hide-when-single-tab
+        place-within-column
+        gap 5
+        width 4
+        length total-proportion=1.0
+        position "left"
+        gaps-between-tabs 2
+        corner-radius 8
+        active-color "bf616a"
+        inactive-color "d08770"
+        // active-gradient from="#80c8ff" to="#bbddff" angle=45
+        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+    }
+}
+output "HDMI-A-1" {
+    scale 1.000000
+    transform "normal"
+    position x=0 y=-1080
+    mode "1920x1080"
+}
+output "eDP-1" {
+    scale 1.000000
+    transform "normal"
+    position x=0 y=0
+    mode "2160x1440"
+}
+workspace "common"
+workspace "media"
+prefer-no-csd
+spawn-at-startup "/nix/store/75lv1npbf6zhsy1lk3v7z9indvwgm96d-polkit-gnome-0.105/libexec/polkit-gnome-authentication-agent-1"
+spawn-at-startup "wl-paste --type image --watch cliphist store"
+spawn-at-startup "wl-paste --type text --watch cliphist store"
+spawn-at-startup "xwayland-satalite"
+spawn-at-startup "swww-daemon"
+spawn-at-startup "uwsm finalize"
+spawn-at-startup "new-bar"
+spawn-at-startup "/nix/store/yr8pk0gw4iq40fc53gfnxf7hf44xm1wa-niri-wallpaper/bin/niri-wallpaper"
+spawn-at-startup "/nix/store/abvdx0za4zcw2s5y457l5f3cqxyja3fn-xdg-desktop-portal-gnome-47.3/libexec/xdg-desktop-portal-gnome"
+spawn-at-startup "wayland-satalite"
+spawn-at-startup " dbus-update-activation-environment --all"
+spawn-at-startup " systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+environment {
+    "CLUTTER_BACKEND" "wayland"
+    DISPLAY null
+    "ELECTRON_OZONE_PLATFORM_HINT" "auto"
+    "GDK_BACKEND" "wayland,x11"
+    "JAVA_AWT_WM_NONEREPARENTING" "1"
+    "MOZ_ENABLE_WAYLAND" "1"
+    "NIXOS_OZONE_WL" "1"
+    "OZONE_PLATFORM" "wayland"
+    "QT_QPA_PLATFORM" "wayland;xcb"
+    "QT_QPA_PLATFORMTHEME" "qt6ct"
+    "QT_STYLE_OVERRIDE" "kvantum"
+    "QT_WAYLAND_DISABLE_WINDOWDECORATION" "1"
+    "SDL_VIDEODRIVER" "wayland"
+}
+
+screenshot-path "~/Pictures/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+// You can also set this to null to disable saving screenshots to disk.
+// screenshot-path null
+
+animations {
+    slowdown 2.0
+    window-open {
+      duration-ms 200
+      curve "linear"
+      custom-shader r"
+    
+    vec4 expanding_circle(vec3 coords_geo, vec3 size_geo) {
+    vec3 coords_tex = niri_geo_to_tex * coords_geo;
+    vec4 color = texture2D(niri_tex, coords_tex.st);
+    vec2 coords = (coords_geo.xy - vec2(0.5, 0.5)) * size_geo.xy * 2.0;
+    coords = coords / length(size_geo.xy);
+    float p = niri_clamped_progress;
+    if (p * p <= dot(coords, coords))
+    color = vec4(0.0);
+
+    return color;
+  }
+
+    vec4 open_color(vec3 coords_geo, vec3 size_geo) {
+    return expanding_circle(coords_geo, size_geo);
+   }
+  "
+ }
+
+   window-close {
+      duration-ms 250
+      curve "linear"
+      custom-shader r"
+
+    vec4 fall_and_rotate(vec3 coords_geo, vec3 size_geo) {
+    float progress = niri_clamped_progress * niri_clamped_progress;
+    vec2 coords = (coords_geo.xy - vec2(0.5, 1.0)) * size_geo.xy;
+    coords.y -= progress * 1440.0;
+    float random = (niri_random_seed - 0.5) / 2.0;
+    random = sign(random) - random;
+    float max_angle = 0.5 * random;
+    float angle = progress * max_angle;
+    mat2 rotate = mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
+    coords = rotate * coords;
+    coords_geo = vec3(coords / size_geo.xy + vec2(0.5, 1.0), 1.0);
+    vec3 coords_tex = niri_geo_to_tex * coords_geo;
+    vec4 color = texture2D(niri_tex, coords_tex.st);
+
+    return color;
+  }
+
+    vec4 close_color(vec3 coords_geo, vec3 size_geo) {
+    return fall_and_rotate(coords_geo, size_geo);
+     }
+    "
+   }
+}
+
+window-rule {
+    geometry-corner-radius 8
+    clip-to-geometry true
+}
+
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    block-out-from "screen-capture"
+
+    // block-out-from "screencast"
+}
+
+window-rule {
+    draw-border-with-background false
+    match is-active=true
+    match is-active=false
+    opacity 0.98
+}
+
+window-rule {
+    match app-id="libreoffice-calc"
+    match app-id="org.keepassxc.KeePassXC"
+    match app-id="librewolf"
+    match app-id="org.pwmt.zathura"
+    match app-id="galculator"
+    opacity 0.95
+}
+
+window-rule {
+    match app-id="mpv"
+    match title="swayimg"
+    opacity 1.0
+}
+
+window-rule {
+   match app-id="foot$"
+   match app-id="thunar$"
+   match app-id="mpv$"
+   match app-id="geany$"
+   match app-id="org.qutebrowser.qutebrowser$"
+   match app-id="librewolf$"
+   open-maximized true
+   // default-column-width { fixed 1300; }
+}
+
+window-rule {
+    match app-id="org.keepassxc.KeePassXC"
+    match app-id="deadbeef"
+    match app-id="goodvibes"
+    match app-id="de.haeckerfelix.Shortwave"
+    match app-id="transmission-gtk"
+    match app-id="org.telegram.desktop"
+    match app-id="galculator"
+    match app-id="com.github.wwmm.easyeffects"
+    open-floating true
+}
+
+window-rule {
+    match app-id="thunar" title="File Operation Progress"
+    match app-id="librewolf" title="Opening .*"
+    match app-id="librewolf" title="About LibreWolf"
+    match app-id="engramba" title="Extract .*"
+    match app-id="xfce-polkit"
+    open-floating true
+}
+binds {
+    Alt+Space { spawn "/nix/store/2wlcrd4z0bfz7ybi26iks28k7ckgx8i6-anyrun-0-unstable-2025-04-04/bin/anyrun"; }
+    Ctrl+Alt+L { spawn "hyprlock"; }
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+    Mod+Backspace { spawn "wlogout-new"; }
+    Mod+C { center-window; }
+    Mod+Comma { consume-window-into-column; }
+    Mod+D { spawn "/nix/store/lrh9mwnby2b4dy04s46hy6amifdz7djc-walker-0.12.22-git/bin/walker"; }
+    Mod+Down { focus-workspace-down; }
+    Mod+E { spawn "walker" "-m" "wallpaper"; }
+    Mod+Equal { set-column-width "+10%"; }
+    Mod+F { maximize-column; }
+    Mod+H { focus-column-left; }
+    Mod+J { focus-window-or-workspace-down; }
+    Mod+K { focus-window-or-workspace-up; }
+    Mod+L { focus-column-right; }
+    Mod+Left { focus-column-left; }
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Period { expel-window-from-column; }
+    Mod+Q { close-window; }
+    Mod+Return { spawn "/nix/store/0jq5syxpxpf8f5504hjxw828r5ap13wa-kitty-0.41.1/bin/kitty"; }
+    Mod+Right { focus-column-right; }
+    Mod+S { switch-preset-column-width; }
+    Mod+Shift+Alt+S { screenshot-window; }
+    Mod+Shift+Ctrl+J { move-column-to-monitor-down; }
+    Mod+Shift+Ctrl+K { move-column-to-monitor-up; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
+    Mod+Shift+F { expand-column-to-available-width; }
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+J { move-column-to-workspace-down; }
+    Mod+Shift+K { move-column-to-workspace-up; }
+    Mod+Shift+L { move-column-right; }
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Return { spawn "/nix/store/jdfjy47hw5razgcvikq00rm8nw2cax5z-ghostty-1.1.4/bin/ghostty"; }
+    Mod+Shift+S { screenshot; }
+    Mod+Space { toggle-window-floating; }
+    Mod+T { spawn "thunar"; }
+    Mod+Tab { switch-focus-between-floating-and-tiling; }
+    Mod+U { spawn "env" "XDG_CURRENT_DESKTOP=gnome" "gnome-control-center"; }
+    Mod+Up { focus-workspace-up; }
+    Mod+V { spawn "walker" "-m" "clipboard"; }
+    Mod+W { toggle-column-tabbed-display; }
+    Print { screenshot-screen write-to-disk=true; }
+    XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+    XF86AudioMicMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioNext { spawn "/nix/store/h1w4v23xgk2pa1nr5yx28svfwasa22hp-playerctl-2.4.1/bin/playerctl" "next"; }
+    XF86AudioPlay { spawn "/nix/store/h1w4v23xgk2pa1nr5yx28svfwasa22hp-playerctl-2.4.1/bin/playerctl" "play-pause"; }
+    XF86AudioPrev { spawn "/nix/store/h1w4v23xgk2pa1nr5yx28svfwasa22hp-playerctl-2.4.1/bin/playerctl" "previous"; }
+    XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+    XF86AudioStop { spawn "/nix/store/h1w4v23xgk2pa1nr5yx28svfwasa22hp-playerctl-2.4.1/bin/playerctl" "pause"; }
+    XF86MonBrightnessDown { spawn "/nix/store/vc7sdpppl3apx2apwg9lphn2lr019rrj-brillo-1.4.13/bin/brillo" "-q" "-u" "300000" "-U" "5"; }
+    XF86MonBrightnessUp { spawn "/nix/store/vc7sdpppl3apx2apwg9lphn2lr019rrj-brillo-1.4.13/bin/brillo" "-q" "-u" "300000" "-A" "5"; }
+}
+
