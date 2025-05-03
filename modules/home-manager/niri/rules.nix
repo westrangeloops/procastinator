@@ -125,12 +125,12 @@
       };
     }
     {
-        matches = [
-            {app-id = "^(org.wezfurlong.wezterm)$";}
-            {app-id = "^(kitty)$";}
-            {app-id = "^(com.mitchellh.ghostty)$";}
-        ];
-        opacity = 0.96;
+      matches = [
+        {app-id = "^(org.wezfurlong.wezterm)$";}
+        {app-id = "^(kitty)$";}
+        {app-id = "^(com.mitchellh.ghostty)$";}
+      ];
+      opacity = 0.96;
     }
   ];
 in {

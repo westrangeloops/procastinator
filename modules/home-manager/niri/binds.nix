@@ -9,6 +9,7 @@
     brillo = spawn "${pkgs.brillo}/bin/brillo" "-q" "-u" "300000";
     playerctl = spawn "${pkgs.playerctl}/bin/playerctl";
     control-center = spawn "env" "XDG_CURRENT_DESKTOP=gnome" "gnome-control-center";
+    brightness = spawn "$HOME/.local/bin/brightness";
     wallPicker = spawn "walker" "-m" "wallpaper";
     walker-clip = spawn "walker" "-m" "clipboard";
   in {
@@ -23,8 +24,8 @@
     "XF86AudioRaiseVolume".action = set-volume "5%+";
     "XF86AudioLowerVolume".action = set-volume "5%-";
 
-    "XF86MonBrightnessUp".action = brillo "-A" "5";
-    "XF86MonBrightnessDown".action = brillo "-U" "5";
+    "XF86MonBrightnessUp".action = brightness "--inc";
+    "XF86MonBrightnessDown".action = brightness "--dec";
 
     "Print".action.screenshot-screen = {write-to-disk = true;};
     "Mod+Shift+Alt+S".action = screenshot-window;
@@ -53,7 +54,7 @@
     "Mod+Period".action = expel-window-from-column;
     "Mod+C".action = center-window;
     "Mod+Tab".action = switch-focus-between-floating-and-tiling;
-    
+
     "Mod+1".action = focus-workspace 1;
     "Mod+2".action = focus-workspace 2;
     "Mod+3".action = focus-workspace 3;

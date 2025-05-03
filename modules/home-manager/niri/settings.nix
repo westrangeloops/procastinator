@@ -1,4 +1,4 @@
-{ 
+{
   config,
   pkgs,
   inputs,
@@ -10,27 +10,27 @@
   };
   wallpaperScript = pkgs.writeScriptBin "niri-wallpaper" (builtins.readFile ./wallpaperAutoChange.sh);
 in {
-    xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-gnome pkgs.gnome-keyring];
-    home.packages = [ pkgs.wl-clipboard inputs.astal.packages.${pkgs.system}.default wallpaperScript];
-    programs.niri = {
-        enable = true;
-        package = pkgs.niri-unstable;
-        settings = {
-            environment = {
-                CLUTTER_BACKEND = "wayland";
-                DISPLAY = null;
-                GDK_BACKEND = "wayland,x11";
-                MOZ_ENABLE_WAYLAND = "1";
-                NIXOS_OZONE_WL = "1";
-                QT_QPA_PLATFORM = "wayland;xcb";
-                QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-                SDL_VIDEODRIVER = "wayland";
-                QT_QPA_PLATFORMTHEME = "qt6ct";
-                QT_STYLE_OVERRIDE = "kvantum";
-                ELECTRON_OZONE_PLATFORM_HINT = "auto";
-                OZONE_PLATFORM = "wayland";
-                JAVA_AWT_WM_NONEREPARENTING = "1";
-                #WAYLAND_DISPLAY = "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY";
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-gnome pkgs.gnome-keyring];
+  home.packages = [pkgs.wl-clipboard inputs.astal.packages.${pkgs.system}.default wallpaperScript];
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri-unstable;
+    settings = {
+      environment = {
+        CLUTTER_BACKEND = "wayland";
+        DISPLAY = null;
+        GDK_BACKEND = "wayland,x11";
+        MOZ_ENABLE_WAYLAND = "1";
+        NIXOS_OZONE_WL = "1";
+        QT_QPA_PLATFORM = "wayland;xcb";
+        QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+        SDL_VIDEODRIVER = "wayland";
+        QT_QPA_PLATFORMTHEME = "qt6ct";
+        QT_STYLE_OVERRIDE = "kvantum";
+        ELECTRON_OZONE_PLATFORM_HINT = "auto";
+        OZONE_PLATFORM = "wayland";
+        JAVA_AWT_WM_NONEREPARENTING = "1";
+        #WAYLAND_DISPLAY = "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY";
       };
       spawn-at-startup = [
         (makeCommand "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1")
@@ -39,14 +39,13 @@ in {
         (makeCommand "xwayland-satalite")
         (makeCommand "swww-daemon")
         (makeCommand "uwsm finalize")
-        (makeCommand "new-bar")
+        (makeCommand "eww-bar")
         (makeCommand "${wallpaperScript}/bin/niri-wallpaper")
         (makeCommand "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
         (makeCommand "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
         (makeCommand "dbus-update-activation-environment --all")
         (makeCommand "${pkgs.xdg-desktop-portal-gnome}/libexec/xdg-desktop-portal-gnome")
         (makeCommand "wayland-satalite")
-
       ];
       input = {
         keyboard.xkb.layout = "us";
@@ -66,13 +65,14 @@ in {
         warp-mouse-to-focus = true;
         workspace-auto-back-and-forth = true;
       };
+      #backdrop-color = "#11121d"; # Tokyo Night background color
       screenshot-path = "~/Pictures/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
       outputs = {
         "eDP-1" = {
           mode = {
-              width = 2160;
-              height = 1440;
-              refresh = null;
+            width = 2160;
+            height = 1440;
+            refresh = null;
           };
           scale = 1.0;
           position = {
@@ -103,26 +103,29 @@ in {
           enable = true;
           width = 3;
           active = {
-                gradient = {
-                    from = "#f7768e";  # Tokyo Night red
-                    to = "#bb9af7";    # Tokyo Night purple/magenta
-                    angle = 45;        # Diagonal gradient
-                 };
+            gradient = {
+              from = "#bb9af7"; # Tokyo Night red
+              to = "#f7768e"; # Tokyo Night purple/magenta
+              angle = 45; # Diagonal gradient
             };
+          };
           inactive = {
-                gradient = {
-                    from = "#414868";  # Dark gray (Tokyo Night)
-                    to = "#f7768e";     # Fade to muted red
-                    angle = 45;
-                 };
+            gradient = {
+              from = "#414868"; # Dark gray (Tokyo Night)
+              to = "#f7768e"; # Fade to muted red
+              angle = 45;
             };
+          };
         };
         shadow = {
           enable = true;
           softness = 40;
-          spread = 6;           # Blur strength
-          offset = { x = 2; y = 2; };  # Shadow direction
-          color = "rgba(0, 0, 0, 0.5)";  # Semi-transparent black
+          spread = 6; # Blur strength
+          offset = {
+            x = 2;
+            y = 2;
+          }; # Shadow direction
+          color = "rgba(0, 0, 0, 0.5)"; # Semi-transparent black
         };
         preset-column-widths = [
           {proportion = 0.33;}
@@ -151,71 +154,64 @@ in {
           length.total-proportion = 0.1;
         };
       };
-            animations = {
-                enable = true;
-                slowdown = 2.0;
-                window-open ={
-                    easing = {
-                       curve = "linear";
-                       duration-ms = 200;
-                    };
-                };
-                window-close = {
-                    easing = {
-                       curve = "linear";
-                       duration-ms = 250;
-                    };
-                };
-                shaders.window-open = ''
-                     
-    
-                      vec4 expanding_circle(vec3 coords_geo, vec3 size_geo) {
-                      vec3 coords_tex = niri_geo_to_tex * coords_geo;
-                      vec4 color = texture2D(niri_tex, coords_tex.st);
-                      vec2 coords = (coords_geo.xy - vec2(0.5, 0.5)) * size_geo.xy * 2.0;
-                      coords = coords / length(size_geo.xy);
-                      float p = niri_clamped_progress;
-                      if (p * p <= dot(coords, coords))
-                      color = vec4(0.0);
-
-    return color;
-  }
-
-                     vec4 open_color(vec3 coords_geo, vec3 size_geo) {
-                     return expanding_circle(coords_geo, size_geo);
-    }
-                    '';
-                 shaders.window-close = ''
-                
-                     vec4 fall_and_rotate(vec3 coords_geo, vec3 size_geo) {
-                     float progress = niri_clamped_progress * niri_clamped_progress;
-                     vec2 coords = (coords_geo.xy - vec2(0.5, 1.0)) * size_geo.xy;
-                     coords.y -= progress * 1440.0;
-                     float random = (niri_random_seed - 0.5) / 2.0;
-                     random = sign(random) - random;
-                     float max_angle = 0.5 * random;
-                     float angle = progress * max_angle;
-                     mat2 rotate = mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
-                     coords = rotate * coords;
-                     coords_geo = vec3(coords / size_geo.xy + vec2(0.5, 1.0), 1.0);
-                     vec3 coords_tex = niri_geo_to_tex * coords_geo;
-                     vec4 color = texture2D(niri_tex, coords_tex.st);
-
-                     return color;
-  }
-
-                     vec4 close_color(vec3 coords_geo, vec3 size_geo) {
-                     return fall_and_rotate(coords_geo, size_geo);
-     }
-    
-                
-                '';
-
-
-                  
+      animations = {
+        enable = true;
+        slowdown = 2.0;
+        window-open = {
+          easing = {
+            curve = "linear";
+            duration-ms = 200;
+          };
         };
-        animations.shaders.window-resize = ''
-        vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
+        window-close = {
+          easing = {
+            curve = "linear";
+            duration-ms = 250;
+          };
+        };
+        shaders.window-open = ''
+                              vec4 expanding_circle(vec3 coords_geo, vec3 size_geo) {
+                              vec3 coords_tex = niri_geo_to_tex * coords_geo;
+                              vec4 color = texture2D(niri_tex, coords_tex.st);
+                              vec2 coords = (coords_geo.xy - vec2(0.5, 0.5)) * size_geo.xy * 2.0;
+                              coords = coords / length(size_geo.xy);
+                              float p = niri_clamped_progress;
+                              if (p * p <= dot(coords, coords))
+                              color = vec4(0.0);
+
+            return color;
+          }
+                             vec4 open_color(vec3 coords_geo, vec3 size_geo) {
+                             return expanding_circle(coords_geo, size_geo);
+            }
+        '';
+        shaders.window-close = ''
+                             vec4 fall_and_rotate(vec3 coords_geo, vec3 size_geo) {
+                             float progress = niri_clamped_progress * niri_clamped_progress;
+                             vec2 coords = (coords_geo.xy - vec2(0.5, 1.0)) * size_geo.xy;
+                             coords.y -= progress * 1440.0;
+                             float random = (niri_random_seed - 0.5) / 2.0;
+                             random = sign(random) - random;
+                             float max_angle = 0.5 * random;
+                             float angle = progress * max_angle;
+                             mat2 rotate = mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
+                             coords = rotate * coords;
+                             coords_geo = vec3(coords / size_geo.xy + vec2(0.5, 1.0), 1.0);
+                             vec3 coords_tex = niri_geo_to_tex * coords_geo;
+                             vec4 color = texture2D(niri_tex, coords_tex.st);
+
+                             return color;
+          }
+
+                             vec4 close_color(vec3 coords_geo, vec3 size_geo) {
+                             return fall_and_rotate(coords_geo, size_geo);
+             }
+
+
+        '';
+      };
+      animations.shaders.window-resize = ''
+          vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
           vec3 coords_next_geo = niri_curr_geo_to_next_geo * coords_curr_geo;
 
           vec3 coords_stretch = niri_geo_to_tex_next * coords_curr_geo;
@@ -270,6 +266,6 @@ in {
       OnCalendar = "*-*-* 00:01:00";
       Persistent = true;
     };
-    Install.WantedBy = [ "timers.target" ];
+    Install.WantedBy = ["timers.target"];
   };
 }

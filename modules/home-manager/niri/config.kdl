@@ -13,12 +13,12 @@ touchpad {
          dwt
          dwtp
          natural-scroll
-        accel-speed 0.000000
-        accel-profile "adaptive"
-        scroll-method "two-finger"
-        click-method "button-areas"
-        tap-button-map "left-right-middle"
-        scroll-factor 0.700000
+         accel-speed 0.000000
+         accel-profile "adaptive"
+         scroll-method "two-finger"
+         click-method "button-areas"
+         tap-button-map "left-right-middle"
+         scroll-factor 0.700000
     }
 
 mouse {
@@ -145,7 +145,7 @@ animations {
       duration-ms 200
       curve "linear"
       custom-shader r"
-    
+
     vec4 expanding_circle(vec3 coords_geo, vec3 size_geo) {
     vec3 coords_tex = niri_geo_to_tex * coords_geo;
     vec4 color = texture2D(niri_tex, coords_tex.st);

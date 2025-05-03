@@ -12,7 +12,7 @@
     inputs.hyprland.homeManagerModules.default
     inputs.catppuccin.homeModules.catppuccin
   ];
-
+#home-manager.backupFileExtension = ".bkp";
   programs.direnv = {
     enable = true;
     enableFishIntegration = true;

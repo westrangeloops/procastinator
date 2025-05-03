@@ -3,11 +3,17 @@
   pkgs,
   ...
 }: {
-  imports = [inputs.niri.homeModules.niri ./settings.nix ./binds.nix ./rules.nix];
+  imports = [
+    inputs.niri.homeModules.niri
+    ./settings.nix
+    ./binds.nix
+    ./rules.nix
+  ];
   home = {
     packages = with pkgs; [
       seatd
       jaq
+      eww
       brillo
       qt6.qtwayland
       wl-clip-persist
@@ -18,7 +24,6 @@
       catppuccin-cursors.mochaGreen
     ];
     sessionVariables = {
-            #      QT_QPA_PLATFORMTHEME = "kvantum";
       QT_STYLE_OVERRIDE = "kvantum";
       XDG_SESSION_TYPE = "wayland";
     };
