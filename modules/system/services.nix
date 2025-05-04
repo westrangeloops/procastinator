@@ -21,7 +21,7 @@
         variant = "";
       };
     };
-
+    
     smartd = {
       enable = false;
       autodetect = true;
@@ -32,6 +32,10 @@
     udev.enable = true; 
     envfs.enable = true;
     dbus.enable = true;
+    dbus.packages = with pkgs; [
+      gcr
+      gnome-settings-daemon
+    ];
     fstrim = {
       enable = true;
       interval = "weekly";
@@ -61,11 +65,11 @@
 
     #ipp-usb.enable = true;
 
-    #syncthing = {
-    #  enable = false;
-    #  user = "${username}";
-    #  dataDir = "/home/${username}";
-    #  configDir = "/home/${username}/.config/syncthing";
-    #};
+    syncthing = {
+     enable = false;
+     user = "${username}";
+     dataDir = "/home/${username}";
+     configDir = "/home/${username}/.config/syncthing";
+    };
   };
 }

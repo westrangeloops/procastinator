@@ -97,6 +97,7 @@ in {
         size = 32;
         theme = "${pointer.name}";
       };
+      #background = "#11121d"; # Tokyo Night background color
       layout = {
         focus-ring.enable = false;
         border = {

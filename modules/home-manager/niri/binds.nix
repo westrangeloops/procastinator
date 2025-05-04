@@ -9,7 +9,6 @@
     brillo = spawn "${pkgs.brillo}/bin/brillo" "-q" "-u" "300000";
     playerctl = spawn "${pkgs.playerctl}/bin/playerctl";
     control-center = spawn "env" "XDG_CURRENT_DESKTOP=gnome" "gnome-control-center";
-    brightness = spawn "$HOME/.local/bin/brightness";
     wallPicker = spawn "walker" "-m" "wallpaper";
     walker-clip = spawn "walker" "-m" "clipboard";
   in {
@@ -24,18 +23,18 @@
     "XF86AudioRaiseVolume".action = set-volume "5%+";
     "XF86AudioLowerVolume".action = set-volume "5%-";
 
-    "XF86MonBrightnessUp".action = brightness "--inc";
-    "XF86MonBrightnessDown".action = brightness "--dec";
+    "XF86MonBrightnessUp".action = spawn "brightness" "--inc";
+    "XF86MonBrightnessDown".action = spawn "brightness" "--dec";
 
     "Print".action.screenshot-screen = {write-to-disk = true;};
     "Mod+Shift+Alt+S".action = screenshot-window;
     "Mod+Shift+S".action = screenshot;
     "Mod+D".action = spawn "${inputs.walker.packages.${pkgs.system}.default}/bin/walker";
-    "Mod+Shift+Return".action = spawn "${
+    "Mod+Return".action = spawn "${
       inputs.ghostty.packages.${pkgs.system}.default
     }/bin/ghostty";
     "Alt+Space".action = spawn "${pkgs.anyrun}/bin/anyrun";
-    "Mod+Return".action = spawn "${pkgs.kitty}/bin/kitty";
+    "Mod+Shift+Return".action = spawn "${pkgs.kitty}/bin/kitty";
     "Ctrl+Alt+L".action = spawn "hyprlock";
     "Mod+T".action = spawn "thunar";
     "Mod+U".action = control-center;
