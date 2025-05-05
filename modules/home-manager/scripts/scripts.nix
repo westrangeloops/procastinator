@@ -23,7 +23,7 @@
   vm-start = pkgs.writeScriptBin "vm-start" (builtins.readFile ./scripts/vm-start.sh);
 
   ascii = pkgs.writeScriptBin "ascii" (builtins.readFile ./scripts/ascii.sh);
-  
+  cli-convert = pkgs.writeScriptBin "cli-convert" (builtins.readFile ./scripts/cli-convert.sh);
   record = pkgs.writeScriptBin "record" (builtins.readFile ./scripts/record.sh);
   statusbar = pkgs.writeScriptBin "statusbar" (builtins.readFile ./scripts/statusbar);
   apply-config = pkgs.writeScriptBin "apply-config" (builtins.readFile ./scripts/apply-config.sh);

@@ -164,7 +164,7 @@
     };
     in {
     nixosConfigurations = {
-      "${host}" = nixpkgs.lib.nixosSystem {
+      shizuru = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit system;
           inherit inputs;

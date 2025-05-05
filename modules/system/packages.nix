@@ -74,7 +74,8 @@
       atuin
       #bun
       dart-sass
-      #nodejs
+      readest
+      wf-recorder
       sassc
       libgtop
       starship
