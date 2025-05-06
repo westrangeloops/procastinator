@@ -17,6 +17,7 @@
     WLR_NO_HARDWARE_CURSORS = "1";
     XDG_SESSION_TYPE = "wayland";
     XDG_SESSION_DESKTOP = "Hyprland";
+    ANI_CLI_PLAYER = "vlc";
     SDL_VIDEODRIVER = "wayland";
     CLUTTER_BACKEND = "wayland"; 
   };

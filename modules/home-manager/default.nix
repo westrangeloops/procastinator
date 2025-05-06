@@ -23,10 +23,10 @@
     ./variables.nix
     ./zathura.nix
     ./hypridle.nix
-    ./anyrun
-    ./fabric/default.nix
+    #./anyrun
+    #./fabric/default.nix
     ./niri/default.nix
-    ./zellij/default.nix
+    #./zellij/default.nix
     ./scripts/scripts.nix
   ];
 }

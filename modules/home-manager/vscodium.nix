@@ -35,7 +35,7 @@
       usernamehw.errorlens
       yzhang.markdown-all-in-one
             #catppuccin.catppuccin-vsc
-      catppuccin.catppuccin-vsc-icons
+      #catppuccin.catppuccin-vsc-icons
       ms-vscode.live-server
       visualstudioexptteam.vscodeintellicode
     ];

@@ -30,7 +30,8 @@ in {
         ELECTRON_OZONE_PLATFORM_HINT = "auto";
         OZONE_PLATFORM = "wayland";
         JAVA_AWT_WM_NONEREPARENTING = "1";
-        #WAYLAND_DISPLAY = "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY";
+        ANI_CLI_PLAYER = "vlc";
+         #WAYLAND_DISPLAY = "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY";
       };
       spawn-at-startup = [
         (makeCommand "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1")

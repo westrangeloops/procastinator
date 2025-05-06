@@ -15,12 +15,12 @@ in  {
 
   config = mkIf cfg.enable {
    ### Useful ZFS maintenance ###
-   networking.hostId = "6f6be4ee";
+   networking.hostId = "4ea1e462";
    boot.supportedFilesystems = [ "zfs" ];
    boot.initrd.supportedFilesystems = [ "zfs" ];
    boot.zfs.devNodes = "/dev/disk/by-partuuid";
    boot.zfs.package = pkgs.zfs_cachyos;
-   #boot.zfs.package = pkgs.zfs;
+   #boot.zfs.package = pkgs.zfs_unstable;
    services.zfs = {
       autoSnapshot= {
         enable = true;

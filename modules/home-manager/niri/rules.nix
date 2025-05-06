@@ -54,6 +54,14 @@
       draw-border-with-background = false;
     }
     {
+      matches = [{app-id = "^niri$";}];
+              opacity = 1.0;
+    }
+    {
+      matches = [{is-focused = false;}];
+      opacity = 0.95;
+    }
+    {
       matches = [
         {is-floating = true;}
       ];

@@ -42,7 +42,7 @@ in {
   ];
   wayland.windowManager.hyprland.settings.exec-once = [
     "uwsm finalize"
-    "${pkgs.hyprpanel}/bin/hyprpanel"
+    #"${pkgs.hyprpanel}/bin/hyprpanel"
     "hyprctl setcursor ${pointer.name} 32"
     "wl-paste --type text --watch cliphist store"  
     "wl-paste --type image --watch cliphist store" 
@@ -63,4 +63,20 @@ in {
       pkgs.hyprlandPlugins.hyprscroller
     ];
   };
+  systemd.user.services.hyprpanel = {
+	Unit = {
+	   Description = "hyprpanel";
+	   After = "graphical-session.target";
+	   PartOf = "graphical-session.target";
+  };
+  Install.WantedBy = [ "graphical-session.target"];
+  Service = {
+	Type = "simple";
+        ExecStart = "${pkgs.hyprpanel}/bin/hyprpanel";
+        Restart = "always";
+	RestartSec = 1;
+	TimeoutStopSec = 10;	
+};
+
+ };
 }

@@ -39,7 +39,7 @@
       pkgs-master.networkmanagerapplet
       nwg-look # requires unstable channel
       nwg-dock-hyprland
-      inputs.hyprswitch.packages.${pkgs.system}.default
+      #inputs.hyprswitch.packages.${pkgs.system}.default
       pkgs-master.pamixer
       pkgs-master.gitui
       inputs.walker.packages.${pkgs.system}.default

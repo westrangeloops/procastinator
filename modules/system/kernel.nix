@@ -19,7 +19,7 @@ in {
   config = mkIf cfg.enable {
     boot = {
       kernelPackages = pkgs.linuxPackages_cachyos;
-      #kernelPackages = pkgs.linuxPackages_latest;
+      #kernelPackages = pkgs.linuxKernel.packages.linux_zen.zfs_unstable;
       consoleLogLevel = 0;
       kernelParams = [
         "quiet"
