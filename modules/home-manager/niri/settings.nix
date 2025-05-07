@@ -30,7 +30,7 @@ in {
         ELECTRON_OZONE_PLATFORM_HINT = "auto";
         OZONE_PLATFORM = "wayland";
         JAVA_AWT_WM_NONEREPARENTING = "1";
-        ANI_CLI_PLAYER = "vlc";
+        #ANI_CLI_PLAYER = "vlc";
          #WAYLAND_DISPLAY = "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY";
       };
       spawn-at-startup = [

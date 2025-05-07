@@ -56,7 +56,7 @@
     xdg-utils
     hyprpicker
     fastfetch
-    (mpv.override {scripts = [mpvScripts.mpris];})
+    mpv
   ]; 
   system.stateVersion = "25.05";
 }

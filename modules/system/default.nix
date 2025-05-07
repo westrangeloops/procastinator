@@ -40,6 +40,7 @@
     ./packages.nix
     ./nix.nix
     ./niri.nix
+    ./mpv.nix
     #./btrfs.nix
     ./zfs.nix
     ./zram.nix

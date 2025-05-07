@@ -51,6 +51,7 @@
   };
 
   catppuccin.enable = true;
+  catppuccin.mako.enable = false;
   # catppuccin.cursors = {
   #     enable = true;
   #     accent = "green";

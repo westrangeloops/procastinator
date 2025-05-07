@@ -31,6 +31,7 @@ in {
         intel-compute-runtime
         libva-utils
         libvdpau-va-gl
+        mesa
       ];
     };
   };

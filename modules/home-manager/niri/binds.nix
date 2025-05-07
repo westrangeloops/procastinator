@@ -10,7 +10,7 @@
     playerctl = spawn "${pkgs.playerctl}/bin/playerctl";
     control-center = spawn "env" "XDG_CURRENT_DESKTOP=gnome" "gnome-control-center";
     wallPicker = spawn "walker" "-m" "wallpaper";
-    walker-clip = spawn "walker" "-m" "clipboard";
+    walker-clip = spawn "niri-clip";
   in {
     "XF86AudioMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
     "XF86AudioMicMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle";
@@ -48,7 +48,7 @@
     "Mod+Shift+F".action = expand-column-to-available-width;
     "Mod+Space".action = toggle-window-floating;
     "Mod+W".action = toggle-column-tabbed-display;
-    "Mod+V".action = spawn "walker" "-m" "clipboard";
+    "Mod+V".action = spawn "niri-clip";
     "Mod+Comma".action = consume-window-into-column;
     "Mod+Period".action = expel-window-from-column;
     "Mod+C".action = center-window;

@@ -15,6 +15,7 @@
       jaq
       eww
       brillo
+      cage
       qt6.qtwayland
       wl-clip-persist
       cliphist
