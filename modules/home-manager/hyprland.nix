@@ -13,8 +13,8 @@ in {
   home.packages = [ pkgs.wl-clipboard ];
   wayland.windowManager.hyprland = {
     enable = true;
-    #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    package = pkgs.hyprland;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    #package = pkgs.hyprland;
     xwayland.enable = true;
   };
   wayland.windowManager.hyprland.systemd.enable = false;
@@ -34,7 +34,6 @@ in {
     source= $UserConfigs/UserSettings.conf
     source= $UserConfigs/WorkspaceRules.conf
     source= $HOME/.config/hypr/themes/mocha.conf
-    source = $HOME/.config/hypr/UserConfigs/hyprscroller.conf
     $mainMod = SUPER
   '';
   wayland.windowManager.hyprland.settings.bind = [
@@ -49,7 +48,8 @@ in {
   ];
   wayland.windowManager.hyprland = {
     plugins = [
-      #inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.borders-plus-plus
+      inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.borders-plus-plus
+      inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprscrolling
       #inputs.hyprscroller.packages.${pkgs.stdenv.hostPlatform.system}.hyprscroller
       # (pkgs.pkgs-master.hyprlandPlugins.hyprscroller.overrideAttrs {
       #   src = pkgs.fetchFromGitHub {
@@ -59,8 +59,8 @@ in {
       #     hash = "sha256-OYCcIsE25HqVBp8z76Tk1v+SuYR7W1nemk9mDS9GHM8=";
       #     };
       #  })
-      pkgs.hyprlandPlugins.borders-plus-plus
-      pkgs.hyprlandPlugins.hyprscroller
+      #pkgs.hyprlandPlugins.borders-plus-plus
+      #pkgs.hyprlandPlugins.hyprscroller
     ];
   };
   systemd.user.services.hyprpanel = {
