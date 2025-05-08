@@ -36,8 +36,11 @@ in {
         "nvidia-drm.fbdev=1"
         "modprobe.blacklist=iTCO_wdt"
         "nohibernate"
+        "i915.enable_guc=2"     # 2=GuC + HuC, 1=GuC only, 0=disable
+        "i915.fastboot=1"       # Faster boot times
+        "i915.enable_psr=0"
       ];
-      kernelModules = ["v4l2loopback"];
+      kernelModules = ["v4l2loopback" "kvm-intel" "drm"];
       extraModulePackages = [config.boot.kernelPackages.v4l2loopback];
       initrd = {
         verbose = false;

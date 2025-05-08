@@ -26,6 +26,7 @@ in {
       enable = true;
       extraPackages = with pkgs; [
         intel-media-driver
+        intel-vaapi-driver
         libva
         vaapiVdpau
         intel-compute-runtime
