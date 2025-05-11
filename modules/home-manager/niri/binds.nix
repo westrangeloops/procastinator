@@ -9,6 +9,7 @@
     brillo = spawn "${pkgs.brillo}/bin/brillo" "-q" "-u" "300000";
     playerctl = spawn "${pkgs.playerctl}/bin/playerctl";
     control-center = spawn "env" "XDG_CURRENT_DESKTOP=gnome" "gnome-control-center";
+    walkern = spawn "${inputs.walker.packages.${pkgs.system}.default}/bin/walker";
     wallPicker = spawn "walker" "-m" "wallpaper";
     walker-clip = spawn "niri-clip";
   in {
@@ -33,6 +34,8 @@
     "Mod+Return".action = spawn "${
       inputs.ghostty.packages.${pkgs.system}.default
     }/bin/ghostty";
+    "Mod+X".action = walkern "-m" "power";
+    "Alt+Tab".action = walkern "-m" "windows";
     "Mod+Shift+X".action = spawn "ani-cli" "--rofi";
     "Alt+Space".action = spawn "${pkgs.anyrun}/bin/anyrun";
     "Mod+Shift+Return".action = spawn "${pkgs.kitty}/bin/kitty";
@@ -49,7 +52,7 @@
     "Mod+Shift+F".action = expand-column-to-available-width;
     "Mod+Space".action = toggle-window-floating;
     "Mod+W".action = toggle-column-tabbed-display;
-    "Mod+V".action = spawn "niri-clip";
+    "Mod+V".action = walkern "-m" "clipboard";
     "Mod+Comma".action = consume-window-into-column;
     "Mod+Period".action = expel-window-from-column;
     "Mod+C".action = center-window;

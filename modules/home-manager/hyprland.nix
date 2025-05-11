@@ -79,7 +79,5 @@ in {
 };
 
  };
- home.file = {
-     ".config/hyprpanel/config.json".source = config.lib.file.mkOutOfStoreSymlink ./../../configs/hyprpanel/config.json;
- };
+ 
 }

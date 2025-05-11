@@ -37,6 +37,7 @@ in {
         (makeCommand "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1")
         (makeCommand "wl-paste --type image --watch cliphist store")
         (makeCommand "wl-paste --type text --watch cliphist store")
+        (makeCommand "wl-paste --watch walker --update-clipboard")
         (makeCommand "xwayland-satalite")
         (makeCommand "swww-daemon")
         (makeCommand "uwsm finalize")
@@ -46,7 +47,6 @@ in {
         (makeCommand "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
         (makeCommand "dbus-update-activation-environment --all")
         (makeCommand "${pkgs.xdg-desktop-portal-gnome}/libexec/xdg-desktop-portal-gnome")
-        (makeCommand "wayland-satalite")
       ];
       input = {
         keyboard.xkb.layout = "us";
