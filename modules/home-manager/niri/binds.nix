@@ -31,9 +31,7 @@
     "Mod+Shift+Alt+S".action = screenshot-window;
     "Mod+Shift+S".action = screenshot;
     "Mod+D".action = spawn "${inputs.walker.packages.${pkgs.system}.default}/bin/walker";
-    "Mod+Return".action = spawn "${
-      inputs.ghostty.packages.${pkgs.system}.default
-    }/bin/ghostty";
+    "Mod+Return".action = spawn "wezterm";
     "Mod+X".action = walkern "-m" "power";
     "Alt+Tab".action = walkern "-m" "windows";
     "Mod+Shift+X".action = spawn "ani-cli" "--rofi";
