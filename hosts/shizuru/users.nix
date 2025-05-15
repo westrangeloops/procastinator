@@ -8,7 +8,7 @@ in
   home-manager = {
       useUserPackages = true;
       useGlobalPkgs = true;
-      backupFileExtension = "bckp";
+      backupFileExtension = "backup";
       extraSpecialArgs = {
           inherit inputs username host;
       };

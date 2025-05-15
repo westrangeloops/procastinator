@@ -86,11 +86,27 @@
       spotify
       zoxide
       bibata-cursors
+      gpu-screen-recorder
+      libqalculate
+      dbus-glib
+      gtkmm4
+      komikku
+      mangal
+      mangareader
+      tmux
+      gtk4
       vivid
       (pkgs.callPackage ../../pkgs/nitch.nix { })
       nurl
+      wezterm 
+      yazi
       #firefox_nightly
-      socat
+      inputs.hyprsunset.packages.${pkgs.system}.hyprsunset 
+      pkgs-master.microfetch
+      socat 
+      hyprpicker  
+      hyprpanel
+      inputs.nyxexprs.packages.${pkgs.system}.ani-cli-git
     ]
     ++ (with pkgs.lua52Packages; [
       cjson

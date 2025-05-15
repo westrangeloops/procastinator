@@ -26,7 +26,7 @@
     ./flatpak.nix
     ./fonts.nix
     ./displaymanager.nix
-    ./wayland.nix
+    ./hyprland.nix
     ./network.nix
     ./scheduler.nix
     ./virtualization.nix
@@ -44,6 +44,7 @@
     #./btrfs.nix
     ./zfs.nix
     ./zram.nix
-    
+    ./hypridle.nix
+    ./cliphist.nix
   ];
 }

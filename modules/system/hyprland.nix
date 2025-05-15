@@ -8,10 +8,10 @@ let
     portalFlake = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 in
 {
-  programs = {
+   programs = {
     hyprland = {
       enable = true;
-      package = hyprFlake;
+      package = pkgs.hyprland;
       portalPackage = portalFlake; 
       xwayland.enable = true;
     };
@@ -53,4 +53,5 @@ in
       enableSSHSupport = true;
     };
   };
+  
 }

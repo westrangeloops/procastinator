@@ -12,7 +12,6 @@
     inputs.hyprland.homeManagerModules.default
     inputs.catppuccin.homeModules.catppuccin
   ];
-
   programs.direnv = {
     enable = true;
     enableFishIntegration = true;

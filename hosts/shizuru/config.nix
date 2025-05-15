@@ -26,6 +26,7 @@ in
   imports = [
     ./hardware.nix
     ./users.nix
+    ./hjem.nix
     ../../modules/system
 
   ];
@@ -113,9 +114,8 @@ in
     TERMINAL = "wezterm";
     VISUAL = "vscodium";
     GSK_RENDERER = "gl";
+    LIBVA_DRIVER_NAME = "iHD";             # Use NVIDIA for VDPAU           # Default to Intel for Wayland
     NIXPKGS_ALLOW_UNFREE = "1";
-    LIBVA_DRIVER_NAME = "iHD";             # Use NVIDIA for VDPAU
-    GBM_BACKEND = "intel-drm";           # Default to Intel for Wayland
     WLR_NO_HARDWARE_CURSORS = "1";       # Fix cursor issues in Hyprland
     __GLX_VENDOR_LIBRARY_NAME = "nvidia"; # NVIDIA GLX (when offloading)# Best for HD 620 (Kaby Lake)
   };

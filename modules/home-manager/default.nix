@@ -8,7 +8,7 @@
     ./home.nix
     ./git.nix
     ./cava.nix
-    ./cliphist.nix
+    #./cliphist.nix
     ./nixy.nix
     ./fhsenv.nix
     ./nvchad.nix
@@ -22,7 +22,7 @@
     ./equibop.nix
     ./variables.nix
     ./zathura.nix
-    ./hypridle.nix
+    #./hypridle.nix
     #./anyrun
     #./fabric/default.nix
     ./niri/default.nix

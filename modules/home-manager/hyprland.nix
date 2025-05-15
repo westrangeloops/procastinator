@@ -6,6 +6,9 @@
 }: let
   pointer = config.home.pointerCursor;
 in {
+    imports = [
+      ./ags.nix
+    ];
   home.sessionVariables = {
     XDG_SESSION_DESKTOP = "Hyprland";
     XDG_CURRENT_DESKTOP = "Hyprland";
@@ -13,8 +16,8 @@ in {
   home.packages = [ pkgs.wl-clipboard ];
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    #package = pkgs.hyprland;
+    #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    package = pkgs.hyprland;
     xwayland.enable = true;
   };
   wayland.windowManager.hyprland.systemd.enable = false;
@@ -48,8 +51,8 @@ in {
   ];
   wayland.windowManager.hyprland = {
     plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.borders-plus-plus
-      inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprscrolling
+      #inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.borders-plus-plus
+      #inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprscrolling
       #inputs.hyprscroller.packages.${pkgs.stdenv.hostPlatform.system}.hyprscroller
       # (pkgs.pkgs-master.hyprlandPlugins.hyprscroller.overrideAttrs {
       #   src = pkgs.fetchFromGitHub {
@@ -59,8 +62,8 @@ in {
       #     hash = "sha256-OYCcIsE25HqVBp8z76Tk1v+SuYR7W1nemk9mDS9GHM8=";
       #     };
       #  })
-      #pkgs.hyprlandPlugins.borders-plus-plus
-      #pkgs.hyprlandPlugins.hyprscroller
+      pkgs.hyprlandPlugins.borders-plus-plus
+      pkgs.hyprlandPlugins.hyprscroller
     ];
   };
   systemd.user.services.hyprpanel = {
@@ -72,8 +75,8 @@ in {
   Install.WantedBy = [ "graphical-session.target"];
   Service = {
 	Type = "simple";
-        ExecStart = "${pkgs.hyprpanel}/bin/hyprpanel";
-        Restart = "always";
+    ExecStart = "${pkgs.hyprpanel}/bin/hyprpanel";
+    Restart = "always";
 	RestartSec = 1;
 	TimeoutStopSec = 10;	
 };
