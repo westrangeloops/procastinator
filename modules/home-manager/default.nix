@@ -15,11 +15,11 @@
     ./textfox.nix
     ./nixcord.nix
     ./hyprland.nix
-    ./spicetify.nix
+    #./spicetify.nix
     ./vscodium.nix
     ./home-packages.nix
     ./ghostty.nix
-    ./equibop.nix
+    #./equibop.nix
     ./variables.nix
     ./zathura.nix
     #./hypridle.nix

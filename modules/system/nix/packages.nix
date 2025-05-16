@@ -69,8 +69,7 @@
       bluez-tools
       wgpu-utils
       gtk3
-      gtk4
-      fish
+      gtk4 
       atuin
       #bun
       dart-sass
@@ -96,9 +95,8 @@
       tmux
       gtk4
       vivid
-      (pkgs.callPackage ../../pkgs/nitch.nix { })
-      nurl
-      wezterm 
+      (pkgs.callPackage ../../../pkgs/nitch.nix { })
+      nurl 
       yazi
       #firefox_nightly
       inputs.hyprsunset.packages.${pkgs.system}.hyprsunset 

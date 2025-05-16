@@ -183,7 +183,6 @@
         };
         modules = [
           ./hosts/${host}/config.nix
-          inputs.spicetify-nix.nixosModules.default
           inputs.chaotic.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
           inputs.stylix.nixosModules.stylix

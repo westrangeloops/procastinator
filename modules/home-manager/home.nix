@@ -26,9 +26,7 @@
     enable = true;
     package = pkgs.gh;
   };
-  programs.lsd = {
-    enable = true;
-  };
+ 
   home.pointerCursor = {
     package = pkgs.lyra-cursors;
     name = "LyraR-cursors";
@@ -37,9 +35,6 @@
     x11.enable = true;
   };
   programs.btop = {
-    enable = true;
-  };
-  programs.bat = {
     enable = true;
   };
   programs.imv = {

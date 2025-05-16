@@ -1,0 +1,19 @@
+{
+    imports = [
+       ./bootloader.nix
+       ./flatpak.nix
+       ./grub.nix
+       ./kernel.nix
+       ./local-hardware-clock.nix
+       ./locale.nix
+       ./network.nix
+       ./plymouth.nix
+       ./powermanagement.nix
+       ./security.nix
+       ./services.nix
+       ./virtualization.nix
+       ./vm-guest-services.nix
+       ./zfs.nix
+       ./zram.nix
+    ];
+}
