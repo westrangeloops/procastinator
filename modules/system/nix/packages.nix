@@ -7,23 +7,32 @@
   options,
   chaotic,
   ...
-}:
+}: 
+let qs-install = inputs.quickshell.packages.${pkgs.stdenv.system}.default.override {
+        withJemalloc = true;
+        withQtSvg = true;
+        withWayland = true;
+        withX11 = true;
+        withPipewire = true;
+        withPam = true;
+        withHyprland = true;
+      };
+in
 {
-
   # _module.args.pkgs-master = import inputs.nixpkgs-master {
   #   inherit (pkgs.stdenv.hostPlatform) system;
   #   inherit (config.nixpkgs) config;
   # };
-  environment.systemPackages =
-    with pkgs;
-    [
+  environment.systemPackages = with pkgs;[
       ags_1
       brightnessctl # for brightness control
       libinput
+      qs-install
       #libinput-gestures
+      starship
       cliphist
       eog
-      gnome-system-monitor
+      gnome-system-monitor 
       file-roller
       grim
       #protonvpn-gui
@@ -69,21 +78,20 @@
       bluez-tools
       wgpu-utils
       gtk3
-      gtk4 
+      gtk4
       atuin
       #bun
+      zoxide
       dart-sass
       readest
       wf-recorder
       sassc
       libgtop
-      starship
       telegram-desktop
       vesktop
       papirus-folders
       papirus-icon-theme
       spotify
-      zoxide
       bibata-cursors
       gpu-screen-recorder
       libqalculate
@@ -95,14 +103,14 @@
       tmux
       gtk4
       vivid
-      (pkgs.callPackage ../../../pkgs/nitch.nix { })
-      nurl 
+      (pkgs.callPackage ../../../pkgs/nitch.nix {})
+      nurl
       yazi
       #firefox_nightly
-      inputs.hyprsunset.packages.${pkgs.system}.hyprsunset 
+      inputs.hyprsunset.packages.${pkgs.system}.hyprsunset
       pkgs-master.microfetch
-      socat 
-      hyprpicker  
+      socat
+      hyprpicker
       hyprpanel
       inputs.nyxexprs.packages.${pkgs.system}.ani-cli-git
     ]

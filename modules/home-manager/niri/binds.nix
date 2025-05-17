@@ -42,6 +42,7 @@
     "Mod+U".action = control-center;
     "Mod+E".action = wallPicker;
     "Mod+Backspace".action = spawn "wlogout-new";
+    "Mod+B".action = spawn "eww-bar";
     "Mod+Q".action = close-window;
     "Mod+S".action = switch-preset-column-width;
     "Mod+F".action = maximize-column;

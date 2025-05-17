@@ -11,6 +11,15 @@
      };
     agsv1.url = "github:dtomvan/agsv1";
     agsv1.inputs.nixpkgs.follows = "nixpkgs";
+    end4-ags = "github:Makrennel/dots-hyprland";
+    quickshell = {
+        url = "github:outfoxxed/quickshell";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
+    lunarsLib = {
+      url = "github:lunarnovaa/lunarslib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # lix = {
     #   url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
     #   inputs = {

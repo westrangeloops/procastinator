@@ -21,7 +21,7 @@
     ./ghostty.nix
     #./equibop.nix
     ./variables.nix
-    ./zathura.nix
+    #./zathura.nix
     #./hypridle.nix
     #./anyrun
     #./fabric/default.nix

@@ -17,7 +17,7 @@
     users.${username} = {
       enable = true;
       user = "${username}";
-
+      directory = "/home/antonio";
       environment = {
         sessionVariables =
           {

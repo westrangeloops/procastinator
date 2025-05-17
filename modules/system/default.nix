@@ -16,5 +16,6 @@
     ./nix 
     ./terminal
     ./media
+    ./hyprland
   ];
 }

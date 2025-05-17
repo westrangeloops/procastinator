@@ -12,6 +12,7 @@
            fd
            bat
            lazygit
+           starship
       ];
       rum.programs = {
           lsd.enable = true;

@@ -1967,6 +1967,26 @@
         "type": "github"
       }
     },
+    "lunarsLib": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1747340568,
+        "narHash": "sha256-3jGYNCNdef481oFCSqP+U9e7VYbYY7o7xAb4j5bpwVA=",
+        "owner": "lunarnovaa",
+        "repo": "lunarslib",
+        "rev": "d7c7578010d8804cf1eae08b4226c54ce09f994b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lunarnovaa",
+        "repo": "lunarslib",
+        "type": "github"
+      }
+    },
     "matugen": {
       "inputs": {
         "nixpkgs": "nixpkgs_10",
@@ -3105,6 +3125,26 @@
         "type": "github"
       }
     },
+    "quickshell": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1747385375,
+        "narHash": "sha256-GhaFgcAftH3rY/SeLlNL/mdO8icNDXihVFwSY9ypE9U=",
+        "owner": "outfoxxed",
+        "repo": "quickshell",
+        "rev": "49ad86f42285e8beccf77509c662005785f1bae1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "outfoxxed",
+        "repo": "quickshell",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "ags": "ags",
@@ -3128,6 +3168,7 @@
         "hyprscroller": "hyprscroller",
         "hyprsunset": "hyprsunset",
         "hyprswitch": "hyprswitch",
+        "lunarsLib": "lunarsLib",
         "matugen": "matugen",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nh": "nh",
@@ -3147,6 +3188,7 @@
         "nvchad4nix": "nvchad4nix",
         "nvf": "nvf",
         "nyxexprs": "nyxexprs",
+        "quickshell": "quickshell",
         "sf-mono-liga-src": "sf-mono-liga-src",
         "spicetify-nix": "spicetify-nix",
         "stylix": "stylix",
