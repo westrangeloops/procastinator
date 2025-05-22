@@ -6,28 +6,49 @@
   lib,
   options,
   chaotic,
+  quickshell,
   ...
-}: 
-let qs-install = inputs.quickshell.packages.${pkgs.stdenv.system}.default.override {
-        withJemalloc = true;
-        withQtSvg = true;
-        withWayland = true;
-        withX11 = true;
-        withPipewire = true;
-        withPam = true;
-        withHyprland = true;
-      };
-in
+}:
+let 
+  qsConfig = ../../../configs/quickshell/kurukurubar; 
+  qsWrapper = pkgs.symlinkJoin rec {
+    name = "qs-wrapper";
+    paths = [ pkgs.quickshell ];
+
+    buildInputs = [ pkgs.makeWrapper ];
+
+    qtDeps = with pkgs.kdePackages; [
+      qtbase
+      qtdeclarative
+      qtmultimedia
+      qtstyleplugin-kvantum
+    ];    
+    qmlPath = let
+       qt5Path = "${pkgs.libsForQt5.qtstyleplugin-kvantum}/lib/qt-5/qml";
+       qt6Paths = lib.pipe (with pkgs.kdePackages; [ qtbase qtdeclarative qtmultimedia ]) [
+      (builtins.map (lib: "${lib}/lib/qt-6/qml"))
+     ];
+   in lib.concatStringsSep ":" (qt6Paths ++ [ qt5Path ]);
+
+    postBuild = ''
+      wrapProgram $out/bin/quickshell \
+        --set QML2_IMPORT_PATH "${qmlPath}" \
+        --add-flags '-p ${./../../../configs/quickshell/kurukurubar}'
+    '';
+
+    meta.mainProgram = "quickshell";
+  };
+in 
 {
-  # _module.args.pkgs-master = import inputs.nixpkgs-master {
-  #   inherit (pkgs.stdenv.hostPlatform) system;
-  #   inherit (config.nixpkgs) config;
-  # };
+#    _module.args.pkgs-master = import inputs.nixpkgs-master {
+#      inherit (pkgs.stdenv.hostPlatform) system;
+#      inherit (config.nixpkgs) config;
+#    };
   environment.systemPackages = with pkgs;[
       ags_1
       brightnessctl # for brightness control
       libinput
-      qs-install
+      qsWrapper 
       #libinput-gestures
       starship
       cliphist
@@ -113,9 +134,5 @@ in
       hyprpicker
       hyprpanel
       inputs.nyxexprs.packages.${pkgs.system}.ani-cli-git
-    ]
-    ++ (with pkgs.lua52Packages; [
-      cjson
-      luautf8
-    ]);
+    ];
 }

@@ -4,14 +4,14 @@
   inputs,
   ...
 }: let
-  pointer = config.home.pointerCursor;
+  #pointer = config.home.pointerCursor;
   makeCommand = command: {
     command = [command];
   };
   wallpaperScript = pkgs.writeScriptBin "niri-wallpaper" (builtins.readFile ./wallpaperAutoChange.sh);
 in {
-  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-gnome pkgs.gnome-keyring];
-  home.packages = [pkgs.wl-clipboard inputs.astal.packages.${pkgs.system}.default wallpaperScript];
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-gnome pkgs.gnome-keyring]; 
+  home.packages = [pkgs.wl-clipboard inputs.astal-bar.packages.${pkgs.system}.default inputs.astal.packages.${pkgs.system}.default wallpaperScript];
   programs.niri = {
     enable = true;
     package = pkgs.niri-unstable;
@@ -38,15 +38,15 @@ in {
         (makeCommand "wl-paste --type image --watch cliphist store")
         (makeCommand "wl-paste --type text --watch cliphist store")
         (makeCommand "wl-paste --watch walker --update-clipboard")
-        (makeCommand "xwayland-satalite")
         (makeCommand "swww-daemon")
+        (makeCommand "${inputs.astal-bar.packages.${pkgs.system}.default}/bin/kaneru")
         (makeCommand "uwsm finalize")
         (makeCommand "eww-bar")
         (makeCommand "${wallpaperScript}/bin/niri-wallpaper")
         (makeCommand "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
         (makeCommand "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
         (makeCommand "dbus-update-activation-environment --all")
-        (makeCommand "xwayland-satalite")
+        #(makeCommand "${pkgs.xwayland-satellite}/bin/xwayland-satellite")
         (makeCommand "${pkgs.xdg-desktop-portal-gnome}/libexec/xdg-desktop-portal-gnome")
       ];
       input = {
@@ -97,7 +97,7 @@ in {
       };
       cursor = {
         size = 32;
-        theme = "${pointer.name}";
+        theme = "LyraR-cursors";
       };
       #background = "#11121d"; # Tokyo Night background color
       layout = {
@@ -271,4 +271,23 @@ in {
     };
     Install.WantedBy = ["timers.target"];
   };
+  systemd.user.services.wayland-satalite = {
+	 Unit = {
+	   Description = "Xwayland Satalite Service";
+	   After = "graphical-session.target";
+	   PartOf = "graphical-session.target";
+      };
+      Install.WantedBy = [ "graphical-session.target"];
+      Service = {
+	     Type = "simple";
+         ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
+         Restart = "on-failure"; 
+         Environment = [
+             "WAYLAND_DISPLAY=wayland-1"
+             "XDG_RUNTIME_DIR=/run/user/%U"
+          ];
+
+        };
+
+      };
 }

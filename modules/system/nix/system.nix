@@ -56,7 +56,6 @@
     xdg-utils
     hyprpicker
     fastfetch
-    mpv
   ]; 
   system.stateVersion = "25.05";
 }

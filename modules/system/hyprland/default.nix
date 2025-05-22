@@ -29,8 +29,8 @@
    };
     hj.rum.programs.hyprland = {
            plugins = [
-              pkgs.hyprlandPlugins.borders-plus-plus
-              pkgs.hyprlandPlugins.hyprscroller
+              inputs.hyprland-plugins.packages.${pkgs.system}.borders-plus-plus
+              inputs.hyprland-plugins.packages.${pkgs.system}.hyprscrolling 
           ];
      };  
       hj.rum.programs.hyprland.settings = {

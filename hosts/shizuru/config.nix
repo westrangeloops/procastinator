@@ -68,6 +68,8 @@ in
   system.displayManager.enable = true;
   system.powermanagement.enable = true;
   system.scheduler.enable = true;
+  myOptions.cliphist.enable = true;
+  myOptions.hypridle.enable = true;
   #system.btrfs.enable = false;
   system.zfs.enable = true;
   system.zram.enable = true;

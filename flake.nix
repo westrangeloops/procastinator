@@ -6,12 +6,13 @@
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nix = {
-       url = "github:NixOS/nix/2.28.1";
+       url = "github:NixOS/nix";
        inputs.nixpkgs.follows = "nixpkgs";
      };
     agsv1.url = "github:dtomvan/agsv1";
     agsv1.inputs.nixpkgs.follows = "nixpkgs";
-    end4-ags = "github:Makrennel/dots-hyprland";
+    illogical-impulse.url = "github:maotseantonio/end-4-dots";
+    illogical-impulse.inputs.nixpkgs.follows = "nixpkgs";    
     quickshell = {
         url = "github:outfoxxed/quickshell";
         inputs.nixpkgs.follows = "nixpkgs";
@@ -70,7 +71,7 @@
      inputs.nixpkgs.follows = "nixpkgs";
     };
     astal-bar = {
-        url = "github:linuxmobile/astal-bar";
+        url = "github:maotseantonio/astal-bar";
         inputs.nixpkgs.follows = "nixpkgs";
     };
     ags = {
@@ -81,7 +82,7 @@
     astal = {
       url = "github:aylur/astal";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
+     };
 
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -170,7 +171,7 @@
   }: let
     system = "x86_64-linux";
     host = "shizuru";
-    username = "antonio";
+    username = "antonio"; 
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
@@ -180,6 +181,37 @@
         config.allowUnfree = true;
     };
     in {
+devShells =  (pkgs: {
+      quickshell = let
+        qs = inputs.quickshell.packages.${pkgs.system}.default.override {
+          withJemalloc = true;
+          withQtSvg = true;
+          withWayland = true;
+          withX11 = false;
+          withPipewire = true;
+          withPam = true;
+          withHyprland = true;
+          withI3 = false;
+        };
+        qtDeps = [
+          qs
+          pkgs.kdePackages.qtbase
+          pkgs.kdePackages.qtdeclarative
+        ];
+      in
+        pkgs.mkShell {
+          shellHook = let
+            qmlPath = pkgs.lib.pipe qtDeps [
+              (builtins.map (lib: "${lib}/lib/qt-6/qml"))
+              (builtins.concatStringsSep ":")
+            ];
+          in ''
+            export QML2_IMPORT_PATH="$QML2_IMPORT_PATH:${qmlPath}"
+          '';
+          buildInputs = qtDeps;
+        };
+    });
+
     nixosConfigurations = {
       shizuru = nixpkgs.lib.nixosSystem {
         specialArgs = {
@@ -210,6 +242,7 @@
                  config.allowUnfree = true;
                  config.nvidia.acceptLicense = true;
                  };
+                quickshell = inputs.quickshell.packages."${pkgs.system}".default;
                 nvchad = inputs.nvchad4nix.packages."${pkgs.system}".nvchad;
                 zjstatus = inputs.zjstatus.packages."${pkgs.system}".default;
                 agsv1 = agsv1.legacyPackages.${system}.agsv1;

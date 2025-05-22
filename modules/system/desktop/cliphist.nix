@@ -47,7 +47,7 @@ in
     systemdTargets = mkOption {
       type = with types; either (listOf str) str;
       default = [ "graphical-session.target" ];
-      example = "sway-session.target";
+      example = "graphical-session.target";
       description = ''
         The systemd targets that will automatically start the cliphist service.
 
@@ -61,34 +61,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    hj.packages = [ cfg.package ];
-
-    systemd.user.services.cliphist = {
-      description = "Clipboard management daemon";
-      partOf = lib.toList cfg.systemdTargets;
-      after = lib.toList cfg.systemdTargets;
-      wantedBy = lib.toList cfg.systemdTargets;
-
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.wl-clipboard-rs}/bin/wl-paste --watch ${cfg.package}/bin/cliphist ${extraOptionsStr} store";
-        Restart = "on-failure";
-      };
-
-    };
-
-    systemd.user.services.cliphist-images = lib.mkIf cfg.allowImages {
-      description = "Clipboard management daemon - images";
-      partOf = lib.toList cfg.systemdTargets;
-      after = lib.toList cfg.systemdTargets;
-      wantedBy = lib.toList cfg.systemdTargets;
-
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.wl-clipboard-rs}/bin/wl-paste --type image --watch ${cfg.package}/bin/cliphist ${extraOptionsStr} store";
-        Restart = "on-failure";
-      };
-
-    };
+    hj.packages = [ cfg.package ]; 
   };
 }

@@ -5,7 +5,7 @@
       ./nh.nix
       ./nix.nix
       ./packages.nix
-      ./hm-clean.nix
+      #./quickshell.nix
       ./scheduler.nix
       ./stylix.nix
       ./system-hardware.nix

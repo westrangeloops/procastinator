@@ -7,10 +7,10 @@
 }:
 {
     imports = [
-        inputs.agsv1.homeManagerModules.agsv1
+        inputs.illogical-impulse.homeManagerModules.default
     ]; 
-    programs.agsv1 = {
+    illogical-impulse = {
         enable = true;
-        configPath = null;
+       
      };
 }

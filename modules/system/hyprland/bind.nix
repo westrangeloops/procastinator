@@ -5,14 +5,14 @@
   inputs,
   ...
 }: {
-  hj.rum.programs.hyprland.settings = {     
-     "$mainMod" = "SUPER";
-     "$scriptsDir" = "$HOME/.config/hypr/scripts";
-     "$configs" = "$HOME/.config/hypr/configs";
-     "$UserConfigs" = "$HOME/.config/hypr/UserConfigs";
-     "$UserScripts" = "$HOME/.config/hypr/UserScripts";
-     "$files" = "thunar";
-     "$term" = "wezterm-gui";
+  hj.rum.programs.hyprland.settings = {
+    "$mainMod" = "SUPER";
+    "$scriptsDir" = "$HOME/.config/hypr/scripts";
+    "$configs" = "$HOME/.config/hypr/configs";
+    "$UserConfigs" = "$HOME/.config/hypr/UserConfigs";
+    "$UserScripts" = "$HOME/.config/hypr/UserScripts";
+    "$files" = "thunar";
+    "$term" = "wezterm-gui";
     bindr = [
       "$mainMod , $mainMod_L , exec , walker"
     ];
@@ -53,9 +53,9 @@
 
       # Master Layout
       "$mainMod CTRL , D , layoutmsg , removemaster"
-      "$mainMod , I , layoutmsg , addmaster"
-      "$mainMod , J , layoutmsg , cyclenext"
-      "$mainMod , K , layoutmsg , cycleprev"
+      # "$mainMod , I , layoutmsg , addmaster"
+      # "$mainMod , J , layoutmsg , cyclenext"
+      # "$mainMod , K , layoutmsg , cycleprev"
       "$mainMod , M , exec , hyprctl dispatch splitratio 0.3"
       "$mainMod , P , pseudo ,"
       "$mainMod CTRL , Return , layoutmsg , swapwithmaster"
@@ -89,8 +89,8 @@
       "$mainMod SHIFT , S , exec , $scriptsDir/ScreenShot.sh --swappy"
 
       # Window Resize
-      "$mainMod , Minus , resizeactive , -150 0"
-      "$mainMod , Equal , resizeactive , 150 0"
+      # "$mainMod , Minus , resizeactive , -150 0"
+      # "$mainMod , Equal , resizeactive , 150 0"
       "$mainMod SHIFT , up , resizeactive , 0 -50"
       "$mainMod SHIFT , down , resizeactive , 0 50"
 
@@ -101,19 +101,19 @@
       "$mainMod CTRL , down , movewindow , d"
 
       # Focus Movement
-      "$mainMod , j , movefocus , d"
-      "$mainMod , k , movefocus , u"
-      "$mainMod , h , movefocus , l"
-      "$mainMod , l , movefocus , r"
-      "$mainMod , up , movefocus , u"
-      "$mainMod , down , movefocus , d"
-      "$mainMod , right , movefocus , r"
-      "$mainMod , left , movefocus , l"
-
+      # "$mainMod , j , movefocus , d"
+      # "$mainMod , k , movefocus , u"
+      # "$mainMod , h , movefocus , l"
+      # "$mainMod , l , movefocus , r"
+      # "$mainMod , up , movefocus , u"
+      # "$mainMod , down , movefocus , d"
+      # "$mainMod , right , movefocus , r"
+      # "$mainMod , left , movefocus , l"
+      #
       # Workspaces
       "$mainMod , grave , workspace , m-1"
-      "$mainMod , up , workspace , r-1"
-      "$mainMod , down , workspace , r+1"
+      # "$mainMod , up , workspace , r-1"
+      # "$mainMod , down , workspace , r+1"
       "$mainMod SHIFT , U , movetoworkspace , special"
       "$mainMod , U , togglespecialworkspace ,"
 
@@ -184,8 +184,7 @@
       "$mainMod SHIFT , X , exec , ani-cli --rofi"
       "$mainMod SHIFT , V , exec , vesktop"
       "$mainMod , X , exec , pkill rofi || hyprpanel t powermenu"
-      "$mainMod , B , exec , hyprpanel t bar-0"
-      "$mainMod , A , exec , codium"
+      "$mainMod , B , exec , hyprpanel t bar-0" 
       "$mainMod , Return , exec , uwsm app $term"
       "$mainMod , T , exec , uwsm app $files"
       "$mainMod ALT , C , exec , $UserScripts/RofiCalc.sh"

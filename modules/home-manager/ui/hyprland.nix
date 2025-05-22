@@ -2,12 +2,11 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
-}: let
-  pointer = config.home.pointerCursor;
-in {
+}:{
     imports = [
-      ./ags.nix
+      #./ags.nix
     ];
   home.sessionVariables = {
     XDG_SESSION_DESKTOP = "Hyprland";
@@ -28,8 +27,8 @@ in {
     Restart = "always";
 	RestartSec = 1;
 	TimeoutStopSec = 10;	
-};
+  };
 
- };
- 
+ }; 
+    
 }
