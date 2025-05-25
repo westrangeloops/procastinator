@@ -27,45 +27,39 @@
 					(eventbox :class "evenicon" :cursor "pointer" :onclick "${BROWSER} --new-window &" (label :style "margin-left: 15px; margin-right: 0px;" :text " "))
 					(eventbox :class "evenicon" :cursor "pointer" :onclick "${FILEMANAGER} $HOME &" (label :style "margin-left: 5px; margin-right: 5px;" :text " "))
 					(eventbox :class "evenicon" :cursor "pointer" :onclick "${EDITOR} &" (label :style "margin-left: 5px; margin-right: 5px;" :text "󰂮 "))
-
 				)
 				(box :orientation "h" :space-evenly "false"
 					(label :class "square" :text "" :xalign 0.4)
 					(label :unindent "false" :class "squareside" :text {WT == "" ? " Desktop " : " ${WT} "} :style "margin-left: 0px;")
 				)
-	(eventbox :cursor "pointer" :onclick "${eww} open keyboard --toggle &"
-				(box :orientation "h" :space-evenly "false"
-					(label :class "squarekey" :text "󰌌" :xalign 0.45)
-					(label :unindent "false" :class "squareside" :text " ${KEYBOARD} " :style "margin-left: 0px;")
-				)
-			)
+
 			)
 		)
 		(box :orientation "h" :space-evenly "false" :spacing 5
-			(eventbox :cursor "pointer" :onclick "${eww} update flagicon=off && ${eww} open quick --toggle && ${eww} update transition=slidedown && ${eww} update selected-index=9 &"
+	(eventbox :cursor "pointer" :onclick "${eww} update flagicon=off && ${eww} open quick --toggle && ${eww} update transition=slidedown && ${eww} update selected-index=9 &"
 				(box :orientation "h" :space-evenly "false"
 					(label :class "squareclima" :text "${TIEMPOICON}" :xalign 0.35)
 					(label :unindent "false" :class "squareside" :text " ${TIEMPO} " :style "margin-left: 0px;")
 				)
 			)
-
-			(box :class "squares"
+(box :class "squares"
 				(eventbox :cursor "pointer" :class "evenicon" :onclick "${eww} open quick --toggle && ${eww} update transition=slidedown && ${eww} update selected-index=11 && ${eww} update flagicon=off &"  (label :unindent "false"  :text "   "))		
 						(eventbox :tooltip "Select Options | Quick Shot" :cursor "pointer" :class "evenicon" :onrightclick "scripts/screenshot full &"  :onclick "${eww} open quick --toggle && ${eww} update transition=slidedown && ${eww} update selected-index=5 && ${eww} update flagicon=ss &"  "󰄄")
 				(eventbox :tooltip "Player | ncmpcpp":cursor "pointer" :class "evenicon" :onrightclick "alacritty --class playlist -e ncmpcpp &" :onclick "${eww} open quick --toggle && ${eww} update transition=slidedown && ${eww} update selected-index=7 && ${eww} update flagicon=music &"  "")
 				(eventbox :tooltip "Clipboard | Delete History" :cursor "pointer" :class "evenicon" :onrightclick "cliphist delete && rm $HOME/.cache/cliphist/db &" :onclick " walker -m clipboard &"  "")	
 
-				(eventbox :tooltip "Settings | Reload" :cursor "pointer" :class "evenicon" :onrightclick "$HOME/.config/niri/eww/themes/theme.sh &" :onclick "${eww} open quick --toggle && ${eww} update transition=slidedown && ${eww} update selected-index=12 && ${eww} update flagicon=off &" (label :unindent "false" :text "  ") )
 			)
+
 			(eventbox :tooltip "Updates List | Update" :cursor "pointer" :onrightclick "alacritty --hold --class updates,updates -e scripts/Updates --update-system &" :onclick "${eww} open quick --toggle && ${eww} update transition=slidedown && ${eww} update selected-index=6 && ${eww} update flagicon=upda &"
 
 				(box :orientation "h" :space-evenly "false"
 					(label :class "squareupda" :text "󰮯" :xalign 0.45)
 					(label :unindent "false" :class "squareside" :text " ${time} " :style "margin-left: 0px;")
 				)
-			)
+			)		
+	
 		)
-    
+
 		(box :orientation "h" :space-evenly "false" :halign "end" :style "margin-right: 5px;" :spacing 5	
       (systray
         :class "solid-systray"
@@ -77,13 +71,6 @@
 				:prepend-new "true"
 			)
 
-	
-			(eventbox :cursor "pointer" :onclick "eww open volumecontrol -c $HOME/.config/niri/eww/volume/ --toggle &"
-				(box :orientation "h" :space-evenly "false"
-					(label :class "squarevol" :text "" :xalign 0.4)
-					(label :unindent "false" :class "squareside" :text " ${volume_percent}% " :style "margin-left: 0px;")
-				)
-			)
 			(eventbox :cursor "pointer" :onclick ""
 				(box :orientation "h" :space-evenly "false"
 					(label :class "squaretemp" :text "󰏈" :xalign 0.4)
@@ -96,6 +83,7 @@
 					(label :unindent "false" :class "squareside" :text " ${date} " :style "margin-left: 0px;")
 				)
 			)
+(eventbox :cursor "pointer" :onclick "walker -m power &" (label :class "squareselect1" :text " " :xalign 0.98))
 		)
 	)
 )

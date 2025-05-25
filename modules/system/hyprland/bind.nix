@@ -14,7 +14,7 @@
     "$files" = "thunar";
     "$term" = "wezterm-gui";
     bindr = [
-      "$mainMod , $mainMod_L , exec , walker"
+      "$mainMod , $mainMod_L , exec , pkill rofi || rofi -show drun -modi drun,filebrowser,run,window"
     ];
     bind = [
       # Default Keybinds
@@ -180,7 +180,7 @@
 
       # Lid Switch Behavior
       ", switch:Lid Switch , exec , hyprlock && sleep 10 && hyprctl dispatch dpms off"
-      "$mainMod , D , exec , pkill rofi || rofi -show drun -modi drun,filebrowser,run,window"
+      "$mainMod , D , exec , walker" 
       "$mainMod SHIFT , X , exec , ani-cli --rofi"
       "$mainMod SHIFT , V , exec , vesktop"
       "$mainMod , X , exec , pkill rofi || hyprpanel t powermenu"

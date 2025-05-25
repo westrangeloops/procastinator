@@ -11,6 +11,11 @@
      };
     agsv1.url = "github:dtomvan/agsv1";
     agsv1.inputs.nixpkgs.follows = "nixpkgs";
+    maomaowm.url = "github:DreamMaoMao/maomaowm"; 
+    hycov={
+      url = "github:DreamMaoMao/hycov";
+      inputs.hyprland.follows = "hyprland";
+    };
     illogical-impulse.url = "github:maotseantonio/end-4-dots";
     illogical-impulse.inputs.nixpkgs.follows = "nixpkgs";    
     quickshell = {
@@ -21,16 +26,16 @@
       url = "github:lunarnovaa/lunarslib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # lix = {
-    #   url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
-    #   inputs = {
-    #     nixpkgs.follows = "nixpkgs";
-    #   };
-    # };
-    # lix-module = {
-    #   url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+     lix = {
+       url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
+       inputs = {
+        nixpkgs.follows = "nixpkgs";
+       };
+     };
+     lix-module = {
+       url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
+       inputs.nixpkgs.follows = "nixpkgs";
+     };
     hjem.url = "github:feel-co/hjem";
     hjem-rum.url = "github:snugnug/hjem-rum";
     hjem.inputs.nixpkgs.follows = "nixpkgs";
@@ -164,7 +169,7 @@
     zjstatus,
     nvf,
     nixvim,
-    #lix-module,
+    lix-module,
     custom-nixpkgs,
     agsv1,
     ...
@@ -230,6 +235,7 @@ devShells =  (pkgs: {
           inputs.catppuccin.nixosModules.catppuccin
           inputs.nixos-hardware.nixosModules.huawei-machc-wa
           inputs.nvf.nixosModules.default
+          inputs.maomaowm.nixosModules.maomaowm
           #lix-module.nixosModules.default
           {
             nixpkgs.overlays = [

@@ -18,7 +18,7 @@ Rectangle {
     ColumnLayout {
       // Month display
       Layout.fillHeight: true
-      Layout.minimumWidth: 30
+      Layout.minimumWidth: 20
       spacing: 0
 
       Rectangle {
@@ -28,7 +28,7 @@ Rectangle {
         color: Dat.Colors.primary_container
         // Day display
         implicitHeight: 18
-        radius: 20
+        radius: 2
 
         Text {
           id: weekDayText

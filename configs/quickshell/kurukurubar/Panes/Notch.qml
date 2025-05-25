@@ -20,7 +20,7 @@ Scope {
       color: "transparent"
       exclusionMode: ExclusionMode.Ignore
       focusable: false
-      implicitHeight: screen.height * 0.65
+      implicitHeight: screen.height * 2.65
       layer: WlrLayer.Top
       namespace: "rexies.notch.quickshell"
       screen: modelData
@@ -39,18 +39,18 @@ Scope {
       Rectangle {
         id: notchRect
 
-        readonly property int baseHeight: 8
-        readonly property int baseWidth: 600
-        readonly property int expandedHeight: 48
-        readonly property int expandedWidth: 1000
-        readonly property int fullHeight: 390
+        readonly property int baseHeight: 1
+        readonly property int baseWidth: 650
+        readonly property int expandedHeight: 42
+        readonly property int expandedWidth: 900
+        readonly property int fullHeight: 310
         readonly property int fullWidth: this.expandedWidth
 
         anchors.horizontalCenter: parent.horizontalCenter
-        bottomLeftRadius: 10
-        bottomRightRadius: 10
+        bottomLeftRadius: 20
+        bottomRightRadius: 20
         clip: true
-        color: Dat.Colors.withAlpha(Dat.Colors.background, (Dat.Globals.actWinName == "desktop" && Dat.Globals.notchState != "FULLY_EXPANDED") ? 1.00 : 0.99)
+        color: Dat.Colors.withAlpha(Dat.Colors.background, (Dat.Globals.actWinName == "desktop" && Dat.Globals.notchState != "FULLY_EXPANDED") ? 0.79 : 0.89)
         state: Dat.Globals.notchState
 
         Behavior on color {
@@ -64,12 +64,12 @@ Scope {
 
             PropertyChanges {
               notchRect.height: notchRect.baseHeight
-              notchRect.opacity: 1
+              notchRect.opacity: 0
               notchRect.width: notchRect.baseWidth
-              topBar.visible: true
+              topBar.visible: false
               expandedPane.visible: false
-              topBar.opacity: 1
-              expandedPane.opacity: 1
+              topBar.opacity: 0
+              expandedPane.opacity: 0
             }
           },
           State {
@@ -302,7 +302,7 @@ Scope {
               Layout.fillWidth: true
               Layout.maximumHeight: notchRect.expandedHeight
               // makes collapse animation look a tiny bit neater
-              Layout.minimumHeight: notchRect.expandedHeight - 10
+              Layout.minimumHeight: notchRect.expandedHeight - 20
             }
 
             ExpandedPane {
@@ -328,7 +328,7 @@ Scope {
         anchors.top: notchRect.bottom
         anchors.topMargin: 10
         color: Dat.Colors.surface
-        radius: 10
+        radius: 20
         state: Dat.Globals.notifState
 
         states: [

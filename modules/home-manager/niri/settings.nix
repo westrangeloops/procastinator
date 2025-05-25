@@ -27,6 +27,7 @@ in {
         SDL_VIDEODRIVER = "wayland";
         QT_QPA_PLATFORMTHEME = "qt6ct";
         QT_STYLE_OVERRIDE = "kvantum";
+        GTK_THEME = "Catppuccin-Dark";
         ELECTRON_OZONE_PLATFORM_HINT = "auto";
         OZONE_PLATFORM = "wayland";
         JAVA_AWT_WM_NONEREPARENTING = "1";
@@ -67,7 +68,7 @@ in {
         warp-mouse-to-focus = true;
         workspace-auto-back-and-forth = true;
       };
-      #backdrop-color = "#11121d"; # Tokyo Night background color
+      overview = { backdrop-color = "#11121dff"; };# Tokyo Night background color
       screenshot-path = "~/Pictures/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
       outputs = {
         "eDP-1" = {
@@ -136,7 +137,7 @@ in {
           {proportion = 0.75;}
           {proportion = 1.0;}
         ];
-        default-column-width = {proportion = 0.5;};
+        default-column-width = {proportion = 0.75;};
         always-center-single-column = true;
         gaps = 6;
         struts = {

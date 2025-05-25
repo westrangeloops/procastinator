@@ -55,6 +55,11 @@ in {
           comment = "Niri";
           binPath = "/run/current-system/sw/bin/niri-session";
       };
+      maomao = {
+          prettyName = "MaoMao-WM";
+          comment = "maomao";
+          binPath = "/run/current-system/sw/bin/maomao";
+      };
     };
   };
 }

@@ -6,7 +6,7 @@
       ./hm-clean.nix
       ./hypridle.nix
       ./hyprland.nix
-      ./mpv.nix
+      ./mpv.nix 
       ./niri.nix
     ];
 }

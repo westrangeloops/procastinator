@@ -16,8 +16,8 @@ Rectangle {
 
   ColumnLayout {
     anchors.fill: parent
-    anchors.margins: 10
-    spacing: 5
+    anchors.margins: 12
+    spacing: 10
 
     Rectangle {
       Layout.fillHeight: true
@@ -73,7 +73,7 @@ Rectangle {
     Rectangle {
       Layout.alignment: Qt.AlignCenter
       color: Dat.Colors.surface_container
-      implicitHeight: (stack.depth > 1) ? 8 : 28
+      implicitHeight: (stack.depth > 1) ? 8 : 20
       implicitWidth: trayItemRow.width + 20
       radius: 20
       visible: SystemTray.items.values.length != 0

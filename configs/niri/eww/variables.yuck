@@ -23,6 +23,12 @@
 (defpoll shuffle          :interval "1s" "scripts/MediaControl --shuffle")
 (defpoll loop             :interval "1s" "scripts/MediaControl --loop")
 
+
+
+(defpoll wallpaper_poller :interval "5s"
+  `(exec "sh" "-c" "~/.config/eww/scripts/wallpaper.sh current")`
+)
+
 ;; POLLS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 (defpoll UPTIME :interval "10s" "uptime -p | sed 's/up //; s/ day[s]*/ Days/; s/ hour[s]*/ hours/; s/ minute[s]*/ min/'")
@@ -113,7 +119,7 @@
 (defpoll current_workspace :interval "1s" "niri msg -j workspaces | jq '.[] | select(.is_focused == true) | .id'")
 (defpoll used_workspaces :interval "1s" "hyprctl workspaces -j | jq -r '.[].id | tostring' | jq -s 'join(\" \")'")
 (defpoll time :interval "1s" "date '+%H:%M'")
-(defpoll date :interval "1s" "date '+%d %Y'")
+(defpoll date :interval "1s" "date '+%A %d %Y'")
 
 ;; WEATHER ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

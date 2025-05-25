@@ -43,7 +43,7 @@
   windowRules = [
     {
       geometry-corner-radius = let
-        radius = 1.0;
+        radius = 5.0;
       in {
         bottom-left = radius;
         bottom-right = radius;
@@ -110,7 +110,7 @@
       matches = [
         {app-id = "^(zen|firefox|equibop|chromium-browser|edge|chrome-.*|zen-.*)$";}
       ];
-      open-maximized = true;
+      open-maximized = false;
     }
     {
       matches = [

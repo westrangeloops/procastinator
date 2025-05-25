@@ -24,10 +24,6 @@ menu() {
 9. Edit Workspace-Rules
 10. Edit Default-Settings
 11. Edit Default-Keybinds
-12. Edit Flake files 
-13. Edit host config 
-14. Edit system modules config 
-15. Edit hm-modules config
 EOF
 }
 
@@ -48,10 +44,6 @@ main() {
         9) file="$UserConfigs/WorkspaceRules.conf" ;;
         10) file="$configs/Settings.conf" ;;
         11) file="$configs/Keybinds.conf" ;;
-        12) file="/home/antonio/NixOS-Hyprland/flake.nix" ;;
-        13) file="/home/antonio/NixOS-Hyprland/hosts/shizuru/config.nix" ;;
-        14) file="/home/antonio/NixOS-Hyprland/modules/system/packages.nix" ;;
-        15) file="/home/antonio/NixOS-Hyprland/modules/home-manager/home-packages.nix" ;;
         *) return ;;  # Do nothing for invalid choices
     esac
 
