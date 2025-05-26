@@ -30,7 +30,7 @@
     hj.rum.programs.hyprland = {
            plugins = [
               #inputs.hyprland-plugins.packages.${pkgs.system}.borders-plus-plus
-              #inputs.hycov.packages.${pkgs.system}.hycov
+              inputs.hyprscroller.packages.${pkgs.system}.hyprscroller
               inputs.hyprland-plugins.packages.${pkgs.system}.hyprscrolling 
           ];
      };  

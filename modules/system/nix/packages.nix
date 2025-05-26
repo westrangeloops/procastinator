@@ -57,7 +57,7 @@ in
       file-roller
       grim
       #protonvpn-gui
-      hiddify-app
+      #hiddify-app
       gtk-engine-murrine # for gtk themes
       hyprcursor # requires unstable channel
       hypridle # requires unstable channel

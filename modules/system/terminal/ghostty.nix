@@ -39,7 +39,7 @@
     };
     themes = {
       catppuccin-mocha = {
-        palatte = [
+        palette = [
           " 0=#414868 "
           " 1=#f7768e "
           " 2=#9ece6a "
@@ -57,12 +57,12 @@
           " 14=#7dcfff"
           " 15=#c0caf5"
         ];
-        background = "11121D";
-        foreground = "CDD6F4";
-        cursor-color = "e78284";
-        cursor-text = "CDD6F4";
-        selection-background = "11121D";
-        selection-foreground = "CDD6F4";
+        background = "#11121D";
+        foreground = "#CDD6F4";
+        cursor-color = "#E78284";
+        cursor-text = "#CDD6F4";
+        selection-background = "#11121D";
+        selection-foreground = "#CDD6F4";
       };
     };
   };

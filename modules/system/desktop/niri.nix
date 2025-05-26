@@ -1,13 +1,15 @@
 {
-    config,
-    pkgs,
-    lib,
-    inputs,
-    ...
-}:
-{      
-    programs.niri = {
-      enable = true;
-      package = pkgs.niri-unstable;
-    };
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:{
+    imports = [
+      ./../niri
+    ];
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri-unstable;
+  }; 
 }

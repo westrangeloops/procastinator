@@ -1938,11 +1938,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1743245876,
-        "narHash": "sha256-zjPPZKcHhVqtJdyuY0q6VZxYTdziw7dXpEjetEZjFq0=",
+        "lastModified": 1748224000,
+        "narHash": "sha256-65hHzOXcMRj66ebZECOkBC2sycEtm/G5jhjpY8FT3LY=",
         "owner": "maotseantonio",
         "repo": "hyprscroller-flake",
-        "rev": "a0eb2e26861c8b86668f5d665a4c9c8d71149c5f",
+        "rev": "18d665077e01015724bb43076a0a282c5f501c0d",
         "type": "github"
       },
       "original": {
@@ -3126,11 +3126,11 @@
     },
     "nixpkgs_17": {
       "locked": {
-        "lastModified": 1747744144,
-        "narHash": "sha256-W7lqHp0qZiENCDwUZ5EX/lNhxjMdNapFnbErcbnP11Q=",
+        "lastModified": 1748026106,
+        "narHash": "sha256-6m1Y3/4pVw1RWTsrkAK2VMYSzG4MMIj7sqUy7o8th1o=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "2795c506fe8fb7b03c36ccb51f75b6df0ab2553f",
+        "rev": "063f43f2dbdef86376cc29ad646c45c46e93234c",
         "type": "github"
       },
       "original": {

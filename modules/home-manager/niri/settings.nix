@@ -12,10 +12,20 @@
 in {
   xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-gnome pkgs.gnome-keyring]; 
   home.packages = [pkgs.wl-clipboard inputs.astal-bar.packages.${pkgs.system}.default inputs.astal.packages.${pkgs.system}.default wallpaperScript];
-  programs.niri = {
+
+   programs.niri = { 
     enable = true;
     package = pkgs.niri-unstable;
     settings = {
+      layer-rules = [
+      {
+        matches = [
+          {
+            namespace = "^swww-daemon$"; 
+          }          
+        ];
+      }
+    ];
       environment = {
         CLUTTER_BACKEND = "wayland";
         DISPLAY = null;
@@ -27,7 +37,7 @@ in {
         SDL_VIDEODRIVER = "wayland";
         QT_QPA_PLATFORMTHEME = "qt6ct";
         QT_STYLE_OVERRIDE = "kvantum";
-        GTK_THEME = "Catppuccin-Dark";
+        GTK_THEME = "Material-DeepOcean-BL-LB";
         ELECTRON_OZONE_PLATFORM_HINT = "auto";
         OZONE_PLATFORM = "wayland";
         JAVA_AWT_WM_NONEREPARENTING = "1";
@@ -68,7 +78,7 @@ in {
         warp-mouse-to-focus = true;
         workspace-auto-back-and-forth = true;
       };
-      overview = { backdrop-color = "#11121dff"; };# Tokyo Night background color
+      overview = { backdrop-color = "#11121d"; };# Tokyo Night background color
       screenshot-path = "~/Pictures/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
       outputs = {
         "eDP-1" = {
@@ -82,6 +92,8 @@ in {
             x = 0;
             y = 0;
           };
+          backdrop-color = "transparent";
+          background-color = "transparent";
         };
         "HDMI-A-1" = {
           mode = {
@@ -102,22 +114,23 @@ in {
       };
       #background = "#11121d"; # Tokyo Night background color
       layout = {
-        focus-ring.enable = false;
+        #background-color = "transparent";
+        focus-ring.enable = false; 
         border = {
           enable = true;
-          width = 3;
+          width = 2;
           active = {
             gradient = {
-              from = "#bb9af7"; # Tokyo Night red
-              to = "#f7768e"; # Tokyo Night purple/magenta
-              angle = 45; # Diagonal gradient
+              from = "#e97078"; # Tokyo Night red
+              to = "#80c8ff"; # Tokyo Night purple/magenta
+              angle = 150; # Diagonal gradient
             };
           };
           inactive = {
             gradient = {
               from = "#414868"; # Dark gray (Tokyo Night)
-              to = "#f7768e"; # Fade to muted red
-              angle = 45;
+              to = "#1e1e2e"; # Fade to muted red
+              angle = 180;
             };
           };
         };

@@ -31,6 +31,7 @@
     "Mod+Shift+Alt+S".action = screenshot-window;
     "Mod+Shift+S".action = screenshot;
     "Mod+D".action = spawn "${inputs.walker.packages.${pkgs.system}.default}/bin/walker";
+    "Mod+N".action = spawn "toggle-waybar";
     "Mod+Return".action = spawn "wezterm";
     "Mod+X".action = walkern "-m" "power";
     "Alt+Tab".action = walkern "-m" "windows";
