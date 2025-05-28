@@ -58,6 +58,7 @@ in
       grim
       #protonvpn-gui
       #hiddify-app
+      inputs.walker.packages.${pkgs.system}.default
       gtk-engine-murrine # for gtk themes
       hyprcursor # requires unstable channel
       hypridle # requires unstable channel
@@ -72,7 +73,6 @@ in
       #inputs.hyprswitch.packages.${pkgs.system}.default
       pkgs-master.pamixer
       pkgs-master.gitui
-      inputs.walker.packages.${pkgs.system}.default
       pavucontrol
       playerctl
       polkit_gnome

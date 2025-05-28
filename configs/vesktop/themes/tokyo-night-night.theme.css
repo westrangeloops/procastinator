@@ -8,8 +8,8 @@
 
 /* import theme modules */
 @import './midnight.css';
-@import './unrounding.css';
-@import './system24-port.theme.css';
+/* @import './unrounding.css';
+@import './system24-port.theme.css'; */
 @import 'https://codeberg.org/AllPurposeMat/Disblock-Origin/raw/branch/master/DisblockOrigin.theme.css'; 
 
 body {

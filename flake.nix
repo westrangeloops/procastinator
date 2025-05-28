@@ -116,7 +116,7 @@
     hyprswitch.url = "github:h3rmt/hyprswitch/release";
     #fabric.url = "github:Fabric-Development/fabric";
     hyprscroller = {
-        url = "github:maotseantonio/hyprscroller-flake";
+        url = "github:maotseantonio/hyprscroller";
         inputs.hyprland.follows = "hyprland";
     };
     hyprddm.url = "github:maotseantonio/hyprddm";

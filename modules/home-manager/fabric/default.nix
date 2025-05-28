@@ -3,9 +3,10 @@ let
   ax-shell = pkgs.fetchFromGitHub {
         owner = "maotseantonio";
         repo = "Ax-Shell";
-        rev = "2af353feb50edcb1fddf3477a51d861e5b1c1fa5";
-        hash = "sha256-2qyXOBTsm7oo1FJgCu5+E2X+wyr/kpVB+SlvhvzwOIM=";    
+        rev = "15f6147d046d44073c62f8e50a64cbb7ab2aa13f";
+        hash = "sha256-KsFOZ6S+e9GMiWsz+9FXoLwWkTQPSKmO79b7WG17rFU=";
     };
+
    fabric-bar = pkgs.writeScriptBin "fabric-bar" (builtins.readFile ./fabric.sh);
 
 in

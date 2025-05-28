@@ -12,7 +12,7 @@
     XDG_SESSION_DESKTOP = "Hyprland";
     XDG_CURRENT_DESKTOP = "Hyprland";
   };
-  home.packages = [ pkgs.wl-clipboard ];
+  home.packages = [ pkgs.wl-clipboard pkgs.hyprpanel ];
  
   systemd.user.services.hyprpanel = {
 	Unit = {

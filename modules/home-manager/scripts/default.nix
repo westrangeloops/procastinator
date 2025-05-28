@@ -27,7 +27,8 @@
   record = pkgs.writeScriptBin "record" (builtins.readFile ./scripts/record.sh);
   statusbar = pkgs.writeScriptBin "statusbar" (builtins.readFile ./scripts/statusbar);
   apply-config = pkgs.writeScriptBin "apply-config" (builtins.readFile ./scripts/apply-config.sh);
-  
+  fuzzel-clip = pkgs.writeScriptBin "fuzzel-clip" (builtins.readFile ./scripts/fuzzel-clip.sh);
+  cliphist-rofi-img = pkgs.writeScriptBin "cliphist-rofi-img" (builtins.readFile ./scripts/rofi-clip-img.sh);
 in {
   home.packages = with pkgs; [
    # wall-change
@@ -49,5 +50,7 @@ in {
     record
     statusbar
     apply-config
+    fuzzel-clip
+    cliphist-rofi-img
   ];
 }

@@ -1,3 +1,4 @@
+
 {
   pkgs,
   config,
@@ -18,24 +19,41 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-         greetd.tuigreet
+      greetd.tuigreet
+      lyra-cursors
     ];
+
     services.greetd = {
-    enable = true; 
+      enable = true;
       vt = 1;
       settings = {
         default_session = {
           user = username;
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --user-menu -w 60 --window-padding 5 --container-padding 5 --remember --remember-session --time --theme 'border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red' --cmd uwsm start hyprland-uwsm.desktop"; 
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet \
+            --user-menu \
+            -w 30 \
+            --window-padding 40 \
+            --container-padding 8 \
+            --remember \
+            --remember-session \
+            --time \
+            --theme 'border=cyan;text=cyan;prompt=cyan;time=cyan;action=cyan;button=cyan;container=black;input=cyan' \
+            --cmd uwsm start hyprland-uwsm.desktop";
         };
       };
     };
+
     programs.uwsm.enable = true;
     programs.uwsm.waylandCompositors = {
       hyprland = {
         prettyName = "Hyprland";
         comment = "Hyprland compositor manager by UWSM";
         binPath = "/run/current-system/sw/bin/Hyprland";
+      };
+      niri = {
+        prettyName = "Niri";
+        comment = "Niri compositor managed by UWSM";
+        binPath = "/run/current-system/sw/bin/niri-session";
       };
     };
   };

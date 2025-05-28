@@ -6,7 +6,9 @@
 }: {
   imports = [
     ./home.nix
-    ./scripts/scripts.nix
+    ./ags 
+    ./fabric
+    ./scripts
     ./niri 
     ./editors 
     ./terminal 

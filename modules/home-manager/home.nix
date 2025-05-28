@@ -55,19 +55,19 @@
     VISUAL = "codium";
     BROWSER = "firefox";
   };
-  
- systemd.user.services.walker = {
-     Unit = {
-       Description = "walker gapplication services";
+  systemd.user.services.walker = {
+	Unit = {
+	   Description = "walker autostart";
 	   After = "graphical-session.target";
 	   PartOf = "graphical-session.target";
-     };
-     Install.WantedBy = [ "graphical-session.target" ];
-     Service = {
-         Type = "simple";
-         ExecStart = "${inputs.walker.packages.${pkgs.system}.default}/bin/walker --gapplication-service";
-         Restart = "always";
-     };
+  };
+  Install.WantedBy = [ "graphical-session.target"];
+  Service = {
+	Type = "simple";
+    ExecStart = "${inputs.walker.packages.${pkgs.system}.default}/bin/walker --gapplication-service";
+    Restart = "on-failure";	
+  };
+
  }; 
   #home.backupFileExtension = "bkp";
   # Let Home Manager install and manage itself.

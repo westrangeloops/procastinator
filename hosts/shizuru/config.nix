@@ -66,10 +66,11 @@ in
   system.plymouth.enable = true;
   system.audio.enable = true;
   system.displayManager.enable = true;
+  system.greetd.enable = false;
   system.powermanagement.enable = true;
   system.scheduler.enable = true;
-  myOptions.cliphist.enable = true;
-  myOptions.hypridle.enable = true;
+  #myOptions.cliphist.enable = false;
+  #mine.hypridle.enable = true;
   #system.btrfs.enable = false;
   system.zfs.enable = true;
   system.zram.enable = true;

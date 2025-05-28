@@ -25,7 +25,7 @@
       "$mainMod , Space , togglefloating ,"
       "$mainMod ALT , F , exec , hyprctl dispatch workspaceopt allfloat"
       "$mainMod , X , exec , pkill rofi || ags -b hyprpanel -t \"powermenu\""
-      "$mainMod , Backspace , exec , pkill wlogout || wlogout-new"
+      "$mainMod , Backspace , exec , wlogout-new"
 
       # Features / Extras
       "$mainMod SHIFT , H , exec , $UserScripts/RofiBeats.sh"
@@ -35,7 +35,6 @@
       "$mainMod SHIFT , B , exec , $scriptsDir/ChangeBlur.sh"
       "$mainMod SHIFT , G , exec , $scriptsDir/GameMode.sh"
       "$mainMod ALT , L , exec , $scriptsDir/ChangeLayout.sh"
-      "$mainMod , V , exec , walker -m clipboard"
       "$mainMod SHIFT , N , exec , pkill -SIGUSR1 waybar"
 
       # UserScripts
@@ -179,8 +178,7 @@
       "ALT , F6 , exec , $scriptsDir/ScreenShot.sh --active"
 
       # Lid Switch Behavior
-      ", switch:Lid Switch , exec , hyprlock && sleep 10 && hyprctl dispatch dpms off"
-      "$mainMod , D , exec , walker" 
+      ", switch:Lid Switch , exec , hyprlock && sleep 10 && hyprctl dispatch dpms off" 
       "$mainMod SHIFT , X , exec , ani-cli --rofi"
       "$mainMod SHIFT , V , exec , vesktop"
       "$mainMod , X , exec , pkill rofi || hyprpanel t powermenu"

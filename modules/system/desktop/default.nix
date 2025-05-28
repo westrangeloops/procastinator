@@ -1,12 +1,14 @@
 {
     imports = [
-      ./cliphist.nix
+      #./cliphist.nix
       ./displaymanager.nix
+      ./greetd.nix
       ./fonts.nix
       ./hm-clean.nix
-      ./hypridle.nix
+      #./hyprlock.nix
       ./hyprland.nix
       ./mpv.nix 
       ./niri.nix
+      ./fuzzel.nix
     ];
 }
