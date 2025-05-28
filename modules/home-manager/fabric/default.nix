@@ -1,11 +1,11 @@
 { config, pkgs, inputs, ... }:
 let
-  ax-shell = pkgs.fetchFromGitHub {
-        owner = "maotseantonio";
-        repo = "Ax-Shell";
-        rev = "15f6147d046d44073c62f8e50a64cbb7ab2aa13f";
-        hash = "sha256-KsFOZ6S+e9GMiWsz+9FXoLwWkTQPSKmO79b7WG17rFU=";
-    };
+  ax-shell = pkgs.fetchFromGitHub {   
+    owner = "maotseantonio";
+    repo = "Ax-Shell";
+    rev = "08ccfd9171abf75078a613845151ebcdd779ad5c";
+    hash = "sha256-TKwnYNGmS8pUrVkpBn3OHq+Zq25rr4JqcJcVgp9Plm4=";
+   };
 
    fabric-bar = pkgs.writeScriptBin "fabric-bar" (builtins.readFile ./fabric.sh);
 
