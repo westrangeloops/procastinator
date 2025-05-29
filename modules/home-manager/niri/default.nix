@@ -63,10 +63,10 @@ in
   systemd.user.services.wayland-satalite = {
 	 Unit = {
 	   Description = "Xwayland Satalite Service";
-	   After = "graphical-session.target";
-	   PartOf = "graphical-session.target";
+	   After = " config.wayland.systemd.target";
+	   PartOf = " config.wayland.systemd.target";
       };
-      Install.WantedBy = [ "graphical-session.target"];
+      Install.WantedBy = [ "config.wayland.systemd.target "];
       Service = {
 	     Type = "simple";
          ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";

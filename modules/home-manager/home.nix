@@ -43,7 +43,11 @@
   #     accent = "green";
   #     flavor = "mocha";
   # };
-  services.arrpc.enable = true;
+  services.arrpc = {
+      enable = true;
+      systemdTarget = "config.wayland.systemd.target";
+  };
+ 
   home.file = {
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
@@ -58,10 +62,10 @@
   systemd.user.services.walker = {
 	Unit = {
 	   Description = "walker autostart";
-	   After = "graphical-session.target";
-	   PartOf = "graphical-session.target";
+	   After = "config.wayland.systemd.target";
+	   PartOf = "config.wayland.systemd.target";
   };
-  Install.WantedBy = [ "graphical-session.target"];
+  Install.WantedBy = [ "config.wayland.systemd.target"];
   Service = {
 	Type = "simple";
     ExecStart = "${inputs.walker.packages.${pkgs.system}.default}/bin/walker --gapplication-service";

@@ -58,7 +58,7 @@ in
       grim
       #protonvpn-gui
       #hiddify-app
-      inputs.walker.packages.${pkgs.system}.default
+      #inputs.walker.packages.${pkgs.system}.default
       gtk-engine-murrine # for gtk themes
       hyprcursor # requires unstable channel
       hypridle # requires unstable channel
