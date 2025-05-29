@@ -12,7 +12,7 @@
     
 programs.walker = {
   enable = true; 
-  runAsService = false;
+  runAsService = true;
   config = {
     app_launch_prefix = " ";
     close_when_open = true;

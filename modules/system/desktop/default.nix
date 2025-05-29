@@ -5,7 +5,7 @@
       ./greetd.nix
       ./fonts.nix
       ./hm-clean.nix
-      #./hyprlock.nix
+      ./walker.nix
       ./hyprland.nix
       ./mpv.nix 
       ./niri.nix

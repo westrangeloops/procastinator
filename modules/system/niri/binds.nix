@@ -28,11 +28,12 @@ in ''
     Print { screenshot-screen; }
     Mod+Shift+Alt+S { screenshot-window; }
     Mod+Shift+S { screenshot; }
-    Mod+D                 { spawn "${walker}"; }
+    Mod+D                 { spawn "walker"; }
+    Mod+R                 { spawn "fuzzel"; }
     Mod+N                 { spawn "toggle-waybar"; }
     Mod+Return            { spawn "wezterm"; }
-    Mod+X                 { spawn "${walker}" "-m" "power"; }
-    Alt+Tab               { spawn "${walker}" "-m" "windows"; }
+    Mod+X                 { spawn "walker" "-m" "power"; }
+    Alt+Tab               { spawn "walker" "-m" "windows"; }
     Mod+Shift+X           { spawn "ani-cli" "--rofi"; }
     Alt+Space             { spawn "${pkgs.anyrun}/bin/anyrun"; }
     Mod+Shift+Return      { spawn "ghostty"; }
@@ -49,7 +50,7 @@ in ''
     Mod+Shift+F           { expand-column-to-available-width; }
     Mod+Space             { toggle-window-floating; }
     Mod+W                 { toggle-column-tabbed-display; }
-    Mod+V                 { spawn "${walker}" "-m" "clipboard"; }
+    Mod+V                 { spawn "walker" "-m" "clipboard"; }
     Mod+Comma             { consume-window-into-column; }
     Mod+Period            { expel-window-from-column; }
     Mod+C                 { center-window; }

@@ -13,8 +13,11 @@
     "$UserScripts" = "$HOME/.config/hypr/UserScripts";
     "$files" = "thunar";
     "$term" = "wezterm-gui";
+    #bindr = [
+     # "$mainMod , $mainMod_L , exec , pkill rofi || rofi -show drun -modi drun,filebrowser,run,window"
+    #];
     bindr = [
-      "$mainMod , $mainMod_L , exec , pkill rofi || rofi -show drun -modi drun,filebrowser,run,window"
+      "$mainMod , $mainMod_L, exec , pkill fuzzel || fuzzel"
     ];
     bind = [
       # Default Keybinds

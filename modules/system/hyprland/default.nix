@@ -7,7 +7,14 @@
 }:{
     imports = [
       ./bind.nix
+      ./hyprpanel.nix
     ];
+    rum.programs.hyprpanel = {
+        enable = true;
+        config = ./config.json;
+        systemd.enable = true;
+        hyprland.enable = true;
+    };
     hj.rum.programs.hyprland = {
           enable = true;
           extraConfig = ''

@@ -10,7 +10,7 @@
     ];
 
   rum.programs.hyprpanel = {
-      enable = true;
+      enable = false;
       configFile = ./config.json;
       systemd.enable = true;
       hyprland.enable = true; 
