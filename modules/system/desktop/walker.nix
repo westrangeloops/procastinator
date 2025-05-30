@@ -1,3 +1,4 @@
+
 { config, lib, pkgs, inputs, ... }:
 
 let
@@ -9,9 +10,7 @@ let
 
   cfg = config.rum.programs.walker;
 
-  # Resolve default package from flake input
-  defaultPackage = (inputs.walker.packages.${pkgs.system}.default or null)
-    // pkgs.walker // (throw "walker package not found in inputs or pkgs");
+  defaultPackage = (pkgs.walker or null);
 in
 {
   options.rum.programs.walker = {
@@ -35,10 +34,20 @@ in
     };
 
     theme = mkOption {
-      type = nullOr {
-        layout = nullOr (either path attrs);
-        style = nullOr (either path str);
-      };
+      type = nullOr (lib.types.submodule {
+        options = {
+          layout = mkOption {
+            type = nullOr (either path attrs);
+            default = null;
+            description = "Theme layout: path or attrset (TOML)";
+          };
+          style = mkOption {
+            type = nullOr (either path str);
+            default = null;
+            description = "Theme style: path to CSS file or raw CSS string";
+          };
+        };
+      });
       default = null;
       description = ''
         Optional theme configuration:
@@ -61,39 +70,35 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = [ cfg.package ];
 
-    # Deploy main config file to ~/.config/walker/config.toml
-    environment.etc."xdg/walker/config.toml" = mkIf (cfg.config != null) (
-      if lib.isString cfg.config then {
-        text = cfg.config;
-      } else if lib.isPath cfg.config then {
-        source = cfg.config;
-      } else {
-        text = tomlFormat.generate "walker-config" cfg.config;
-      }
-    );
+    # Replace environment.etc with hj.files
+    hj.files = lib.mkMerge [
+      (lib.mkIf (cfg.config != null) {
+        ".config/walker/config.toml" = if lib.isString cfg.config then {
+          text = cfg.config;
+        } else if lib.isPath cfg.config then {
+          source = cfg.config;
+        } else {
+          text = tomlFormat.generate "walker-config" cfg.config;
+        };
+      })
 
-    # Deploy theme files if provided
-    environment.etc = lib.optionalAttr (cfg.theme != null) (
-      let
-        # Layout deployment: if path, source; else generate TOML from attrset
+      (lib.mkIf (cfg.theme != null) (let
         layoutEntry = if cfg.theme.layout == null then null else
           if lib.isPath cfg.theme.layout then
             { source = cfg.theme.layout; }
           else
             { text = tomlFormat.generate "walker-theme-layout" cfg.theme.layout; };
 
-        # Style deployment: if path, source; else raw string
         styleEntry = if cfg.theme.style == null then null else
           if lib.isPath cfg.theme.style then
             { source = cfg.theme.style; }
           else
             { text = cfg.theme.style; };
-      in
-      {
-        "xdg/walker/themes/default.toml" = layoutEntry;
-        "xdg/walker/themes/default.css" = styleEntry;
-      }
-    );
+      in {
+        ".config/walker/themes/default.toml" = layoutEntry;
+        ".config/walker/themes/default.css" = styleEntry;
+      }))
+    ];
 
     # systemd user service for walker
     systemd.user.services.walker = mkIf (cfg.systemd.enable && cfg.runAsService) {
@@ -107,3 +112,4 @@ in
     };
   };
 }
+

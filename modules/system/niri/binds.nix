@@ -3,8 +3,7 @@
   pkgs,
   inputs,
   ...
-}: let
-  walker = "${inputs.walker.packages.${pkgs.system}.default}/bin/walker";
+}: let 
   set-volume = "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@";
   brillo = "${pkgs.brillo}/bin/brillo" "-q" "-u" "300000";
   playerctl = "${pkgs.playerctl}/bin/playerctl";

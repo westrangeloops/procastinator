@@ -1,6 +1,6 @@
 {
   "bar.customModules.updates.pollingInterval": 1440000,
-  "theme.bar.scaling": 78,
+  "theme.bar.scaling": 73,
   "scalingPriority": "both",
   "tear": true,
   "menus.transition": "crossfade",

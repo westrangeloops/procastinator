@@ -4,7 +4,6 @@
        ./hypridle.nix
        ./variables.nix
        ./ags.nix
-       ./hyprpanel
-       ./walker
+       ./hyprpanel.nix
     ];
 }

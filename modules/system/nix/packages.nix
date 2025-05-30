@@ -104,6 +104,7 @@ in
       #bun
       zoxide
       dart-sass
+      sass
       readest
       wf-recorder
       sassc

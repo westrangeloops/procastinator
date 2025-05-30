@@ -7,14 +7,9 @@
 }:{
     imports = [
       ./bind.nix
-      ./hyprpanel.nix
+      #./hyprpanel.nix
     ];
-    rum.programs.hyprpanel = {
-        enable = true;
-        config = ./config.json;
-        systemd.enable = true;
-        hyprland.enable = true;
-    };
+       
     hj.rum.programs.hyprland = {
           enable = true;
           extraConfig = ''
@@ -43,6 +38,7 @@
      };  
       hj.rum.programs.hyprland.settings = {
           exec-once = [
+             "hyprpanel"
              "uwsm finalize"
              "hyprctl setcursor LyraR-cursors 34"
              "wl-paste --type text --watch cliphist store"  
@@ -57,5 +53,5 @@
           bind = [
              "SUPER, tab, exec, ${pkgs.ags_1}/bin/ags -t 'overview' "
           ];
-        }; 
+        };
 }

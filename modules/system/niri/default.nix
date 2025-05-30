@@ -7,7 +7,7 @@
     { 
 
         hj = {
-           packages = [ pkgs.niri-unstable ];
+           packages = [ pkgs.niri ];
            files = {
                ".config/niri/config.kdl".text = ''
                     ${import ./settings.nix { inherit config pkgs inputs; }}

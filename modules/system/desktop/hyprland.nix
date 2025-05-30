@@ -8,7 +8,6 @@ let
     portalFlake = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 in
 {
-   
    imports = [ inputs.hyprland.nixosModules.default ];
    programs = {
     hyprland = {

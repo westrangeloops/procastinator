@@ -251,6 +251,7 @@ devShells =  (pkgs: {
                  config.allowUnfree = true;
                  config.nvidia.acceptLicense = true;
                  };
+                 walker = inputs.walker.packages."${pkgs.system}".default;
                 quickshell = inputs.quickshell.packages."${pkgs.system}".default;
                 nvchad = inputs.nvchad4nix.packages."${pkgs.system}".nvchad;
                 zjstatus = inputs.zjstatus.packages."${pkgs.system}".default;

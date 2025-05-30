@@ -45,7 +45,7 @@
   # };
   services.arrpc = {
       enable = true;
-      systemdTarget = "config.wayland.systemd.target";
+      systemdTarget = "graphical-session.target";
   };
  
   home.file = {
