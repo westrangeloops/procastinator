@@ -1,60 +1,14 @@
 {
-  inputs,
-  pkgs,
-  lib,
   config,
+  pkgs,
+  inputs,
   ...
-}: let
-  requiredDeps = with pkgs; [
-    bash
-    brightnessctl
-    bun
-    cliphist
-    coreutils
-    dart-sass
-    fd
-    fzf
-    gawk
-    glib
-    gtk3
-    imagemagick
-    matugen
-    networkmanager
-    niri
-    ripgrep
-    swww
-    util-linux
-    which
-    wl-clipboard
-  ];
+}: {
+  imports = [ inputs.ags.homeManagerModules.default];
 
-  guiDeps = with pkgs; [
-    gnome-control-center
-  ];
-
-  dependencies = requiredDeps ++ guiDeps;
-
-  cfg = config.programs.ags;
-in {
-  imports = [
-    inputs.ags.homeManagerModules.default
-  ];
-
-  programs.ags.enable = true;
-
-  # systemd.user.services.ags = {
-  #   Unit = {
-  #     Description = "Aylur's Gtk Shell";
-  #     PartOf = [
-  #       "tray.target"
-  #       "graphical-session.target"
-  #     ];
-  #   };
-  #   Service = {
-  #     Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies}";
-  #     ExecStart = "${cfg.package}/bin/ags -c ${config.xdg.configHome}/ags/config.js";
-  #     Restart = "on-failure";
-  #   };
-  #   Install.WantedBy = ["graphical-session.target"];
-  # };
+  programs.ags = {
+    enable = true;
+    configDir = null; # Don't symlink since we're using the bundled version
+    
+  };
 }

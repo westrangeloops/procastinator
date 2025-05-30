@@ -26,6 +26,9 @@
       url = "github:lunarnovaa/lunarslib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    astal-shell.url = "github:knoopx/astal-shell";
+    astal-shell.inputs.nixpkgs.follows = "nixpkgs";
      lix = {
        url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
        inputs = {
@@ -175,6 +178,7 @@
     lix-module,
     custom-nixpkgs,
     agsv1,
+    astal-shell,
     ...
   }: let
     system = "x86_64-linux";
@@ -242,6 +246,7 @@ devShells =  (pkgs: {
           #lix-module.nixosModules.default
           {
             nixpkgs.overlays = [
+              astal-shell.overlays.default
               inputs.hyprpanel.overlay
               inputs.niri.overlays.niri
               nur.overlays.default

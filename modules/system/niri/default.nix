@@ -7,7 +7,7 @@
     { 
 
         hj = {
-           packages = [ pkgs.niri ];
+           packages = [ pkgs.niri pkgs.astal-shell ];
            files = {
                ".config/niri/config.kdl".text = ''
                     ${import ./settings.nix { inherit config pkgs inputs; }}
