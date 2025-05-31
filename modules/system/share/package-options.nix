@@ -1,15 +1,16 @@
 {
-  pkgs,
-  pkgs-master,
-  config,
-  inputs,
-  lib,
-  options,
-  chaotic,
-  quickshell,
+ pkgs,
+ config,
+ host,
+ username,
+ options,
+ lib,
+ inputs,
+ system,
   ...
 }:
-let 
+with lib; let
+  cfg = config.system.packages;
   qsConfig = ../../../configs/quickshell/kurukurubar; 
   qsWrapper = pkgs.symlinkJoin rec {
     name = "qs-wrapper";
@@ -38,13 +39,14 @@ let
 
     meta.mainProgram = "quickshell";
   };
-in 
-{
-#    _module.args.pkgs-master = import inputs.nixpkgs-master {
-#      inherit (pkgs.stdenv.hostPlatform) system;
-#      inherit (config.nixpkgs) config;
-#    };
-  environment.systemPackages = with pkgs;[
+in {
+  options.system.packages = {
+    enable = mkEnableOption "Enable Laptop Specific Packages";
+  };
+
+  config = mkIf cfg.enable {
+    
+     environment.systemPackages = with pkgs;[
       ags_1
       brightnessctl # for brightness control
       libinput
@@ -136,4 +138,6 @@ in
       hyprpanel
       inputs.nyxexprs.packages.${pkgs.system}.ani-cli-git
     ];
+
+  };
 }

@@ -12,10 +12,10 @@
         enable = true;
         systemd.enable = true;
         runAsService = true;
-        config = ./../../../configs/walker/config.toml;
+        config = ../../../../configs/walker/config.toml;
         theme = {
-            layout = ./../../../configs/walker/themes/base16.toml;
-            style = ./../../../configs/walker/themes/base16.css;
+            layout = ../../../../configs/walker/themes/base16.toml;
+            style = ../../../../configs/walker/themes/base16.css;
         };
     };
 }

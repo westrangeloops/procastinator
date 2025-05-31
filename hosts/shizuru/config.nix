@@ -27,8 +27,7 @@ in
     ./hardware.nix
     ./users.nix
     ./hjem.nix
-    ../../modules/system
-
+    ./../../modules/system/options/shizuru.nix
   ];
 
   nixpkgs.overlays = [
@@ -50,7 +49,8 @@ in
 
     })
   ];
-_module.args.theme = {
+  
+    _module.args.theme = {
       colors = inputs.basix.schemeData.base24.catppuccin-mocha.palette;
       fonts = {
         monospace = {
@@ -96,6 +96,7 @@ _module.args.theme = {
   };
   vm.guest-services.enable = false;
   local.hardware-clock.enable = true;
+  system.packages.enable = true;
   system.kernel.enable = true;
   system.bootloader-systemd.enable = true;
   system.bootloader-grub.enable = false;
