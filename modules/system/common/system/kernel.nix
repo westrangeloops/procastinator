@@ -18,7 +18,25 @@ in {
 
   config = mkIf cfg.enable {
     boot = {
-      kernelPackages = pkgs.linuxPackages_cachyos;
+      kernelPackages = let
+      apply = _: prevModules: {
+        v4l2loopback =
+          if lib.strings.hasPrefix "0.13.2" prevModules.v4l2loopback.version then
+            prevModules.v4l2loopback.overrideAttrs
+              (_: rec {
+                version = "0.15.0";
+                src = final.fetchFromGitHub {
+                  owner = "umlaeute";
+                  repo = "v4l2loopback";
+                  rev = "v${version}";
+                  hash = "sha256-fa3f8GDoQTkPppAysrkA7kHuU5z2P2pqI8dKhuKYh04=";
+                };
+              })
+          else
+            prevModules.v4l2loopback;
+      };
+    in
+    pkgs.linuxPackages_cachyos.extend apply;
       #kernelPackages = pkgs.linuxKernel.packages.linux_zen.zfs_unstable;
       consoleLogLevel = 0;
       kernelParams = [
