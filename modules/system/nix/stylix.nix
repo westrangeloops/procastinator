@@ -28,8 +28,8 @@
     fonts = {
       sizes = {
         terminal = 14;
-        applications = 12;
-        popups = 12;
+        applications = 13;
+        popups = 13;
       };
 
       serif = {

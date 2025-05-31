@@ -17,5 +17,6 @@
     ./terminal
     ./media
     ./hyprland
+    ./themes
   ];
 }

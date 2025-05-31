@@ -17,13 +17,19 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [
-      #  (pkgs.callPackage ../../pkgs/sddm-astronaut-theme.nix {
-      #      theme = "cybermonk"; 
-      #  })
+  environment.systemPackages = [
+      (
+        pkgs.catppuccin-sddm.override {
+          flavor = "mocha";
+          font = "JetBrainsMono Nerd Font";
+          fontSize = "12";
+          #background = "${wallpapers.primary}"; # for some reason, this doesn't work rn
+          loginBackground = true;
+        }
+      )
       pkgs.lyra-cursors
-      inputs.hyprddm.packages.${pkgs.system}.default
-    ];
+    ]; 
+
     services.xserver.enable = true;
     services.displayManager.defaultSession = "hyprland-uwsm";
     services.displayManager.sddm = {
@@ -36,7 +42,8 @@ in {
 
       ];
       wayland.enable = true;
-      theme = "sddm-astronaut-theme";
+      #theme = "sddm-astronaut-theme";
+      theme = "catppuccin-mocha";
       settings = {
         Theme = {
           CursorTheme = "LyraR-cursors";
