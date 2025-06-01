@@ -98,8 +98,8 @@ layout {
 }
 
 cursor {
-  xcursor-theme "LyraR-cursors"
-  xcursor-size 32
+  xcursor-theme "LyraS-cursors"
+  xcursor-size 34
 }
 
 hotkey-overlay { skip-at-startup; }

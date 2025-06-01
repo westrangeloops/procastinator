@@ -64,7 +64,7 @@ echo "-----"
 # Create directory for the new hostname, unless the default is selected
 if [ "$hostName" != "shizuru" ]; then
   mkdir -p hosts/"$hostName"
-  cp hosts/default/*.nix hosts/"$hostName"
+  cp -r hosts/shizuru/*.nix hosts/"$hostName"
   git add .
 else
   echo "Default hostname selected, no extra hosts directory created."
@@ -127,10 +127,10 @@ printf "\n%.0s" {1..2}
 # Set the Nix configuration for experimental features
 NIX_CONFIG="experimental-features = nix-command flakes"
 #sudo nix flake update
-sudo nixos-rebuild switch --flake ~/NixOS-Hyprland/#"${hostName}"
+sudo nixos-rebuild switch --flake ~/shizuru/#"${hostName}"
 
-#return to NixOS-Hyprland
-cd ~/NixOS-Hyprland
+#return to flakes directory
+cd ~/shizuru
 
 
 printf "\n%.0s" {1..2}

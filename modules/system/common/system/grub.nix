@@ -1,8 +1,11 @@
-{ config, lib, pkgs, host, ... }:
-
-with lib;
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  host,
+  ...
+}:
+with lib; let
   cfg = config.system.bootloader-grub;
 in {
   options.system.bootloader-grub = {
@@ -37,7 +40,7 @@ in {
         extraGrubInstallArgs = ["--bootloader-id=${host}"];
         configurationName = "${host}";
         gfxmodeEfi = "2160x1440";
-        
+
         # Fail-safe enhancements
         forceInstall = true;
         copyKernels = true;
@@ -47,7 +50,7 @@ in {
         extraInstallCommands = ''
           cp -f /boot/EFI/${host}/grubx64.efi /boot/EFI/${host}/grubx64.bak
           cp -f /boot/EFI/${host}/grubx64.efi /boot/EFI/BOOT/BOOTX64.EFI
-          
+
           # Create custom grub.cfg with rescue entry
           cat > /boot/grub/custom.cfg <<EOF
           menuentry "Emergency ZFS Boot (Backup)" {
@@ -77,7 +80,7 @@ in {
     # Automatic repair service
     systemd.services.grub-maintenance = {
       description = "GRUB fail-safe maintenance";
-      wantedBy = [ "multi-user.target" ];
+      wantedBy = ["multi-user.target"];
       serviceConfig = {
         Type = "oneshot";
         RemainAfterExit = true;
@@ -102,7 +105,7 @@ in {
       exec tail -n +3 $0
       source /boot/grub/custom.cfg
     '';
-    
+
     # Make custom grub script executable
     system.activationScripts.makeGrubCustomExecutable = ''
       chmod +x /etc/grub.d/99_custom

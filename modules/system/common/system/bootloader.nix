@@ -1,12 +1,12 @@
 {
- pkgs,
- config,
- host,
- username,
- options,
- lib,
- inputs,
- system,
+  pkgs,
+  config,
+  host,
+  username,
+  options,
+  lib,
+  inputs,
+  system,
   ...
 }:
 with lib; let
@@ -27,7 +27,7 @@ in {
         consoleMode = "auto";
         configurationLimit = 8;
       };
-       tmp = {
+      tmp = {
         useTmpfs = false;
         tmpfsSize = "30%";
       };

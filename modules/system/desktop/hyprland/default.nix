@@ -8,7 +8,7 @@
     imports = [
       ./bind.nix
       ./hyprland.nix
-      #./hyprpanel.nix
+      ./hyprpanel.nix
     ];
        
     hj.rum.programs.hyprland = {
@@ -39,9 +39,9 @@
      };  
       hj.rum.programs.hyprland.settings = {
           exec-once = [
-             "hyprpanel"
+             #"hyprpanel"
              "uwsm finalize"
-             "hyprctl setcursor LyraR-cursors 34"
+             "hyprctl setcursor LyraS-cursors 34"
              "wl-paste --type text --watch cliphist store"  
              "wl-paste --type image --watch cliphist store"
              "systemctl --user start walker"

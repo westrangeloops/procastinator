@@ -46,7 +46,7 @@ in {
       theme = "catppuccin-mocha";
       settings = {
         Theme = {
-          CursorTheme = "LyraR-cursors";
+          CursorTheme = "LyraS-cursors";
         };
       };
     };

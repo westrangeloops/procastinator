@@ -21,9 +21,9 @@ in {
       scx_git.full
     ];
     services.scx = {
-        enable = true;
-        scheduler = "scx_lavd";
-        extraArgs = [ "--autopower" ];
-     };
+      enable = true;
+      scheduler = "scx_lavd";
+      extraArgs = ["--autopower"];
+    };
   };
 }
