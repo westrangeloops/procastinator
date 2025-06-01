@@ -4,7 +4,7 @@
   imports = [ inputs.hyprpanel.homeManagerModules.hyprpanel ];
 
   programs.hyprpanel = {
-    enable = true;
+    enable = false;
     systemd.enable = true;
     hyprland.enable = true;
     overwrite.enable = true;

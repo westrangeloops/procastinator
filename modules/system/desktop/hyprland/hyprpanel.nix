@@ -1,10 +1,10 @@
 { config, pkgs, inputs, ... }:
 {
   rum.programs.hyprpanel = {
-    enable = false;
-    extraPackages = [ pkgs.sass pkgs.sassc pkgs.libgtop ];
+    enable = true;
     systemd.enable = true;
-    #hyprland.enable = true;
+    hyprland.enable = true;
+    overwrite.enable = true;   
    # Put color-related config in override
     override = {
       "theme.notification.background" = "#181826";
@@ -46,15 +46,14 @@
 
     # Non-color config goes to settings
     settings = {
-      layout = {
-      "bar.layouts" = {
+
+      bar.layouts = {
         "0" = {
           left = [ "dashboard" "windowtitle" "media" "cava" "systray" ];
           middle = [ "notifications" "workspaces" "updates" ];
           right = [ "volume" "network" "clock" "bluetooth" "battery" "power" ];
         }; 
-      };
-    };    
+      };    
       bar.customModules.updates.pollingInterval = 1440000;
       theme.bar.scaling = 73;
       theme.name = "catppuccin_mocha";

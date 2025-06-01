@@ -7,7 +7,8 @@ input {
       model ""
       rules ""
       variant ""
-    }
+      options "caps:swapescape"
+   }
     repeat-delay 600
     repeat-rate 25
     track-layout "global"

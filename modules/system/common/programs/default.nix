@@ -8,8 +8,8 @@
       ./starship.nix  
       ./zathura.nix
       ./zoxide.nix
-      ./shell.nix 
-      ./hyprpanel-new.nix
+      ./shell.nix
+      ./hyprpanel.nix
       ./wezterm
     ];
 }
