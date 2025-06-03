@@ -10,6 +10,7 @@
       ./zoxide.nix
       ./shell.nix
       ./hyprpanel.nix
+      ./niri.nix
       ./wezterm
     ];
 }

@@ -13,8 +13,8 @@
                         
                {
                       "MINIMIZE_TO_TRAY": true,
-                      "arRPC": false,
-                      "discordBranch": "canary",
+                      "arRPC": true,
+                      "discordBranch": "stable",
                       "splashBackground": "rgb(30, 30, 46)",
                       "splashColor":"rgb(186, 194, 222)",
                       "splashTheming": true,

@@ -17,7 +17,7 @@
         splashTheming = true;
         splashColor = "rgb(186, 194, 222)";
         splashBackground = "rgb(30, 30, 46)";
-        arRPC = false;
+        arRPC = true;
         minimizeToTray = true;	
      };
     };

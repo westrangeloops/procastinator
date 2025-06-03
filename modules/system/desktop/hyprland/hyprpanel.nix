@@ -49,38 +49,38 @@
 
       bar.layouts = {
         "0" = {
-          left = [ "dashboard" "windowtitle" "media" "cava" "systray" ];
+          left = [ "dashboard" "windowtitle" "volume" "cava" "systray" ];
           middle = [ "notifications" "workspaces" "updates" ];
-          right = [ "volume" "network" "clock" "bluetooth" "battery" "power" ];
+          right = [ "media" "network" "clock" "bluetooth" "battery" "power" ];
         }; 
       };    
       bar.customModules.updates.pollingInterval = 1440000;
-      theme.bar.scaling = 73;
+      theme.bar.scaling = 85;
       theme.name = "catppuccin_mocha";
       scalingPriority = "both";
       tear = true;
       menus.transition = "crossfade";
-      theme.notification.scaling = 75;
-      theme.osd.scaling = 75;
-      theme.bar.menus.menu.dashboard.scaling = 70;
-      theme.bar.menus.menu.dashboard.confirmation_scaling = 75;
-      theme.bar.menus.menu.media.scaling = 75;
-      theme.bar.menus.menu.volume.scaling = 75;
-      theme.bar.menus.menu.network.scaling = 75;
-      theme.bar.menus.menu.bluetooth.scaling = 75;
-      theme.bar.menus.menu.battery.scaling = 75;
-      theme.bar.menus.menu.clock.scaling = 80;
-      theme.bar.menus.menu.notifications.scaling = 80;
-      theme.bar.menus.menu.power.scaling = 75;
-      theme.tooltip.scaling = 70;
-      theme.bar.menus.popover.scaling = 80;
+      theme.notification.scaling = 85;
+      theme.osd.scaling = 85;
+      theme.bar.menus.menu.dashboard.scaling = 85;
+      theme.bar.menus.menu.dashboard.confirmation_scaling = 85;
+      theme.bar.menus.menu.media.scaling = 85;
+      theme.bar.menus.menu.volume.scaling = 85;
+      theme.bar.menus.menu.network.scaling = 85;
+      theme.bar.menus.menu.bluetooth.scaling = 85;
+      theme.bar.menus.menu.battery.scaling = 85;
+      theme.bar.menus.menu.clock.scaling = 85;
+      theme.bar.menus.menu.notifications.scaling = 85;
+      theme.bar.menus.menu.power.scaling = 85;
+      theme.tooltip.scaling = 85;
+      theme.bar.menus.popover.scaling = 85;
       theme.font.weight = 500;
-      theme.bar.floating = false;
+      theme.bar.floating = true;
       theme.bar.location = "top";
       bar.autoHide = "never";
-      theme.bar.buttons.enableBorders = false;
+      theme.bar.buttons.enableBorders = true;
       theme.font.name = "JetBrainsMono Nerd Font"; 
-      theme.font.size = "1.2rem";
+      theme.font.size = "1rem";
       bar.workspaces.show_icons = false;
       bar.workspaces.show_numbered = false;
       bar.workspaces.workspaceMask = false;
@@ -144,6 +144,16 @@
       theme.bar.buttons.workspaces.pill.active_width = "14em";
       bar.workspaces.spacing = 0.5;
       theme.bar.buttons.workspaces.fontSize = "1.2em";
+      bar.media.format = "{title}";
+      theme.bar.buttons.media.spacing = "0.5em";
+      bar.media.truncation_size = 15;
+      bar.media.show_active_only = false;
+      theme.bar.opacity = 90;
+      theme.bar.outer_spacing = "0.4em";
+      theme.bar.buttons.y_margins = "0.7em";
+      theme.bar.margin_top = "0.2em";
+      theme.bar.margin_sides = "5.5em";
+  
     };
   };
 }

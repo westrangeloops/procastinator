@@ -188,6 +188,7 @@ window-rule {
     match app-id="^(org.wezfurlong.wezterm)$"
     match app-id="^(kitty)$"
     match app-id="^(com.mitchellh.ghostty)$"
+    match app-id="^(foot)$"
     opacity 0.960000
 }
 window-rule {

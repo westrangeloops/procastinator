@@ -1,5 +1,5 @@
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, username, ... }:
 
 let
   inherit (lib.modules) mkIf;
@@ -22,7 +22,7 @@ in {
       type = json.type;
       default = {};
       example = {
-        "bar.layouts" = {
+        bar.layouts = {
           "0" = {
             left = [ "dashboard" "workspaces" "windowtitle" ];
             middle = [ "media" ];
