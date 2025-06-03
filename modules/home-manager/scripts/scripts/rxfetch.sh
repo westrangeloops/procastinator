@@ -54,7 +54,7 @@ get_pkg_count() {
 			apk) apk search | wc -l ;;
 			apt) echo $(($(apt list --installed 2>/dev/null | wc -l) - 1)) ;;
 			pacman) pacman -Q | wc -l ;;
-			nix) nix-env -qa --installed '*' | wc -l ;;
+			nix) nix-store -qR /run/current-system | grep -E '/nix/store/.+-[^/]+$' | sed 's|.*/||' | sort -u | wc -l ;;
 			dnf) dnf list installed | wc -l ;;
 			rpm) rpm -qa | wc -l ;;
 			emerge) qlist -I | wc -l ;;
@@ -208,7 +208,7 @@ echo -e "  ┃          ${c8}${c0}${c9}oo${c0}${c8}|${c0}         ┃  ${c7}pkgs
 echo -e "  ┃         ${c8}/${c0}${c10} ${c0}${c8}'\'${c0}        ┃  ${c4}sh${c3}     ${SHELL##*/}"
 echo -e "  ┃        ${c9}(${c0}${c8}\_;/${c0}${c9})${c0}        ┃  ${c6}ram${c3}    $(get_mem)"
 echo -e "  ┃                      ┃  ${c1}init${c3}   $(get_init)"
-echo -e "  ┃     NixOS ${c1}${c0} ${c1}Hana     ┃  ${c2}wm   ${c3}  $(get_de_wm)"
+#echo -e "  ┃     NixOS ${c1}${c0} ${c1}Hana     ┃  ${c2}wm   ${c3}  $(get_de_wm)"
 echo -e "  ┃                      ┃  ${c6}disk${c3}   $(get_storage_info)"
 echo -e "  ┗━━━━━━━━━━━━━━━━━━━━━━┛  ${c1}━━━${c2}━━━${c3}━━━${c4}━━━${c5}━━━${c6}━━━${c7}━━━"
 echo -e "\n\n"

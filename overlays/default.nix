@@ -1,33 +1,40 @@
-# This file defines overlays
-{ inputs, ... }:
-let
-  # This one brings our custom packages from the 'pkgs' directory
-  # This one contains whatever you want to overlay
-  # You can change versions, add patches, set compilation flags, anything really.
-  # https://nixos.wiki/wiki/Overlays
-  # When applied, the unstable nixpkgs set (declared in the flake inputs) will
-  # be accessible through 'pkgs.unstable'
-  pkgs-master = final: _prev: {
-    pkgs-master = import inputs.nixpkgs-master {
-      system = final.system;
-      config.allowUnfree = true;
-    };
-  };
-  pkgs-stable = final: _prev: {
-    pkgs-stable = import inputs.nixpkgs-stable {
-      system = final.system;
-      config.allowUnfree = true;
-    };
-  };
 
-in
+# overlays.nix
+{ inputs, lib, ... }:
+
 {
-  # Overlays are very useful to overwrite a package globally which then gets used transitively.
-  # So overlays should only be used when a package must be overwritten for all
-  # packages which might need to use this derivation override as well.
-  #
-  # [Read more here](docs/pass-inputs-to-modules.md) and
-  # [here](https://nix-community.github.io/home-manager/options.xhtml#opt-nixpkgs.overlays).
-  inherit pkgs-master;
-  inherit pkgs-stable;
+  nixpkgs.overlays = [
+    (final: prev: {
+      sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation rec {
+        pname = "sf-mono-liga-bin";
+        version = "dev";
+        src = inputs.sf-mono-liga-src;
+        dontConfigure = true;
+        installPhase = ''
+          mkdir -p $out/share/fonts/opentype
+          cp -R $src/*.otf $out/share/fonts/opentype/
+        '';
+      };
+
+      pkgs-master = import inputs.nixpkgs-master {
+        system = final.system;
+        config.allowUnfree = true;
+      };
+
+      linuxPackages_cachyos = prev.linuxPackages_cachyos.extend (_: prev': {
+        v4l2loopback = prev'.v4l2loopback.overrideAttrs (_: rec {
+          version = "0.15.0";
+          src = final.fetchFromGitHub {
+            owner = "umlaeute";
+            repo = "v4l2loopback";
+            rev = "v${version}";
+            hash = "sha256-fa3f8GDoQTkPppAysrkA7kHuU5z2P2pqI8dKhuKYh04=";
+          };
+        });
+      });
+    })
+  ];
 }
+
+# This file defines overlays
+

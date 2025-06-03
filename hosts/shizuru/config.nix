@@ -27,6 +27,8 @@ in
     ./hardware.nix
     ./users.nix
     ./hjem.nix
+    ./themes.nix
+    ../../overlays 
     ./../../modules/system/options/shizuru.nix
   ];
 
