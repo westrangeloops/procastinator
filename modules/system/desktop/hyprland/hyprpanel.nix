@@ -142,7 +142,7 @@
       theme.bar.buttons.workspaces.pill.height = "4.5em";
       theme.bar.buttons.workspaces.pill.width = "6.5em";
       theme.bar.buttons.workspaces.pill.active_width = "12em";
-      bar.workspaces.spacing = 0.5;
+      bar.workspaces.spacing = 1.0;
       theme.bar.buttons.workspaces.fontSize = "1.2em";
       bar.media.format = "{title}";
       theme.bar.buttons.media.spacing = "0.5em";

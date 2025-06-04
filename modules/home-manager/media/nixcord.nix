@@ -22,11 +22,8 @@
      };
     };
     config = {
-      themeLinks = [
-         "https://raw.githubusercontent.com/maotseantonio/midnight-discord/refs/heads/master/themes/flavors/midnight-catppuccin-mocha.theme.css"
-      ];
       frameless = true;
-      enabledThemes = ["midnight-catppuccin-mocha.theme.css"];
+      enabledThemes = ["tokyo-night-night.theme.css"];
       plugins = {
         alwaysTrust.enable = true;
         alwaysAnimate.enable = true;

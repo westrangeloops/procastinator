@@ -59,7 +59,7 @@ in {
       file-roller
       grim
       #protonvpn-gui
-      #hiddify-app
+      hiddify-app
       #inputs.walker.packages.${pkgs.system}.default
       gtk-engine-murrine # for gtk themes
       hyprcursor # requires unstable channel
@@ -124,7 +124,7 @@ in {
       komikku
       mangal
       mangareader
-      tmux
+      pkgs-master.tmux
       gtk4
       vivid
       (pkgs.callPackage ../../../pkgs/nitch.nix {})

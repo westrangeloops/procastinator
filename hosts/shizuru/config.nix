@@ -27,81 +27,11 @@ in
     ./hardware.nix
     ./users.nix
     ./hjem.nix
-    ./themes.nix
-    ../../overlays 
+    ./themes.nix 
     ./../../modules/system/options/shizuru.nix
   ];
 
-  nixpkgs.overlays = [
-    
-
-    (final: prev: {
-      sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation rec {
-        pname = "sf-mono-liga-bin";
-        version = "dev";
-        src = inputs.sf-mono-liga-src;
-        dontConfigure = true;
-        installPhase = ''
-          mkdir -p $out/share/fonts/opentype
-          cp -R $src/*.otf $out/share/fonts/opentype/
-        '';
-      };
-      pkgs-master = import inputs.nixpkgs-master {
-         system = final.system;
-         config.allowUnfree = true;
-      };
-   linuxPackages_cachyos = prev.linuxPackages_cachyos.extend (_: prev': {
-    v4l2loopback = prev'.v4l2loopback.overrideAttrs (_: rec {
-      version = "0.15.0";
-      src = final.fetchFromGitHub {
-        owner = "umlaeute";
-        repo = "v4l2loopback";
-        rev = "v${version}";
-        hash = "sha256-fa3f8GDoQTkPppAysrkA7kHuU5z2P2pqI8dKhuKYh04=";
-      };
-    });
-  });
-
-    })
-  ];
-  
-    _module.args.theme = {
-      colors = inputs.basix.schemeData.base24.catppuccin-mocha.palette;
-      fonts = {
-        monospace = {
-          package = pkgs.nerd-fonts.jetbrains-mono; # packaged by yours truly
-          name = "JetBrainsMono Nerd Font";
-        };
-        sans = {
-          package = pkgs.inter;
-          name = "Inter";
-          path = "${pkgs.inter}/share/fonts/truetype/Inter.ttc";
-        };
-        serif = {
-          package = pkgs.roboto-serif;
-          name = "Roboto Serif";
-        };
-        emoji = {
-          package = pkgs.noto-fonts-color-emoji;
-          name = "Noto Color Emoji";
-        };
-        cjk = {
-          sans = {
-            package = pkgs.noto-fonts-cjk-sans;
-            name = "Noto Sans CJK SC";
-          };
-          serif = {
-            package = pkgs.noto-fonts-cjk-serif;
-            name = "Noto Serif CJK SC";
-          };
-        };
-        size = 11;
-      };
-      wallpapers = {
-        primary = "/home/antonio/Pictures/wallpapers/guts-5k-berserk-3840x2160-13631.jpg";
-      };
-    };
-  #drivers.amdgpu.enable = false;
+ #drivers.amdgpu.enable = false;
   drivers.intel.enable = true;
   drivers.nvidia.enable = true;
   drivers.nvidia-prime = {

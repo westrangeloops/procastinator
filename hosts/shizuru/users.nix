@@ -4,7 +4,11 @@ let
   inherit (import ./variables.nix) gitUsername;
 in
 {
-  imports = [ inputs.home-manager.nixosModules.home-manager ];
+  imports = [ 
+     
+     inputs.home-manager.nixosModules.home-manager 
+    (lib.modules.mkAliasOptionModule [ "hm" ] [ "home-manager" "users" "${username}" ]) # gitlab/fazzi
+   ];
   home-manager = {
       useUserPackages = true;
       useGlobalPkgs = true;

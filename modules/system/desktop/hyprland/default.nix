@@ -11,7 +11,7 @@
       ./hyprpanel.nix
       #./testing.nix
     ];
-       
+      
     hj.rum.programs.hyprland = {
           enable = true;
           extraConfig = ''
