@@ -4,7 +4,7 @@
   inputs,
   ...
 }: {
-  home.packages = [
+  hj.packages = [
     (let
       base = pkgs.appimageTools.defaultFhsEnvArgs;
     in

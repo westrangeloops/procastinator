@@ -9,9 +9,10 @@
   ...
 }: {
   imports = [
-    inputs.hyprland.homeManagerModules.default
     inputs.catppuccin.homeModules.catppuccin
   ];
+
+ 
   programs.direnv = {
     enable = true;
     enableFishIntegration = true;
@@ -25,10 +26,7 @@
   programs.gh = {
     enable = true;
     package = pkgs.gh;
-  };
-  programs.btop = {
-    enable = true;
-  };
+  }; 
   programs.imv = {
     enable = true;
   };
@@ -37,12 +35,14 @@
   };
 
   catppuccin.enable = true;
+  catppuccin.btop.enable = false;
   catppuccin.mako.enable = false;
   # catppuccin.cursors = {
   #     enable = true;
   #     accent = "green";
   #     flavor = "mocha";
   # };
+  services.mako.enable = false; 
   services.arrpc = {
       enable = true;
       systemdTarget = "graphical-session.target";

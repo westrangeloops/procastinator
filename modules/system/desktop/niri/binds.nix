@@ -42,6 +42,7 @@ in ''
     Mod+E                 { spawn "walker" "-m" "wallpaper"; }
     Mod+Backspace         { spawn "wlogout-new"; }
     Mod+B                 { spawn "eww-bar"; }
+    Mod+O                 { spawn "rofi" "-show" "drun" "-theme" "~/.config/rofi/style.rasi";}
     Mod+Q                 { close-window; }
     Mod+S                 { switch-preset-column-width; }
     Mod+F                 { maximize-column; }

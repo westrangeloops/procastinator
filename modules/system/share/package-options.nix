@@ -52,6 +52,7 @@ in {
       libinput
       qsWrapper 
       #libinput-gestures
+      neovide 
       starship
       cliphist
       eog

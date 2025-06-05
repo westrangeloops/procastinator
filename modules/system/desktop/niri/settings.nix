@@ -233,6 +233,7 @@ window-rule {
 }
 window-rule {
     match app-id="^(spotify)" title=""
+    match app-id="^(org.pulseaudio.pavucontrol)$"
     open-floating true
 }
 

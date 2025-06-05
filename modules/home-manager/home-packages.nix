@@ -7,7 +7,7 @@
   options,
   ...
 }: {
-  services.mako.enable = false;  # Explicitly disable
+ # Explicitly disable
   home.packages = with pkgs; [
     #rustup
     #github-cli

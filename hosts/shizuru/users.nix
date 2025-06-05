@@ -19,9 +19,9 @@ in
        users.${username} = {
       imports =
         if (host == "shizuru") then
-          [ ../../modules/home-manager ]
+          [ ../../modules/home-manager/default.nix ]
         else
-          [ ../../modules/home-manager/default.nix ];
+          [ ../../modules/home-manager/home.nix ];
       home.username = "${username}";
       home.homeDirectory = "/home/${username}";
       home.stateVersion = "25.05";

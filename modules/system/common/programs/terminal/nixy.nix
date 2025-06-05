@@ -69,4 +69,4 @@
         echo "Unknown argument"
       fi
     '';
-in {home.packages = [nixy];}
+in {hj.packages = [nixy];}

@@ -9,7 +9,6 @@
       ./bind.nix
       ./hyprland.nix
       ./hyprpanel.nix
-      #./testing.nix
     ];
       
     hj.rum.programs.hyprland = {

@@ -8,6 +8,7 @@
     ./locale.nix
     ./network.nix
     ./nix.nix
+    ./notify.nix
     ./plymouth.nix
     ./powermanagement.nix
     ./scheduler.nix

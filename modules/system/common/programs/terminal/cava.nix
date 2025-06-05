@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  programs.cava = {
+  hm.programs.cava = {
     enable = true;
     settings = {
       # General

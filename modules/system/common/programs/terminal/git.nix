@@ -4,7 +4,7 @@
   inputs,
   ...
 }: {
-  programs.git = {
+  hm.programs.git = {
     enable = true;
     package = pkgs.gitFull;
     userName = "maotseantonio";

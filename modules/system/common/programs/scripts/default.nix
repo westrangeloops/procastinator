@@ -30,7 +30,7 @@
   fuzzel-clip = pkgs.writeScriptBin "fuzzel-clip" (builtins.readFile ./scripts/fuzzel-clip.sh);
   cliphist-rofi-img = pkgs.writeScriptBin "cliphist-rofi-img" (builtins.readFile ./scripts/rofi-clip-img.sh);
 in {
-  home.packages = with pkgs; [
+  hj.packages = with pkgs; [
    # wall-change
    # wallpaper-picker
     runbg

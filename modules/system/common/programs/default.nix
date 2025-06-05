@@ -1,16 +1,21 @@
 {
     imports = [
+      ./btop.nix
       ./equibop.nix
       ./flatpak.nix
       ./ghostty.nix
       ./nh.nix 
+      ./spotify-player.nix
       ./spicetify.nix
       ./starship.nix  
       ./zathura.nix
       ./zoxide.nix
       ./shell.nix
       ./hyprpanel.nix
-      ./niri.nix
+      ./niri.nix 
       ./wezterm
+      ./scripts 
+      ./terminal
+      ./editors
     ];
 }
