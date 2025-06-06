@@ -11,7 +11,13 @@
 }:
 with lib; let
   cfg = config.system.packages;
-  qsConfig = ../../../configs/quickshell/kurukurubar; 
+  qsConfig = ../../../configs/quickshell/qml; 
+  quickshell =(inputs.quickshell.packages.${pkgs.system}.default.override {
+              withWayland = true;
+              withHyprland = true;
+              withQtSvg = true;
+            });
+
   qsWrapper = pkgs.symlinkJoin rec {
     name = "qs-wrapper";
     paths = [ pkgs.quickshell ];
@@ -34,7 +40,7 @@ with lib; let
     postBuild = ''
       wrapProgram $out/bin/quickshell \
         --set QML2_IMPORT_PATH "${qmlPath}" \
-        --add-flags '-p ${./../../../configs/quickshell/kurukurubar}'
+        --add-flags '-p ${qsConfig}'
     '';
 
     meta.mainProgram = "quickshell";
@@ -49,7 +55,7 @@ in {
      environment.systemPackages = with pkgs;[
       ags_1
       brightnessctl # for brightness control
-      libinput
+      libinput 
       qsWrapper 
       #libinput-gestures
       neovide 

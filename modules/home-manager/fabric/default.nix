@@ -25,13 +25,9 @@ in
   home.file.".local/share/fonts/tabler-icons.ttf" = {
     source = "${ax-shell}/assets/fonts/tabler-icons/tabler-icons.ttf";
   };
-
-  home.file."${config.xdg.configHome}/matugen/config.toml" = {
-    source = ./matugen.toml;
-  };
-   
+    
   home.packages = with pkgs; [
-    matugen
+    #matugen
     cava
     fabric-bar
     #hyprsunset

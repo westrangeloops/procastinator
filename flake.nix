@@ -80,6 +80,7 @@
     };
 
     matugen.url = "github:/InioX/Matugen";
+    matugen.inputs.nixpkgs.follows = "nixpkgs";
     nvf.url = "github:notashelf/nvf";
     yazi.url = "github:sxyazi/yazi";
 

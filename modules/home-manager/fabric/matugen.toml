@@ -1,3 +1,4 @@
+
 [config]
 reload_apps = true
 
@@ -40,6 +41,10 @@ blend = true
 color = "#FFFFFF"
 blend = true
 
+[templates.yazi]
+input_path = './templates/yazi-theme.toml'
+output_path = '~/.config/yazi/theme.toml'
+
 [templates.hyprland]
 input_path = "~/.config/Ax-Shell/config/matugen/templates/hyprland-colors.conf"
 output_path = "~/.config/matugen/config/hypr/colors.conf"
@@ -48,3 +53,20 @@ output_path = "~/.config/matugen/config/hypr/colors.conf"
 input_path = "~/.config/Ax-Shell/config/matugen/templates/ax-shell.css"
 output_path = "~/.config/matugen/styles/colors.css"
 post_hook = "fabric-cli exec ax-shell 'app.set_css()' &; python3 ~/.config/Ax-Shell/vesktop_preprocessor.py &"
+
+[templates.waybar]
+input_path = './templates/colors.css'
+output_path = '~/.config/niri/waybar/colors.css'
+post_hook = 'pkill -SIGUSR2 waybar'
+
+[templates.gtk3]
+input_path = './templates/gtk-colors.css'
+output_path = '~/.config/gtk-3.0/colors.css'
+
+[templates.gtk4]
+input_path = './templates/gtk-colors.css'
+output_path = '~/.config/gtk-4.0/colors.css'
+
+[templates.qt5ct]
+input_path = './templates/qtct-colors.conf'
+output_path = '~/.config/qt5ct/colors/matugen.conf'

@@ -17,5 +17,6 @@
       ./scripts 
       ./terminal
       ./editors
+      ./matugen
     ];
 }

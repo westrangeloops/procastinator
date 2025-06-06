@@ -29,15 +29,12 @@ let
     ${pkgs.libnotify}/bin/notify-send -i nix-snowflake \
       "NixOS Rebuild" \
       "System configuration applied successfully!"
-    
-    ${pkgs.sound-theme-freedesktop}/bin/canberra-gtk-play -d complete
   '';
 in {
   # NH wrapper configuration
    # Required packages
   environment.systemPackages = with pkgs; [
     libnotify
-    sound-theme-freedesktop
     notifyScript
     nhWithNotify
   ];
