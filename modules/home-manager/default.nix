@@ -8,10 +8,8 @@
     ./home.nix
     ./ags 
     ./fabric
-    #./scripts
     ./niri 
     ./editors 
-    #./terminal 
     ./ui 
     ./media 
   ];

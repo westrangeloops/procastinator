@@ -4,8 +4,7 @@ let
   inherit (import ./variables.nix) gitUsername;
 in
 {
-  imports = [ 
-     
+  imports = [   
      inputs.home-manager.nixosModules.home-manager 
     (lib.modules.mkAliasOptionModule [ "hm" ] [ "home-manager" "users" "${username}" ]) # gitlab/fazzi
    ];
@@ -19,7 +18,7 @@ in
        users.${username} = {
       imports =
         if (host == "shizuru") then
-          [ ../../modules/home-manager/default.nix ]
+          [ ../../modules/home-manager ]
         else
           [ ../../modules/home-manager/home.nix ];
       home.username = "${username}";
