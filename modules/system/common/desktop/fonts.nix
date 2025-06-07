@@ -31,6 +31,8 @@ in {
             nerd-fonts.jetbrains-mono
             nerd-fonts.caskaydia-cove
             #nerd-fonts.iosevka
+            material-symbols
+            material-design-icons
             nerd-fonts.caskaydia-mono
             #nerd-fonts.iosevka-term-slab
             #iosevka-bin 

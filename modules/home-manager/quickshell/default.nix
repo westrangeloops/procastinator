@@ -28,7 +28,7 @@ let
     in ''
       wrapProgram $out/bin/quickshell \
         --set QML2_IMPORT_PATH "${qmlPath}" \
-        --add-flags '-p ${./config}'
+        --add-flags '-c ${../../../configs/quickshell/qml}'
     '';
     meta.mainProgram = "quickshell";
   };

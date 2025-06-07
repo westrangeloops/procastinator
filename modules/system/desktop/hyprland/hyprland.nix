@@ -9,6 +9,12 @@ let
 in
 {
    imports = [ inputs.hyprland.nixosModules.default ];
+   hj.packages = [ 
+       inputs.hyprland-qt-support.packages.${pkgs.system}.default
+       pkgs.libsForQt5.qtstyleplugin-kvantum
+       pkgs.kdePackages.qtstyleplugin-kvantum
+       inputs.hyprland-qtutils.packages.${pkgs.system}.default
+   ];
    programs = {
     hyprland = {
       enable = true;

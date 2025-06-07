@@ -12,7 +12,6 @@
     ];
     hm.services.arrpc = {
         enable = true;  
-        systemdTarget = "graphical-session.target";
     };
     hj.rum.programs.hyprland = {
           enable = true;

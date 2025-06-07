@@ -4,6 +4,7 @@
     QT_QPA_PLATFORMTHEME = "qt6ct";
   };
 in {
+  qt.enable = true;
   environment.variables = envVars;
   hj = {
     packages = [

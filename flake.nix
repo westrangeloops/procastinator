@@ -112,7 +112,14 @@
     hyprland = {
       url = "github:hyprwm/Hyprland";
     };
-
+    
+    hyprland-qt-support = {
+        url = "github:hyprwm/hyprland-qt-support";
+    };
+    hyprland-qtutils = {
+        url = "github:hyprwm/hyprland-qtutils";
+        inputs.hyprland.follows = "hyprland";
+    };
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
