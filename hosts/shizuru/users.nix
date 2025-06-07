@@ -15,12 +15,12 @@ in
       extraSpecialArgs = {
           inherit inputs username host;
       };
-       users.${username} = {
+      users.${username} = {
       imports =
         if (host == "shizuru") then
-          [ ../../modules/home-manager ]
+          [ ./home.nix ]
         else
-          [ ../../modules/home-manager/home.nix ];
+          [ ./home.nix ];
       home.username = "${username}";
       home.homeDirectory = "/home/${username}";
       home.stateVersion = "25.05";

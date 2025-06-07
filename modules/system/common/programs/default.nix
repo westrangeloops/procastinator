@@ -3,6 +3,7 @@
       ./btop.nix
       ./equibop.nix
       ./flatpak.nix
+      ./foot.nix
       ./ghostty.nix
       ./nh.nix 
       ./spotify-player.nix

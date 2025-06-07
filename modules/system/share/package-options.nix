@@ -56,7 +56,7 @@ in {
       ags_1
       brightnessctl # for brightness control
       libinput 
-      qsWrapper 
+      #qsWrapper 
       #libinput-gestures
       neovide 
       starship

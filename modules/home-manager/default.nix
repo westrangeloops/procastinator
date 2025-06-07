@@ -5,12 +5,13 @@
   ...
 }: {
   imports = [
-    ./home.nix
+#    ./home.nix
     ./ags 
     ./fabric
     ./niri 
     ./editors 
     ./ui 
     ./media 
+    ./quickshell 
   ];
 }

@@ -10,7 +10,10 @@
       ./hyprland.nix
       ./hyprpanel.nix
     ];
-      
+    hm.services.arrpc = {
+        enable = true;  
+        systemdTarget = "graphical-session.target";
+    };
     hj.rum.programs.hyprland = {
           enable = true;
           extraConfig = ''
@@ -55,4 +58,5 @@
              "SUPER, tab, exec, ${pkgs.ags_1}/bin/ags -t 'overview' "
           ];
         };
+
 }

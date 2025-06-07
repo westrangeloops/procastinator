@@ -27,9 +27,9 @@ in
     ./hardware.nix
     ./users.nix
     ./hjem.nix 
-    ./themes.nix 
-    ./../../modules/system/options/shizuru.nix
-  ];
+    ./themes.nix
+    ../../modules
+   ];
 
  #drivers.amdgpu.enable = false;
   drivers.intel.enable = true;
