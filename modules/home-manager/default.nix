@@ -5,7 +5,6 @@
   ...
 }: {
   imports = [
-#    ./home.nix
     ./ags 
     ./fabric
     ./niri 

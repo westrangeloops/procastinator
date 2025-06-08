@@ -13,7 +13,7 @@
       listener = [
         # After 10 minutes
         {
-          timeout = 600;
+          timeout = 6000;
           on-timeout = ''
             notify-send "Idle mode starting... Screen will turn off.";
             hyprctl dispatch dpms off
@@ -23,7 +23,7 @@
 
         # After 20 minutes
         {
-          timeout = 1200;
+          timeout = 12000;
           on-timeout = ''
             notify-send -u critical "Locking session due to inactivity";
             loginctl lock-session;
