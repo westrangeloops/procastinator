@@ -261,7 +261,7 @@ Rectangle {
 
           anchors.fill: parent
           anchors.rightMargin: 8
-          fillMode: Image.PreserveAspectFit
+          fillMode: Image.PreserveAspectCrop
           horizontalAlignment: Image.AlignRight
           playing: parent.playing && smoll.visible
           source: "https://duiqt.github.io/herta_kuru/static/img/hertaa1.gif"

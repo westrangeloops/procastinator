@@ -118,7 +118,6 @@
     };
     hyprland-qtutils = {
         url = "github:hyprwm/hyprland-qtutils";
-        inputs.hyprland.follows = "hyprland";
     };
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";

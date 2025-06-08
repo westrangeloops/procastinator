@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Wayland
 
 import "../Data/" as Dat
@@ -42,7 +42,7 @@ Rectangle {
         anchors.centerIn: parent
         color: Dat.Colors.on_primary
         font.pointSize: 10
-        text: Niri.activeWorkspace?.id ?? "0" // Niri might have different workspace property name
+        text: Hyprland.focusedWorkspace?.id ?? "0"
       }
     }
 
@@ -55,7 +55,7 @@ Rectangle {
       color: Dat.Colors.on_primary_container
       elide: Text.ElideRight
       font.pointSize: 11
-      text: activeWindow?.title ?? "No active window"
+      text: Dat.Globals.actWinName
     }
   }
 

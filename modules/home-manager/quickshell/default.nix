@@ -28,7 +28,7 @@ let
     in ''
       wrapProgram $out/bin/quickshell \
         --set QML2_IMPORT_PATH "${qmlPath}" \
-        --add-flags '-c ${../../../configs/quickshell/qml}'
+        --add-flags '-p ${./config/shell.qml}'
     '';
     meta.mainProgram = "quickshell";
   };
@@ -46,17 +46,6 @@ in {
     pkgs.libqalculate
     pkgs.colloid-kde
   ];
-
-  home.activation.installQuickshell = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    if [ -d "$HOME/.config/quickshell" ]; then
-      chmod -R u+w "$HOME/.config/quickshell"
-      rm -rf "$HOME/.config/quickshell"
-    fi
-
-    mkdir -p "$HOME/.config/quickshell"
-    cp -r ${../../../configs/quickshell}/* "$HOME/.config/quickshell"
-    chmod -R u+w "$HOME/.config/quickshell"
-  '';
 }
 
 

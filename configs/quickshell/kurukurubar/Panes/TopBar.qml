@@ -21,13 +21,13 @@ RowLayout {
       }
 
       Wid.MprisDot {
-        implicitHeight: 28
+        implicitHeight: 20
         implicitWidth: 20
         radius: 20
       }
 
       Wid.RecordingDot {
-        implicitHeight: 28
+        implicitHeight: 20
         implicitWidth: 20
         radius: 20
       }

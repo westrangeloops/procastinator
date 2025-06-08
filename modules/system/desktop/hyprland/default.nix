@@ -57,5 +57,20 @@
              "SUPER, tab, exec, ${pkgs.ags_1}/bin/ags -t 'overview' "
           ];
         };
+       
 
+ hm.systemd.user.services.quickshell = {
+	Unit = {
+	   Description = "quickshell autostart";
+	   After = "config.wayland.systemd.target";
+	   PartOf = "config.wayland.systemd.target";
+  };
+  Install.WantedBy = [ "config.wayland.systemd.target"];
+  Service = {
+	Type = "simple";
+    ExecStart = "caelestia shell";
+    Restart = "on-failure";	
+  };
+ };
+ 
 }

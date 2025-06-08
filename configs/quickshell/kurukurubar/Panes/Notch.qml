@@ -20,7 +20,7 @@ Scope {
       color: "transparent"
       exclusionMode: ExclusionMode.Ignore
       focusable: false
-      implicitHeight: screen.height * 2.65
+      implicitHeight: screen.height * 0.65
       layer: WlrLayer.Top
       namespace: "rexies.notch.quickshell"
       screen: modelData
@@ -40,10 +40,10 @@ Scope {
         id: notchRect
 
         readonly property int baseHeight: 1
-        readonly property int baseWidth: 650
-        readonly property int expandedHeight: 42
-        readonly property int expandedWidth: 900
-        readonly property int fullHeight: 310
+        readonly property int baseWidth: 200
+        readonly property int expandedHeight: 28
+        readonly property int expandedWidth: 700
+        readonly property int fullHeight: 190
         readonly property int fullWidth: this.expandedWidth
 
         anchors.horizontalCenter: parent.horizontalCenter
@@ -302,7 +302,7 @@ Scope {
               Layout.fillWidth: true
               Layout.maximumHeight: notchRect.expandedHeight
               // makes collapse animation look a tiny bit neater
-              Layout.minimumHeight: notchRect.expandedHeight - 20
+              Layout.minimumHeight: notchRect.expandedHeight - 10
             }
 
             ExpandedPane {

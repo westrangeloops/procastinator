@@ -14,7 +14,7 @@ ParticleSystem {
   ImageParticle {
     autoRotation: true
     color: "#653BE0"
-    colorVariation: 0.9
+    colorVariation: 0.3
     entryEffect: ImageParticle.Fade
     groups: ["kuru"]
     rotationVariation: 360
@@ -25,7 +25,7 @@ ParticleSystem {
     anchors.bottom: parent.bottom
     anchors.right: parent.right
     width: 100
-    height: 20
+    height: 10
     anchors.rightMargin: 30
     group: "kuru"
     emitRate: 120 * (Math.min(root.rateMultiplier - 5.5, 5))

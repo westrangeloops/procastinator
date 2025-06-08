@@ -2,8 +2,8 @@
 {
   rum.programs.hyprpanel = {
     enable = true;
-    systemd.enable = true;
-    hyprland.enable = true;
+    systemd.enable = false;
+    hyprland.enable = false;
     overwrite.enable = true;   
    # Put color-related config in override
     override = {
