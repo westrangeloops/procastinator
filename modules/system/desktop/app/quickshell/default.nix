@@ -33,7 +33,7 @@ let
     meta.mainProgram = "quickshell";
   };
 in {
-  home.packages = [
+environment.systemPackages = with pkgs;[
     qsWrapper
     pkgs.libsForQt5.qtstyleplugin-kvantum
     pkgs.kdePackages.qtstyleplugin-kvantum

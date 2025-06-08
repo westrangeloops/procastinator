@@ -5,6 +5,7 @@
       ./hypridle.nix 
       ./launcher.nix 
       ./mpv.nix 
-      ./walker.nix 
+      ./walker.nix
+      ./quickshell
     ];
 }

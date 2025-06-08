@@ -11,6 +11,5 @@
     ./editors 
     ./ui 
     ./media 
-    ./quickshell 
   ];
 }
