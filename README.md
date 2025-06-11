@@ -1,13 +1,9 @@
 <h1 align="center">
-   <img src="./.github/assets/logo/nixos-logo.png  " width="100px" /> 
+   <img src="./.github/assets/logo/flake.png  " width="100px" /> 
    <br>
       Shizuru  
    <br>
-    <br>
-        My config is provided too much bleeding-edge. If you blindly run my install script, you got headache
-    Now My Main WM is niri the Goat 
-    </br>
-      <img src="./.github/assets/pallet/macchiato.png" width="600px" /> <br>
+     <img src="./.github/assets/pallet/macchiato.png" width="600px" /> <br>
 
    <div align="center">
       <p></p>
@@ -30,16 +26,14 @@
 </h1>
 
 
-### 🖼️ Gallery for Hyprland
+### 🖼️ Gallery for Hyprland (qs config is from this guy https://github.com/caelestia-dots/shell.git)
 
 <p align="center">
-   <img src="./.github/assets/screenshots/1.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/2.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/3.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/4.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/5.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/6.jpg" style="margin-bottom: 10px;"/> <br>  
-   <img src="./.github/assets/screenshots/7.png" style="margin-bottom: 10px;"/> <br>
+   <img src="./.github/assets/screenshots/quickshell-1.png" style="margin-bottom: 10px;"/> <br>
+   <img src="./.github/assets/screenshots/quickshell-2.png" style="margin-bottom: 10px;"/> <br>
+   <img src="./.github/assets/screenshots/quickshell-3.png" style="margin-bottom: 10px;"/> <br>
+   <img src="./.github/assets/screenshots/quickshell-4.png" style="margin-bottom: 10px;"/> <br>
+   <img src="./.github/assets/screenshots/quickshell-5.png" style="margin-bottom: 10px;"/> <br>
    <img src="./.github/assets/screenshots/hyprlock.png" style="margin-bottom: 10px;"/> <br>
 
   Screenshots last updated <b>2025-4-29</b>
@@ -60,10 +54,17 @@
 </p>
 
 
+## ✨ Features
 
-# 🗃️ Overview
-### My config was different from JaKooLit NixOS-Hyprland. Dont blindly use my install script. plz check the install.sh file.
-### Now My Primary WM is Niri But I also update my hyprland and its config. good luck have fun. 
+- ❄️ Flakes - for precise dependency management of the entire system.
+- 🏡 hjem - to configure symlink to user directory.
+- 💽 hjem-rum - hjem with modules system support.
+- 📁 home-manager - on this time i do not fully change to hjem and hjem-rum so optional.
+- ⚠️ Hyprland - As my window manager But secondary.  
+- 💈 Niri - My Main WM.
+- 💽 QuickShell - for my desktop enviornment.
+
+
 ## 📚 Layout
 
 -   [flake.nix](flake.nix) base of the configuration
@@ -74,42 +75,25 @@
         - [hardware](hosts/shizuru/hardware.nix) hardware configuration
         - [user](hosts/shizuru/user.nix) user specific packages(shell)
         - [variables](hosts/shizuru/variables.nix) user variables git username email
+        - [hjem](hosts/shizuru/hjem.nix) hjem and hjem-rum modules 
+        - [home](hosts/shizuru/home.nix) home-manager module
+        - [theme](hosts/shizuru/theme.nix) theme related config
 -   [modules](modules) 🍱 for more modularize
   - [system](system) for system wide config
-    - [bootloader](modules/system/bootloader.nix) kernel packages(cachyos kernel) grub2 plymouth theme(catppuccin)
-    - [flatpak](modules/system/flatpak.nix) declarative flatpak
-    - [fonts](modules/system/fonts.nix) fonts packages
-    - [hardwareconf](modules/system/hardwareconf.nix) hardware configuration
-    - [intel-driver](modules/system/intel-driver.nix) intel graphic intel-driver
-    - [nvidia-driver](modules/system/nvidia-driver) nvidia graphic driver
-    - [local-hardware-clock](modules/system/local-hardware-clock.nix)hardware clock(i dontknow this will be needed)
-    - [network](modules/system/network.nix) network configuration 
-    - [nvidia-prime](modules/system/nvidia-prime-driver) nvidia prime configuration
-    - [nvidia-patch](modules/system/nvidia-patch) nvidia patch for linux 6.12 kernel
-    - [services](modules/system/services.nix) services for nix system
-    - [system](modules/system/system.nix) system specific packages and settings
-    - [virtualization](modules/system/virtualization.nix) virtualization specific packages
-    - [wayland](modules/system/wayland.nix) wayland specific packages
-    - [packages](modules/system/packages.nix) packages config
-    - [nix](modules/system/nix.nix) nix related settings
-    - [niri](modules/system/niri.nix) niri flake for nixos
+    - [common](modules/system/common) kernel packages(cachyos kernel) systemd boot plymouth theme(catppuccin)
+    - [desktop](modules/system/desktop) desktop related modules
+    - [options](modules/system/options) options for laptop and desktop
+    - [share](modules/system/share) share modules for laptop and desktop
   - [home-manager](home-manager) home-manager config
-    - [home](modules/home-manager/home.nix) home-manager config 
-    - [vscodium](modules/home-manager/vscodium.nix) vscodium config 
-    - [helix](modules/home-manager/helix.nix) helix config 
-    - [spicetify](modules/home-manager/spicetify.nix) spotify client config
-    - [nvchad](modules/home-manager/nvchad.nix) nvchad config
-    - [textfox](modules/home-manager/textfox.nix)textfox config
-    - [git](modules/home-manager/git)git config 
-    - [gtk.nix](modules/home-manager/gtk.nix) themeing related 
-    - [nixcord](modules/home-manager/nixcord.nix) vencord for nix way 
-    - [HyprPanel](modules/home-manager/hyprpanel.nix) hm module for hyprpanel 
-    - [nixy](modules/home-manager/nixy.nix) system utilities
-    - [hom-packages](modules/home-manager/home-packages.nix) packages for user specific 
-    - [fhsenv](modules/home-manager/fhsenv.nix) fhs enviornment(will remove in 25.11)
-    - [anyrun](modules/home-manager/anyrun) anyrun for application launcher 
-    - [niri](modules/home-manager/niri) niri settings via home-manager
-
+    - [ags](modules/home-manager/ags) ags home-manager modules(dont use) 
+    - [Editor](modules/home-manager/editors) editor modules for nvchad
+    - [Fabric-Bar](modules/home-manager/fabric) fabric bar config 
+    - [Hana](modules/home-manager/hana) desktop related modules
+    - [Media](modules/home-manager/media) media related modules
+    - [Niri](modules/home-manager/niri) niri modules and config
+    - [Ui](modules/home-manager/ui) ui related modules and config
+    - [Zellij](modules/home-manager/zellij) zellij(not used) 
+   
 
 ## 📓 Components
 |                             | NixOS + Hyprland                                                                              |
@@ -137,151 +121,6 @@
 | **Clipboard**               | [wl-clip-persist] |
 | **Color Picker**            | [hyprpicker] |
 
-
-## 📝 Shell aliases
-
-<details>
-<summary>
-Utils (EXPAND)
-</summary>
-
-- ```cl```     $\rightarrow$ ```clear```
-- ```cd```    $\rightarrow$ ```z```
-- ```tt```    $\rightarrow$ ```gtrash put```
-- ```v```   $\rightarrow$ ```nvim```
-- ```cat```   $\rightarrow$ ```bat```
-- ```code```  $\rightarrow$ ```codium```
-- ```icat```  $\rightarrow$ ```kitten icat```
-- ```l```     $\rightarrow$ ```eza --icons  -a --group-directories-first -1```
-- ```ll```    $\rightarrow$ ```eza --icons  -a --group-directories-first -1 --no-user --long```
-- ```tree```  $\rightarrow$ ```eza --icons --tree --group-directories-first```
-</details>
-
-<details>
-<summary>
-Nixos (EXPAND)
-</summary>
-
-- ```fuckdit```      $\rightarrow$ ```cd ~/NixOS-Hyprland/ && codium ~/NixOS-Hyprland/```
-- ```fucknix```   $\rightarrow$ ```sudo nixos rebuild switch --flake .#nixy4life```
-</details>
-
-<details>
-<summary>
-</summary>
-</details>
-
-## 🛠️ Scripts
-
-All the scripts are in ```~/.config/home-manager/scripts/scripts/``` and are exported as packages in ```~/.config/home-manager/scripts/scripts.nix```
-
-<details>
-<summary>
-extract.sh 
-</summary>
-
-**Description:** This script extract ```tar.gz``` archives in the current directory.
-
-**Usage:** ```extract <archive_file>```
-</details>
-
-<details>
-<summary>
-compress.sh 
-</summary>
-</details>
-
-<details>
-<summary>
-maxfetch.sh 
-</summary>
-
-**Description:** This script is a modified version of the [jobcmax/maxfetch][maxfetch] script.
-
-**Usage:** ```maxfetch```
-</details>
-
-<details>
-<summary>
-music.sh 
-</summary>
-
-**Description:** This script is for managing Audacious (music player). If Audacious is currently running, it will be killed (stopping the music); otherwise, it will start Audacious in the 8th workspace and resume the music. 
-
-**Usage:** ```music```
-</details>
-
-<details>
-<summary>
-runbg.sh 
-</summary>
-
-**Description:** This script runs a provided command along with its arguments and detaches it from the terminal. Handy for launching apps from the command line without blocking it. 
-
-**Usage:** ```runbg <command> <arg1> <arg2> <...>```
-</details>
-
-
-```bash
-nix-shell -p git
-git clone https://github.com/maotseantonio/NixOS-Hyprland
-cd NixOS-Hyprland
-```
-#### 3. **Install script**
-> [!CAUTION]
-> For some computers, the default rebuild command might get stuck due to CPU cores running out of RAM. To fix that modify the install script line: ```sudo nixos-rebuild switch --flake .#${HOST}``` to ```sudo nixos-rebuild switch --cores <less than your max number of cores> --flake .#${HOST}```
-
-> [!TIP]
-> As it is better to know what a script does before running it, you are advised to read it or at least see the [Install script walkthrough](#Install-script-walkthrough) section before execution.
-   
-Execute and follow the installation script :
-```bash
-./install.sh
-```
-  
-#### 4. **Reboot**
-
-After rebooting, the config should be applied, you'll be greeted by hyprlock prompting for your password.
-
-#### 5. **Manual config**
-
-```
-
-## Install script walkthrough
-
-A brief walkthrough of what the install script does.
-
-#### 1. **Get username**
-
-You will receive a prompt to enter your username, with a confirmation check.
-
-#### 2. **Set username**
-
-The script will replace all occurancies of the default usename ```CURRENT_USERNAME``` by the given one stored in ```$username```
-
-#### 3. Create basic directories
-
-The following directories will be created:
-- ```~/Music```
-- ```~/Documents```
-- ```~/Pictures/wallpapers/others```
-
-#### 4. Copy the wallpapers
-
-Then the wallpapers will be copied into ```~/Pictures/wallpapers/others``` which is the folder in which the ```wallpaper-picker.sh``` script will be looking for them.
-
-#### 5. Get the hardware configuration
-
-It will also automatically copy the hardware configuration from ```/etc/nixos/hardware-configuration.nix``` to ```./hosts/${host}/hardware-configuration.nix``` so that the hardware configuration used is yours and not the default one.
-
-#### 6. Choose a host (desktop / laptop)
-
-Now you will need to choose the host you want. It depend on whether you are using a desktop or laptop (or a VM altho it can be realy buggy).
-
-#### 7. Build the system
-
-Lastly, it will build the system, which includes both the flake config and home-manager config.
-```
 # 👥 Credits
 
 Other dotfiles that I learned / copy from:
@@ -308,6 +147,10 @@ Other dotfiles that I learned / copy from:
   - [sioodmy/dotfiles](https://github.com/sioodmy/dotfiles)
   - [Ruixi-rebirth/flakes](https://github.com/Ruixi-rebirth/flakes)
   - [LinuxMobile](https://github.com/linuxmobile/kaku.git): for niri config and astal bar i love u man
+
+- now my config is move to hjem and hjem-rum so sometime it breaks 
+ - [hjem](https://github.com/feel-co/hjem.git)
+ - [hjem-rum](https://github.com/snugnug/hjem-rum.git)
 
 
 <!-- # ✨ Stars History -->

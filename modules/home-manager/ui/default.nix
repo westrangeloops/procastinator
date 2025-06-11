@@ -1,9 +1,8 @@
 {
-    imports = [
-       ./cliphist.nix
-       #./hypridle.nix
-       ./variables.nix
-       ./ags.nix
-       ./hyprpanel.nix
-    ];
+  imports = [
+    ./cliphist.nix
+    ./variables.nix
+    ./ags.nix
+    ./pipewire-idle.nix
+  ];
 }

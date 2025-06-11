@@ -1,30 +1,26 @@
-{ lib, pkgs, config, ... }:
-let
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.mine.hypridle;
-in
-{
+in {
   options.mine.hypridle = {
     enable = mkEnableOption "Enable Hypridle service";
   };
 
   config = mkIf cfg.enable {
     hj.rum.programs.hypridle = {
-      enable = true;
+      enable = false;
       settings = {
         general = {
           lock_cmd = ''
-            sh -c '
-              notify-send "Locking"
-              if command -v pidoff >/dev/null; then
-                pidoff hyprlock
-              else
-                hyprlock
-              fi
-            '
+            sh -c 'notify-send "Locking" && pidoff hyprlock || hyprlock'
           '';
           unlock_cmd = ''notify-send "Unlocked"'';
-          before_sleep_cmd = ''sh -c 'notify-send "Sleeping" && loginctl lock-session' '';
+          before_sleep_cmd = ''sh -c 'notify-send "Sleeping" && hyprctl dispatch dpms off' '';
           after_sleep_cmd = ''sh -c 'notify-send "Woke up" && hyprctl dispatch dpms on' '';
           ignore_dbus_inhibit = false;
           ignore_systemd_inhibit = false;
@@ -33,32 +29,12 @@ in
         listener = [
           {
             # DPMS off after 10 minutes idle
-            timeout = 600;
+            timeout = 6000;
             on-timeout = ''sh -c 'notify-send "Idle" && hyprctl dispatch dpms off' '';
             on-resume = ''sh -c 'notify-send "Resumed" && hyprctl dispatch dpms on' '';
           }
-          {
-            # Lock screen after 20 minutes total idle
-            timeout = 1200;
-            on-timeout = ''sh -c 'notify-send "Locking after idle" && loginctl lock-session' '';
-          }
         ];
       };
-    };
-
-    systemd.user.services.hypridle = {
-      description = "Hyprland idle daemon";
-      documentation = [ "https://wiki.hyprland.org/Hypr-Ecosystem/hypridle" ];
-      partOf = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-
-      serviceConfig = {
-        ExecStart = "${pkgs.hypridle}/bin/hypridle";
-        Restart = "on-failure";
-        RestartSec = 1;
-      };
-
-      wantedBy = [ "graphical-session.target" ];
     };
 
     hj.rum.programs.hyprland.settings.misc = {
@@ -67,5 +43,3 @@ in
     };
   };
 }
-
-

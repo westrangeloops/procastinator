@@ -31,6 +31,9 @@
     "^(thunar)"
     "^(discord)"
     "^(spotify)"
+    "^(hiddify)"
+    "^(kitty)"
+    "^(com.mitchellh.ghostty)"
   ];
 
   floatingRules = builtins.map (appId:
@@ -43,7 +46,7 @@
   windowRules = [
     {
       geometry-corner-radius = let
-        radius = 5.0;
+        radius = 20.0;
       in {
         bottom-left = radius;
         bottom-right = radius;
@@ -55,7 +58,7 @@
     }
     {
       matches = [{app-id = "^niri$";}];
-              opacity = 1.0;
+      opacity = 1.0;
     }
     {
       matches = [{is-focused = false;}];
@@ -140,7 +143,36 @@
       ];
       opacity = 0.96;
     }
+    {
+      matches = [
+        {app-id = "^(dropdown)$";}
+      ];
+      open-floating = true;
+      default-floating-position = {
+        x = 0;
+        y = 0;
+        relative-to = "top";
+      };
+      default-window-height = {
+        proportion = 0.5;
+      };
+      default-column-width = {
+        proportion = 0.5;
+      };
+    }
   ];
 in {
-  programs.niri.settings.window-rules = windowRules ++ floatingRules;
+  programs.niri.settings = {
+    window-rules = windowRules ++ floatingRules;
+  };
+  programs.niri.settings.layer-rules = [
+    {
+      matches = [
+        {namespace = "^swww-daemon$";}
+        {namespace = "^wallpaper$";}
+      ];
+
+      place-within-backdrop = true;
+    }
+  ];
 }

@@ -10,7 +10,6 @@
   ...
 }: {
   nix = {
-    package = pkgs.nixVersions.latest;
     settings = {
       allowed-users = ["root" "@wheel" "antonio"];
       trusted-users = ["root" "@wheel" "antonio" "@builders"];

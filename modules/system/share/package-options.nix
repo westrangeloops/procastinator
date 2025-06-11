@@ -1,41 +1,43 @@
 {
- pkgs,
- config,
- host,
- username,
- options,
- lib,
- inputs,
- system,
+  pkgs,
+  config,
+  host,
+  username,
+  options,
+  lib,
+  inputs,
+  system,
   ...
 }:
 with lib; let
+  swww = inputs.swww.packages.${pkgs.system}.swww;
   cfg = config.system.packages;
-  qsConfig = ../../../configs/quickshell/qml; 
-  quickshell =(inputs.quickshell.packages.${pkgs.system}.default.override {
-              withWayland = true;
-              withHyprland = true;
-              withQtSvg = true;
-            });
+  qsConfig = ../../../configs/quickshell/qml;
+  quickshell = inputs.quickshell.packages.${pkgs.system}.default.override {
+    withWayland = true;
+    withHyprland = true;
+    withQtSvg = true;
+  };
 
   qsWrapper = pkgs.symlinkJoin rec {
     name = "qs-wrapper";
-    paths = [ pkgs.quickshell ];
+    paths = [pkgs.quickshell];
 
-    buildInputs = [ pkgs.makeWrapper ];
+    buildInputs = [pkgs.makeWrapper];
 
     qtDeps = with pkgs.kdePackages; [
       qtbase
       qtdeclarative
       qtmultimedia
       qtstyleplugin-kvantum
-    ];    
+    ];
     qmlPath = let
-       qt5Path = "${pkgs.libsForQt5.qtstyleplugin-kvantum}/lib/qt-5/qml";
-       qt6Paths = lib.pipe (with pkgs.kdePackages; [ qtbase qtdeclarative qtmultimedia ]) [
-      (builtins.map (lib: "${lib}/lib/qt-6/qml"))
-     ];
-   in lib.concatStringsSep ":" (qt6Paths ++ [ qt5Path ]);
+      qt5Path = "${pkgs.libsForQt5.qtstyleplugin-kvantum}/lib/qt-5/qml";
+      qt6Paths = lib.pipe (with pkgs.kdePackages; [qtbase qtdeclarative qtmultimedia]) [
+        (builtins.map (lib: "${lib}/lib/qt-6/qml"))
+      ];
+    in
+      lib.concatStringsSep ":" (qt6Paths ++ [qt5Path]);
 
     postBuild = ''
       wrapProgram $out/bin/quickshell \
@@ -51,18 +53,18 @@ in {
   };
 
   config = mkIf cfg.enable {
-    
-     environment.systemPackages = with pkgs;[
+    environment.systemPackages = with pkgs; [
       ags_1
       brightnessctl # for brightness control
-      libinput 
-      #qsWrapper 
+      libinput
+      #qsWrapper
       #libinput-gestures
-      neovide 
+      python313Packages.pywayland
+      neovide
       starship
       cliphist
       eog
-      gnome-system-monitor 
+      gnome-system-monitor
       file-roller
       grim
       #protonvpn-gui
@@ -70,18 +72,18 @@ in {
       #inputs.walker.packages.${pkgs.system}.default
       gtk-engine-murrine # for gtk themes
       hyprcursor # requires unstable channel
-      hypridle # requires unstable channel
+      #hypridle # requires unstable channel
       imagemagick
       inxi
       jq
       kitty
       libsForQt5.qtstyleplugin-kvantum # kvantum
-      pkgs-master.networkmanagerapplet
+      master.networkmanagerapplet
       nwg-look # requires unstable channel
       nwg-dock-hyprland
       #inputs.hyprswitch.packages.${pkgs.system}.default
-      pkgs-master.pamixer
-      pkgs-master.gitui
+      master.pamixer
+      master.gitui
       pavucontrol
       playerctl
       polkit_gnome
@@ -104,13 +106,13 @@ in {
       nix-ld
       power-profiles-daemon
       fd
-      pkgs-master.home-manager
+      master.home-manager
       bluez-tools
       wgpu-utils
       gtk3
       gtk4
       atuin
-      #bun
+      bun
       zoxide
       dart-sass
       sass
@@ -131,7 +133,8 @@ in {
       komikku
       mangal
       mangareader
-      pkgs-master.tmux
+      master.tmux
+      stable.neofetch
       gtk4
       vivid
       (pkgs.callPackage ../../../pkgs/nitch.nix {})
@@ -139,12 +142,11 @@ in {
       yazi
       #firefox_nightly
       inputs.hyprsunset.packages.${pkgs.system}.hyprsunset
-      pkgs-master.microfetch
+      master.microfetch
       socat
       hyprpicker
       hyprpanel
       inputs.nyxexprs.packages.${pkgs.system}.ani-cli-git
     ];
-
   };
 }

@@ -10,22 +10,13 @@
   };
   wallpaperScript = pkgs.writeScriptBin "niri-wallpaper" (builtins.readFile ./wallpaperAutoChange.sh);
 in {
-  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-gnome pkgs.gnome-keyring]; 
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-gnome pkgs.gnome-keyring];
   home.packages = [pkgs.wl-clipboard inputs.astal-bar.packages.${pkgs.system}.default inputs.astal.packages.${pkgs.system}.default wallpaperScript];
 
-   programs.niri = { 
+  programs.niri = {
     enable = true;
     package = pkgs.niri-unstable;
     settings = {
-      layer-rules = [
-      {
-        matches = [
-          {
-            namespace = "^swww-daemon$"; 
-          }          
-        ];
-      }
-    ];
       environment = {
         CLUTTER_BACKEND = "wayland";
         DISPLAY = null;
@@ -42,7 +33,7 @@ in {
         OZONE_PLATFORM = "wayland";
         JAVA_AWT_WM_NONEREPARENTING = "1";
         #ANI_CLI_PLAYER = "vlc";
-         #WAYLAND_DISPLAY = "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY";
+        #WAYLAND_DISPLAY = "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY";
       };
       spawn-at-startup = [
         (makeCommand "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1")
@@ -50,18 +41,18 @@ in {
         (makeCommand "wl-paste --type text --watch cliphist store")
         (makeCommand "wl-paste --watch walker --update-clipboard")
         (makeCommand "swww-daemon")
-        (makeCommand "${inputs.astal-bar.packages.${pkgs.system}.default}/bin/kaneru")
-        (makeCommand "uwsm finalize")
-        (makeCommand "eww-bar")
-        (makeCommand "${wallpaperScript}/bin/niri-wallpaper")
+        (makeCommand "python /home/antonio/wayland-idle-inhibitor/wayland-idle-inhibitor.py")
+        (makeCommand "niri-bar")
+        (makeCommand "uwsm-app ${wallpaperScript}/bin/niri-wallpaper")
         (makeCommand "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
         (makeCommand "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
         (makeCommand "dbus-update-activation-environment --all")
-        #(makeCommand "${pkgs.xwayland-satellite}/bin/xwayland-satellite")
+        (makeCommand "${pkgs.xwayland-satellite}/bin/xwayland-satellite")
         (makeCommand "${pkgs.xdg-desktop-portal-gnome}/libexec/xdg-desktop-portal-gnome")
       ];
       input = {
         keyboard.xkb.layout = "us";
+        keyboard.xkb.options = "caps:swapescape";
         touchpad = {
           click-method = "button-areas";
           dwt = true;
@@ -75,10 +66,10 @@ in {
           scroll-factor = 0.7;
         };
         focus-follows-mouse.enable = true;
-        warp-mouse-to-focus = true;
+        warp-mouse-to-focus.enable = true;
         workspace-auto-back-and-forth = true;
       };
-      overview = { backdrop-color = "#11121d"; };# Tokyo Night background color
+      overview = {backdrop-color = "#11121d";}; # Tokyo Night background color
       screenshot-path = "~/Pictures/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
       outputs = {
         "eDP-1" = {
@@ -88,34 +79,15 @@ in {
             refresh = null;
           };
           scale = 1.0;
-          position = {
-            x = 0;
-            y = 0;
-          };
-          backdrop-color = "transparent";
-          background-color = "transparent";
-        };
-        "HDMI-A-1" = {
-          mode = {
-            width = 1920;
-            height = 1080;
-            refresh = null;
-          };
-          scale = 1.0;
-          position = {
-            x = 0;
-            y = -1080;
-          };
         };
       };
       cursor = {
         size = 32;
         theme = "LyraR-cursors";
       };
-      #background = "#11121d"; # Tokyo Night background color
       layout = {
-        #background-color = "transparent";
-        focus-ring.enable = false; 
+        background-color = "transparent";
+        focus-ring.enable = false;
         border = {
           enable = true;
           width = 2;
@@ -150,14 +122,14 @@ in {
           {proportion = 0.75;}
           {proportion = 1.0;}
         ];
-        default-column-width = {proportion = 0.75;};
+        default-column-width = {proportion = 0.55;};
         always-center-single-column = true;
         gaps = 6;
         struts = {
-          left = 0;
-          right = 0;
-          top = 0;
-          bottom = 0;
+          left = 10;
+          right = 10;
+          top = 5;
+          bottom = 5;
         };
 
         tab-indicator = {
@@ -285,23 +257,4 @@ in {
     };
     Install.WantedBy = ["timers.target"];
   };
-  systemd.user.services.wayland-satalite = {
-	 Unit = {
-	   Description = "Xwayland Satalite Service";
-	   After = "graphical-session.target";
-	   PartOf = "graphical-session.target";
-      };
-      Install.WantedBy = [ "graphical-session.target"];
-      Service = {
-	     Type = "simple";
-         ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
-         Restart = "on-failure"; 
-         Environment = [
-             "WAYLAND_DISPLAY=wayland-1"
-             "XDG_RUNTIME_DIR=/run/user/%U"
-          ];
-
-        };
-
-      };
 }
