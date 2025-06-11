@@ -33,18 +33,41 @@ let
     meta.mainProgram = "quickshell";
   };
 in {
+# Some addition qml module paths needed for qmlls and quickshell
+  environment.variables = let 
+    extraQmlPaths = [
+      # kirigami is wrapped, access the unwrapped version to retrieve binaries/source files
+      "${pkgs.kdePackages.kirigami.passthru.unwrapped}/lib/qt-6/qml"
+      "${inputs.quickshell.packages.${pkgs.system}.default}/lib/qt-6/qml/"
+      "${pkgs.kdePackages.qtbase}/lib/qt-6/qml"
+      "${pkgs.kdePackages.qtdeclarative}/lib/qt-6/qml"
+    ];
+  in {
+    # May not need to append here since pretty much everything we need is included
+    QML2_IMPORT_PATH = "$QML2_IMPORT_PATH:${lib.strings.concatStringsSep ":" extraQmlPaths}";
+  };
+
 environment.systemPackages = with pkgs;[
     qsWrapper
-    pkgs.libsForQt5.qtstyleplugin-kvantum
-    pkgs.kdePackages.qtstyleplugin-kvantum
-    pkgs.wlsunset
-    pkgs.libsForQt5.qt5.qtgraphicaleffects
-    pkgs.kdePackages.qt5compat
-    pkgs.kdePackages.qtbase
-    pkgs.kdePackages.qtdeclarative
-    pkgs.kdePackages.qtmultimedia
-    pkgs.libqalculate
-    pkgs.colloid-kde
+    quickshellPackage
+    libsForQt5.qtstyleplugin-kvantum
+    kdePackages.qtstyleplugin-kvantum
+    wlsunset
+    libsForQt5.qt5.qtgraphicaleffects
+    kdePackages.qt5compat
+    kdePackages.qtbase
+    kdePackages.qtdeclarative
+    kdePackages.qtmultimedia
+    libqalculate
+    colloid-kde
+    kdePackages.qt5compat # For Qt5Compat.GraphicalEffects
+    # For styling QtQuick controls within Quickshell
+    kdePackages.qqc2-desktop-style
+    kdePackages.sonnet
+    kdePackages.kirigami
+    kdePackages.kirigami-addons # Not sure if this is needed
+    # Icon theme
+    kdePackages.breeze
   ];
 }
 

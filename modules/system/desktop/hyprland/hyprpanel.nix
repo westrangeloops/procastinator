@@ -4,8 +4,9 @@
     enable = true;
     systemd.enable = false;
     hyprland.enable = false;
-    overwrite.enable = true;   
    # Put color-related config in override
+    themeName = "catppuccin_mocha";
+
     override = {
       "theme.notification.background" = "#181826";
       "theme.notification.close_button.background" = "#f38ba7";
@@ -56,7 +57,6 @@
       };    
       bar.customModules.updates.pollingInterval = 1440000;
       theme.bar.scaling = 85;
-      theme.name = "catppuccin_mocha";
       scalingPriority = "both";
       tear = true;
       menus.transition = "crossfade";

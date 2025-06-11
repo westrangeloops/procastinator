@@ -16,9 +16,9 @@
     #bindr = [
      # "$mainMod , $mainMod_L , exec , pkill rofi || rofi -show drun -modi drun,filebrowser,run,window"
     #];
-    bindr = [
-      "$mainMod , $mainMod_L, exec , pkill fuzzel || fuzzel"
-    ];
+    # bindr = [
+    #   "$mainMod , $mainMod_L, exec , pkill fuzzel || fuzzel"
+    # ];
     bind = [
       # Default Keybinds
       "CTRL ALT , Delete , exec , hyprctl dispatch exit 0"
@@ -113,7 +113,7 @@
       # "$mainMod , left , movefocus , l"
       #
       # Workspaces
-      "$mainMod , grave , workspace , m-1"
+      #"$mainMod , grave , workspace , m-1"
       # "$mainMod , up , workspace , r-1"
       # "$mainMod , down , workspace , r+1"
       "$mainMod SHIFT , U , movetoworkspace , special"

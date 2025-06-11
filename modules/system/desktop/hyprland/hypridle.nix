@@ -1,6 +1,10 @@
-{ pkgs, ... }:
-
 {
+    inputs,
+    pkgs,
+    configs,
+    ...
+}:{
+    hm = {
   services.hypridle = {
     enable = true;
     settings = {
@@ -33,4 +37,5 @@
       ];
     };
   };
+    };
 }

@@ -52,7 +52,7 @@ in
   system.powermanagement.enable = true;
   system.scheduler.enable = true;
   #myOptions.cliphist.enable = false;
-  #mine.hypridle.enable = true;
+  mine.hypridle.enable = true;
   #system.btrfs.enable = false;
   system.zfs.enable = true;
   system.zram.enable = true;

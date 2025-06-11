@@ -11,6 +11,7 @@
   walkern = "${inputs.walker.packages.${pkgs.system}.default}/bin/walker";
   wallPicker = "walker" "-m" "wallpaper";
   walker-clip = "niri-clip";
+  rofi-launch = "pkill rofi || rofi -show drun";
   wallpaperScript = pkgs.writeScriptBin "niri-wallpaper" (builtins.readFile ./wallpaperAutoChange.sh);
 in ''
   binds {
@@ -27,7 +28,7 @@ in ''
     Print { screenshot-screen; }
     Mod+Shift+Alt+S { screenshot-window; }
     Mod+Shift+S { screenshot; }
-    Mod+D                 { spawn "walker"; }
+    Mod+O                 { spawn "walker"; }
     Mod+R                 { spawn "fuzzel"; }
     Mod+N                 { spawn "toggle-waybar"; }
     Mod+Return            { spawn "wezterm"; }
@@ -42,7 +43,7 @@ in ''
     Mod+E                 { spawn "walker" "-m" "wallpaper"; }
     Mod+Backspace         { spawn "wlogout-new"; }
     Mod+B                 { spawn "eww-bar"; }
-    Mod+O                 { spawn "rofi" "-show" "drun" "-theme" "~/.config/rofi/style.rasi";}
+    Mod+D                 { spawn "rofi-launch";}
     Mod+Q                 { close-window; }
     Mod+S                 { switch-preset-column-width; }
     Mod+F                 { maximize-column; }

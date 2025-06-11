@@ -17,11 +17,7 @@ in
     cp -r --no-preserve=all ${ax-shell}/* "$HOME/.config/Ax-Shell"
     chmod -R u+w "$HOME/.config/Ax-Shell"
   '';
-
-  #home.file.".config/Ax-Shell" = {
-   # source = ax-shell;
-  #};
-
+ 
   home.file.".local/share/fonts/tabler-icons.ttf" = {
     source = "${ax-shell}/assets/fonts/tabler-icons/tabler-icons.ttf";
   };

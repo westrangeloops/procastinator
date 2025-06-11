@@ -140,8 +140,6 @@
     };
 
     textfox.url = "github:adriankarlen/textfox";
-    hyprswitch.url = "github:h3rmt/hyprswitch/release";
-
     hyprscroller = {
       url = "github:maotseantonio/hyprscroller";
       inputs.hyprland.follows = "hyprland";
@@ -154,12 +152,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-
-    zen-browser = {
-      url = "github:youwen5/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
+ 
     ax-shell-config = {
       url = "github:maotseantonio/AX-Shell";
       flake = false;

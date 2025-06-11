@@ -11,5 +11,6 @@
     ./editors 
     ./ui 
     ./media 
+    ./zellij
   ];
 }

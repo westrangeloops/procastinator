@@ -8,6 +8,7 @@
     imports = [
       ./bind.nix
       ./hyprland.nix
+      #./hypridle.nix
       ./hyprpanel.nix
     ];
     hm.services.arrpc = {
@@ -36,7 +37,7 @@
            plugins = [
               #inputs.hyprland-plugins.packages.${pkgs.system}.borders-plus-plus
               inputs.hyprscroller.packages.${pkgs.system}.hyprscroller
-              #inputs.hyprland-plugins.packages.${pkgs.system}.hyprscrolling 
+              inputs.hyprland-plugins.packages.${pkgs.system}.hyprscrolling 
           ];
      };  
       hj.rum.programs.hyprland.settings = {
@@ -70,6 +71,7 @@
 	Type = "simple";
     ExecStart = "caelestia shell";
     Restart = "on-failure";	
+    Environment = "XDG_CURRENT_DESKTOP=Hyprland";
   };
  };
  
