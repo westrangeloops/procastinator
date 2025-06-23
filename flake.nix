@@ -8,6 +8,14 @@
     fish-flake = {
         url = "github:maotseantonio/fish-flakes";
     };   
+    izlix = {
+      type = "github";
+      owner = "isabelroses";
+      repo = "izlix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs"; 
+      };
+    };
     lix-module = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.0.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";

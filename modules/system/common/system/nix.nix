@@ -7,9 +7,11 @@
   options,
   username,
   host,
+  inputs',
   ...
 }: {
   nix = {
+    package = inputs.izlix.packages.${pkgs.system}.nix;
     settings = {
       allowed-users = ["root" "@wheel" "antonio"];
       trusted-users = ["root" "@wheel" "antonio" "@builders"];

@@ -29,12 +29,12 @@
 ### 🖼️ Gallery for Hyprland (qs config is from this guy https://github.com/caelestia-dots/shell.git)
 
 <p align="center">
-   <img src="./.github/assets/screenshots/quickshell-1.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/quickshell-2.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/quickshell-3.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/quickshell-4.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/quickshell-5.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/hyprlock.png" style="margin-bottom: 10px;"/> <br>
+   <img src="./.github/assets/screenshots/1.png" style="margin-bottom: 10px;"/> <br>
+   <img src="./.github/assets/screenshots/2.png" style="margin-bottom: 10px;"/> <br>
+   <img src="./.github/assets/screenshots/3.png" style="margin-bottom: 10px;"/> <br>
+   <img src="./.github/assets/screenshots/4.png" style="margin-bottom: 10px;"/> <br>
+   <img src="./.github/assets/screenshots/5.png" style="margin-bottom: 10px;"/> <br>
+   <img src="./.github/assets/screenshots/sddm.png" style="margin-bottom: 10px;"/> <br>
 
   Screenshots last updated <b>2025-4-29</b>
 </p>
@@ -46,11 +46,10 @@
    <img src="./.github/assets/screenshots/niri-2.png" style="margin-bottom: 10px;"/> <br>
    <img src="./.github/assets/screenshots/niri-3.png" style="margin-bottom: 10px;"/> <br>
    <img src="./.github/assets/screenshots/niri-4.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/niri-5.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/niri-6.png" style="margin-bottom: 10px;"/> <br>  
+   <img src="./.github/assets/screenshots/niri-5.png" style="margin-bottom: 10px;"/> <br>  
    <img src="./.github/assets/screenshots/hyprlock.png" style="margin-bottom: 10px;"/> <br>
 
-  Screenshots last updated <b>2025-4-29</b>
+  Screenshots last updated <b>2025-6-23</b>
 </p>
 
 
