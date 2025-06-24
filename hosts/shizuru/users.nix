@@ -58,6 +58,7 @@ in {
   rum.programs.fish = {
       enable = true;
       defaultShell = true;
+      mainUser = "antonio";
   };
   nix.settings.allowed-users = ["${username}"];
   environment.shells = with pkgs; [fish];

@@ -12,6 +12,7 @@
 with lib; let
   cfg = config.system.displayManager;
   #sddm-stray = pkgs.callPackage ../../../../pkgs/stray-new.nix { };
+  cursorPkg = inputs.kureiji-ollie-cursor.packages.${pkgs.system}.kureiji-ollie-cursor;
 in {
   options.system.displayManager = {
     enable = mkEnableOption "Enable Display Manager Services";
@@ -21,6 +22,7 @@ in {
     environment.systemPackages = [
       #   sddm-stray
       pkgs.lyra-cursors
+      cursorPkg
       inputs.hyprddm.packages.${pkgs.system}.default
       inputs.sddm-stray.packages.${pkgs.system}.default
     ];
@@ -40,7 +42,7 @@ in {
       theme = "sddm-theme-stray";
       settings = {
         Theme = {
-          CursorTheme = "LyraS-cursors";
+          CursorTheme = "Kureiji-Ollie-v2";
         };
       };
     };

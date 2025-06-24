@@ -39,7 +39,7 @@
     exec-once = [
       #"hyprpanel"
       "uwsm finalize"
-      "hyprctl setcursor LyraS-cursors 34"
+      "hyprctl setcursor Kureiji-Ollie-v2 34"
       "wl-paste --type text --watch cliphist store"
       "wl-paste --type image --watch cliphist store"
       "systemctl --user restart walker"

@@ -47,7 +47,7 @@
    <img src="./.github/assets/screenshots/niri-3.png" style="margin-bottom: 10px;"/> <br>
    <img src="./.github/assets/screenshots/niri-4.png" style="margin-bottom: 10px;"/> <br>
    <img src="./.github/assets/screenshots/niri-5.png" style="margin-bottom: 10px;"/> <br>  
-   <img src="./.github/assets/screenshots/hyprlock.png" style="margin-bottom: 10px;"/> <br>
+   <img src="./.github/assets/screenshots/quickshell-lock.png" style="margin-bottom: 10px;"/> <br>
 
   Screenshots last updated <b>2025-6-23</b>
 </p>

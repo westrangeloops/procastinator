@@ -42,7 +42,7 @@ in {
         (makeCommand "wl-paste --watch walker --update-clipboard")
         (makeCommand "swww-daemon")
         (makeCommand "python /home/antonio/wayland-idle-inhibitor/wayland-idle-inhibitor.py")
-        (makeCommand "niri-bar")
+        (makeCommand "qs")
         (makeCommand "uwsm-app ${wallpaperScript}/bin/niri-wallpaper")
         (makeCommand "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
         (makeCommand "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
@@ -83,7 +83,7 @@ in {
       };
       cursor = {
         size = 32;
-        theme = "LyraR-cursors";
+        theme = "Kureiji-Ollie-v2";
       };
       layout = {
         background-color = "transparent";
