@@ -137,7 +137,8 @@ in {
       stable.neofetch
       gtk4
       vivid
-      (pkgs.callPackage ../../../pkgs/nitch.nix {})
+      inputs.shizuruPkgs.packages.${pkgs.system}.nitch 
+      inputs.shizuruPkgs.packages.${pkgs.system}.rxfetch
       nurl
       yazi
       #firefox_nightly

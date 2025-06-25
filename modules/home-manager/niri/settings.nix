@@ -90,7 +90,7 @@ in {
         focus-ring.enable = false;
         border = {
           enable = true;
-          width = 2;
+          width = 4;
           active = {
             gradient = {
               from = "#e97078"; # Tokyo Night red
@@ -126,10 +126,10 @@ in {
         always-center-single-column = true;
         gaps = 6;
         struts = {
-          left = 10;
-          right = 10;
-          top = 5;
-          bottom = 5;
+          left = 12;
+          right = 12;
+          top = 12;
+          bottom = 12;
         };
 
         tab-indicator = {
@@ -157,7 +157,7 @@ in {
             curve = "linear";
             duration-ms = 250;
           };
-        };
+        }; 
         shaders.window-open = ''
                               vec4 expanding_circle(vec3 coords_geo, vec3 size_geo) {
                               vec3 coords_tex = niri_geo_to_tex * coords_geo;

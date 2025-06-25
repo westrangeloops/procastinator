@@ -16,6 +16,7 @@
         nixpkgs.follows = "nixpkgs"; 
       };
     };
+    shizuruPkgs.url = "github:maotseantonio/shizuruPkgs";
     kureiji-ollie-cursor.url = "github:maotseantonio/Kureiji-Ollie-Cursors";
     lix-module = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.0.tar.gz";

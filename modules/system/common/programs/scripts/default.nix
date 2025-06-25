@@ -11,7 +11,7 @@
   toggle_float = pkgs.writeScriptBin "toggle_float" (builtins.readFile ./scripts/toggle_float.sh);
 
   maxfetch = pkgs.writeScriptBin "maxfetch" (builtins.readFile ./scripts/maxfetch.sh);
-  rxfetch = pkgs.writeScriptBin "rxfetch" (builtins.readFile ./scripts/rxfetch.sh);
+#  rxfetch = pkgs.writeScriptBin "rxfetch" (builtins.readFile ./scripts/rxfetch.sh);
   compress = pkgs.writeScriptBin "compress" (builtins.readFile ./scripts/compress.sh);
   extract = pkgs.writeScriptBin "extract" (builtins.readFile ./scripts/extract.sh);
 
@@ -40,7 +40,7 @@ in {
     toggle_waybar
     toggle_float
     maxfetch
-    rxfetch
+#    rxfetch
     compress
     extract
     shutdown-script
