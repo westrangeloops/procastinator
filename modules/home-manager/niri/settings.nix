@@ -17,9 +17,9 @@ in {
     enable = true;
     package = pkgs.niri-unstable;
     settings = {
+      xwayland-satellite.enable = true;
       environment = {
         CLUTTER_BACKEND = "wayland";
-        DISPLAY = null;
         GDK_BACKEND = "wayland,x11";
         MOZ_ENABLE_WAYLAND = "1";
         NIXOS_OZONE_WL = "1";
@@ -28,12 +28,15 @@ in {
         SDL_VIDEODRIVER = "wayland";
         QT_QPA_PLATFORMTHEME = "qt6ct";
         QT_STYLE_OVERRIDE = "kvantum";
-        GTK_THEME = "Material-DeepOcean-BL-LB";
+        GTK_THEME = "Catppuccin-Dark";
         ELECTRON_OZONE_PLATFORM_HINT = "auto";
         OZONE_PLATFORM = "wayland";
         JAVA_AWT_WM_NONEREPARENTING = "1";
-        #ANI_CLI_PLAYER = "vlc";
-        #WAYLAND_DISPLAY = "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY";
+        ELECTRON_ENABLE_HARDWARE_ACCELERATION = "1";
+        XDG_SESSION_TYPE = "wayland";
+        XDG_CURRENT_DESKTOP = "niri";
+        #DISPLAY = ":0";
+        DISPLAY = null;
       };
       spawn-at-startup = [
         (makeCommand "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1")

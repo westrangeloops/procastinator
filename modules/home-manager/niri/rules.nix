@@ -111,6 +111,12 @@
     }
     {
       matches = [
+        {app-id = "^(info.febvre.Komikku)$";}
+      ];
+      scroll-factor = 0.1;
+    }
+    {
+      matches = [
         {app-id = "^(zen|firefox|equibop|chromium-browser|edge|chrome-.*|zen-.*)$";}
       ];
       open-maximized = false;

@@ -50,7 +50,7 @@ in {
         binPath = "/run/current-system/sw/bin/Hyprland";
       };
       niri = {
-        prettyName = "Niri";
+        prettyName = "Niri The Goat";
         comment = "Niri compositor managed by UWSM";
         binPath = "/run/current-system/sw/bin/niri-session";
       };

@@ -48,7 +48,7 @@
     "Mod+S".action = switch-preset-column-width;
     "Mod+F".action = maximize-column;
     "Mod+M".action = spawn "niri-edit";
-    # "Mod+Shift+F".action = fullscreen-window;
+    "Mod+Shift+Space".action = fullscreen-window;
     "Mod+Shift+F".action = expand-column-to-available-width;
     "Mod+Space".action = toggle-window-floating;
     "Mod+W".action = toggle-column-tabbed-display;

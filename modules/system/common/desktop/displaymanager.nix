@@ -20,11 +20,11 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = [
-      #   sddm-stray
       pkgs.lyra-cursors
       cursorPkg
       inputs.hyprddm.packages.${pkgs.system}.default
       inputs.sddm-stray.packages.${pkgs.system}.default
+      inputs.waifu-cursors.packages.${pkgs.system}.Reichi-Shinigami
     ];
 
     services.xserver.enable = true;
@@ -42,7 +42,8 @@ in {
       theme = "sddm-theme-stray";
       settings = {
         Theme = {
-          CursorTheme = "Kureiji-Ollie-v2";
+          #CursorTheme = "Kureiji-Ollie-v2";
+          CursorTheme = "Reichi-Shinigami";
         };
       };
     };

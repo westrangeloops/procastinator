@@ -2,49 +2,117 @@
   description = "MaotseNyein NixOS-Hyprland";
 
   inputs = {
+    # Core Nixpkgs sources
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+
+    # Fish shell flake
     fish-flake = {
-        url = "github:maotseantonio/fish-flakes";
-    };   
+      url = "github:maotseantonio/fish-flakes";
+    };
+
+    custom-nixpkgs = {
+      url = "github:maotseantonio/custom-nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # izLix module
     izlix = {
-      type = "github";
+      type = "github"; # legacy-style declaration (optional)
       owner = "isabelroses";
       repo = "izlix";
       inputs = {
-        nixpkgs.follows = "nixpkgs"; 
+        nixpkgs.follows = "nixpkgs";
       };
     };
+
+    # Personal packages and cursors
     shizuruPkgs.url = "github:maotseantonio/shizuruPkgs";
     kureiji-ollie-cursor.url = "github:maotseantonio/Kureiji-Ollie-Cursors";
+    waifu-cursors.url = "github:maotseantonio/waifu-cursors";
+
+    # Modules and utilities
     lix-module = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.0.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     flake-programs-sqlite = {
       url = "github:wamserma/flake-programs-sqlite";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    swww = {
-      url = "github:LGFae/swww/v0.10.3";
-    };
-    agsv1 = {
-      url = "github:dtomvan/agsv1";
+
+    disko = {
+      url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    maomaowm.url = "github:DreamMaoMao/maomaowm";
 
+    nixos-anywhere = {
+      url = "github:numtide/nixos-anywhere";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.disko.follows = "disko";
+    };
+
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nvf.url = "github:notashelf/nvf";
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
+    nvchad4nix = {
+      url = "github:MOIS3Y/nvchad4nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    matugen = {
+      url = "github:/InioX/Matugen";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    anyrun.url = "github:fufexan/anyrun/launch-prefix";
+    walker.url = "github:abenz1267/walker";
+    yazi.url = "github:sxyazi/yazi";
+
+    # Hyprland ecosystem
+    hyprland.url = "github:hyprwm/Hyprland";
+    hypridle.url = "github:hyprwm/hypridle";
+    hyprlock.url = "github:hyprwm/hyprlock";
+    hyprsunset.url = "github:hyprwm/hyprsunset";
+    hyprland-qt-support.url = "github:hyprwm/hyprland-qt-support";
+    hyprland-qtutils.url = "github:hyprwm/hyprland-qtutils";
+
+    hyprland-plugins = {
+      url = "github:ItsOhen/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+
+    hyprpanel = {
+      url = "github:Jas-SinghFSU/HyprPanel";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hyprscroller = {
+      url = "github:maotseantonio/hyprscroller";
+      inputs.hyprland.follows = "hyprland";
+    };
+
+    hyprddm.url = "github:maotseantonio/hyprddm";
+
+    # Other tools / DE components
+    maomaowm.url = "github:DreamMaoMao/maomaowm";
     hycov = {
       url = "github:DreamMaoMao/hycov";
       inputs.hyprland.follows = "hyprland";
     };
-    wayland-pipewire-idle-inhibit = {
-      url = "github:rafaelrc7/wayland-pipewire-idle-inhibit";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    illogical-impulse = {
-      url = "github:maotseantonio/end-4-dots";
+
+    niri = {
+      url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -53,13 +121,33 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    lunarsLib = {
-      url = "github:lunarnovaa/lunarslib";
+    astal = {
+      url = "github:aylur/astal";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    astal-bar = {
+      url = "github:maotseantonio/astal-bar";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     astal-shell = {
       url = "github:knoopx/astal-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ags = {
+      url = "github:aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    agsv1 = {
+      url = "github:dtomvan/agsv1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    lunarsLib = {
+      url = "github:lunarnovaa/lunarslib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -74,111 +162,19 @@
       inputs.hjem.follows = "hjem";
     };
 
+    # Themes, overlays, fonts
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    anyrun.url = "github:fufexan/anyrun/launch-prefix";
-
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nix-alien.url = "github:thiagokokada/nix-alien";
-    wezterm.url = "github:wezterm/wezterm?dir=nix";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     catppuccin.url = "github:catppuccin/nix";
-    walker.url = "github:abenz1267/walker";
-
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixos-anywhere = {
-      url = "github:numtide/nixos-anywhere";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.disko.follows = "disko";
-    };
-    matugen = {
-      url = "github:/InioX/Matugen";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nvf.url = "github:notashelf/nvf";
-    yazi.url = "github:sxyazi/yazi";
-
-    sf-mono-liga-src = {
-      url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
-      flake = false;
-    };
-
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    astal-bar = {
-      url = "github:maotseantonio/astal-bar";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    ags = {
-      url = "github:aylur/ags";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    astal = {
-      url = "github:aylur/astal";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-    };
-
-    hypridle = {
-      url = "github:hyprwm/hypridle";
-    };
-    hyprlock = {
-      url = "github:hyprwm/hyprlock";
-    };
-    hyprland-qt-support = {
-      url = "github:hyprwm/hyprland-qt-support";
-    };
-    hyprland-qtutils = {
-      url = "github:hyprwm/hyprland-qtutils";
-    };
-    hyprland-plugins = {
-      url = "github:ItsOhen/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
-
-    hyprsunset.url = "github:hyprwm/hyprsunset";
-    ghostty.url = "github:ghostty-org/ghostty";
-
-    hyprpanel = {
-      url = "github:Jas-SinghFSU/HyprPanel";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixcord.url = "github:kaylorben/nixcord";
-
-    custom-nixpkgs = {
-      url = "github:maotseantonio/custom-nixpkgs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    textfox.url = "github:adriankarlen/textfox";
-    hyprscroller = {
-      url = "github:maotseantonio/hyprscroller";
-      inputs.hyprland.follows = "hyprland";
-    };
-
-    hyprddm.url = "github:maotseantonio/hyprddm";
-    sddm-stray.url = "github:maotseantonio/sddm-stray-flakes";
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
+    };
+
+    sf-mono-liga-src = {
+      url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
+      flake = false;
     };
 
     ax-shell-config = {
@@ -186,36 +182,47 @@
       flake = false;
     };
 
-    nyxexprs.url = "github:notashelf/nyxexprs";
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
-
-    nvchad4nix = {
-      url = "github:MOIS3Y/nvchad4nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nvchad-on-steroids = {
       url = "github:maotseantonio/nvchad_config";
       flake = false;
     };
+
+    illogical-impulse = {
+      url = "github:maotseantonio/end-4-dots";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    wayland-pipewire-idle-inhibit = {
+      url = "github:rafaelrc7/wayland-pipewire-idle-inhibit";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ghostty.url = "github:ghostty-org/ghostty";
+    nixcord.url = "github:kaylorben/nixcord";
+    textfox.url = "github:adriankarlen/textfox";
+    nh.url = "github:viperML/nh";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    spicetify-nix = {
-      url = "github:Gerg-L/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nh.url = "github:viperML/nh";
-
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    swww = {
+      url = "github:LGFae/swww/v0.10.3";
+    };
+
+    sddm-stray.url = "github:maotseantonio/sddm-stray-flakes";
+    nix-alien.url = "github:thiagokokada/nix-alien";
+    wezterm.url = "github:wezterm/wezterm?dir=nix";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    nyxexprs.url = "github:notashelf/nyxexprs";
+
+    # Example of commented input
     # zjstatus = {
     #   url = "github:dj95/zjstatus";
     # };
@@ -230,12 +237,14 @@
     chaotic,
     nur,
     lix-module,
+    quickshell,
     ...
   }: let
     system = "x86_64-linux";
     host = "shizuru";
     username = "antonio";
 
+    # Import nixpkgs for main and master channels
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
@@ -246,9 +255,10 @@
       config.allowUnfree = true;
     };
   in {
-    devShells = pkgs: {
+    # Development shell for quickshell QML development
+    devShells.${system} = {
       quickshell = let
-        qs = inputs.quickshell.packages.${pkgs.system}.default.override {
+        qs = quickshell.packages.${system}.default.override {
           withJemalloc = true;
           withQtSvg = true;
           withWayland = true;
@@ -260,23 +270,21 @@
         };
         qtDeps = [
           qs
-          pkgs.kdePackages.qtbase
-          pkgs.kdePackages.qtdeclarative
+          pkgs.qt6.qtbase
+          pkgs.qt6.qtdeclarative
         ];
-      in
-        pkgs.mkShell {
-          shellHook = let
-            qmlPath = pkgs.lib.pipe qtDeps [
-              (builtins.map (lib: "${lib}/lib/qt-6/qml"))
-              (builtins.concatStringsSep ":")
-            ];
-          in ''
-            export QML2_IMPORT_PATH="$QML2_IMPORT_PATH:${qmlPath}"
-          '';
-          buildInputs = qtDeps;
-        };
+      in pkgs.mkShell {
+        name = "quickshell-dev";
+        nativeBuildInputs = qtDeps;
+        shellHook = let
+          qmlPath = pkgs.lib.makeSearchPath "lib/qt-6/qml" qtDeps;
+        in ''
+          export QML2_IMPORT_PATH="$QML2_IMPORT_PATH:${qmlPath}"
+        '';
+      };
     };
 
+    # NixOS configuration for host 'shizuru'
     nixosConfigurations = {
       shizuru = nixpkgs.lib.nixosSystem {
         specialArgs = {
