@@ -60,7 +60,7 @@
 - 💽 hjem-rum - hjem with modules system support.
 - 📁 home-manager - on this time i do not fully change to hjem and hjem-rum so optional.
 - ⚠️ Hyprland - As my window manager But secondary.  
-- 💈 Niri - My Main WM.
+- 💈 Niri - My Main WM (Niri The Goat).
 - 💽 QuickShell - for my desktop enviornment.
 
 

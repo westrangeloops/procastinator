@@ -11,8 +11,7 @@
       enable = true;
       packages = [
         "com.github.tchx84.Flatseal"
-        #"com.calibre_ebook.calibre"
-        #"org.getoutline.OutlineClient"
+        "app.opencomic.OpenComic"
       ];
     };
   };

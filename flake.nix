@@ -5,8 +5,8 @@
     # Core Nixpkgs sources
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
-
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    font-flake.url = "github:redyf/font-flake";
     # Fish shell flake
     fish-flake = {
       url = "github:maotseantonio/fish-flakes";
@@ -16,7 +16,7 @@
       url = "github:maotseantonio/custom-nixpkgs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # izLix module
+   # izLix module
     izlix = {
       type = "github"; # legacy-style declaration (optional)
       owner = "isabelroses";
@@ -33,7 +33,7 @@
 
     # Modules and utilities
     lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.0.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.2-1.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -75,7 +75,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    anyrun.url = "github:fufexan/anyrun/launch-prefix";
+    anyrun-fufexan.url = "github:fufexan/anyrun/launch-prefix";
     walker.url = "github:abenz1267/walker";
     yazi.url = "github:sxyazi/yazi";
 
@@ -131,11 +131,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    astal-shell = {
-      url = "github:knoopx/astal-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     ags = {
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -187,10 +182,8 @@
       flake = false;
     };
 
-    illogical-impulse = {
-      url = "github:maotseantonio/end-4-dots";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    illogical-impulse.url = "github:xBLACKICEx/end-4-dots-hyprland-nixos";
+    illogical-impulse.inputs.nixpkgs.follows = "nixpkgs";
 
     wayland-pipewire-idle-inhibit = {
       url = "github:rafaelrc7/wayland-pipewire-idle-inhibit";
@@ -200,8 +193,10 @@
     ghostty.url = "github:ghostty-org/ghostty";
     nixcord.url = "github:kaylorben/nixcord";
     textfox.url = "github:adriankarlen/textfox";
-    nh.url = "github:viperML/nh";
-
+    nh = {
+        url = "github:nix-community/nh/better-env-handling";
+        inputs.nixpkgs.follows = "nixpkgs";
+     };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -221,11 +216,6 @@
     wezterm.url = "github:wezterm/wezterm?dir=nix";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nyxexprs.url = "github:notashelf/nyxexprs";
-
-    # Example of commented input
-    # zjstatus = {
-    #   url = "github:dj95/zjstatus";
-    # };
   };
 
   outputs = inputs @ {
@@ -273,15 +263,16 @@
           pkgs.qt6.qtbase
           pkgs.qt6.qtdeclarative
         ];
-      in pkgs.mkShell {
-        name = "quickshell-dev";
-        nativeBuildInputs = qtDeps;
-        shellHook = let
-          qmlPath = pkgs.lib.makeSearchPath "lib/qt-6/qml" qtDeps;
-        in ''
-          export QML2_IMPORT_PATH="$QML2_IMPORT_PATH:${qmlPath}"
-        '';
-      };
+      in
+        pkgs.mkShell {
+          name = "quickshell-dev";
+          nativeBuildInputs = qtDeps;
+          shellHook = let
+            qmlPath = pkgs.lib.makeSearchPath "lib/qt-6/qml" qtDeps;
+          in ''
+            export QML2_IMPORT_PATH="$QML2_IMPORT_PATH:${qmlPath}"
+          '';
+        };
     };
 
     # NixOS configuration for host 'shizuru'
@@ -293,7 +284,7 @@
         modules = [
           ./hosts/${host}/config.nix
           inputs.chaotic.nixosModules.default
-          inputs.fish-flake.nixosModules.myfish
+          #inputs.fish-flake.nixosModules.myfish
           inputs.home-manager.nixosModules.home-manager
           inputs.stylix.nixosModules.stylix
           inputs.catppuccin.nixosModules.catppuccin

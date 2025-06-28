@@ -7,8 +7,7 @@
     config.allowUnfree = true;
   };
 in [
-  inputs.astal-shell.overlays.default
-  inputs.hyprpanel.overlay
+  #inputs.hyprpanel.overlay
   inputs.niri.overlays.niri
   inputs.nur.overlays.default
   inputs.custom-nixpkgs.overlays.default

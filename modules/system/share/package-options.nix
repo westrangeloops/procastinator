@@ -63,6 +63,7 @@ in {
       neovide
       starship
       cliphist
+      hyprpanel
       eog
       gnome-system-monitor
       file-roller
@@ -73,6 +74,8 @@ in {
       gtk-engine-murrine # for gtk themes
       hyprcursor # requires unstable channel
       #hypridle # requires unstable channel
+      qcomicbook
+      ahoviewer
       imagemagick
       inxi
       jq
@@ -131,22 +134,22 @@ in {
       dbus-glib
       gtkmm4
       komikku
+      master.mangayomi
       mangal
       mangareader
       master.tmux
-      stable.neofetch
+      neofetch
       gtk4
       vivid
-      inputs.shizuruPkgs.packages.${pkgs.system}.nitch 
+      inputs.shizuruPkgs.packages.${pkgs.system}.nitch
       inputs.shizuruPkgs.packages.${pkgs.system}.rxfetch
       nurl
-      yazi
+      master.yazi
       #firefox_nightly
       inputs.hyprsunset.packages.${pkgs.system}.hyprsunset
       master.microfetch
       socat
       hyprpicker
-      hyprpanel
       inputs.nyxexprs.packages.${pkgs.system}.ani-cli-git
     ];
   };

@@ -47,7 +47,7 @@ in {
         "loglevel=0"
         "rd.udev.log_level=0"
         "rd.systemd.show_status=false"
-        "udev.log_priority=3"
+        "udev.log_priority=0"
         "systemd.mask=systemd-vconsole-setup.service"
         "systemd.mask=dev-tpmrm0.device"
         "nowatchdog"
@@ -59,6 +59,7 @@ in {
         "v4l2loopback"
         "kvm-intel"
         "drm"
+        "i2c-dev"
       ];
 
       extraModulePackages = [

@@ -13,7 +13,7 @@
 
   cfg = config.rum.programs.walker;
 
-  defaultPackage = pkgs.walker or null;
+  defaultPackage = inputs.walker.packages.${pkgs.system}.default or null;
 in {
   options.rum.programs.walker = {
     enable = mkEnableOption "Walker application launcher";

@@ -12,7 +12,7 @@ in {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     (lib.modules.mkAliasOptionModule ["hm"] ["home-manager" "users" "${username}"]) # gitlab/fazzi
-  ]; 
+  ];
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
@@ -31,9 +31,11 @@ in {
       programs.home-manager.enable = true;
     };
   };
-
   users = {
+    defaultUserShell = pkgs.fish;
+    mutableUsers = true;
     users."${username}" = {
+      shell = pkgs.fish;
       homeMode = "755";
       isNormalUser = true;
       description = "${gitUsername}";
@@ -48,22 +50,13 @@ in {
         "audio"
       ];
 
-      # define user packages here
-      packages = with pkgs; [
+    # define user packages here
+    packages = with pkgs; [
       ];
     };
-
-    defaultUserShell = pkgs.fish;
   };
-  rum.programs.fish = {
-      enable = true;
-      defaultShell = true;
-  };
+    #security.sudo.wheelNeedsPassword = false;
   nix.settings.allowed-users = ["${username}"];
-  environment.shells = with pkgs; [fish];
-  environment.systemPackages = with pkgs; [fzf];
-  programs.fish.enable = true;
-  programs.fish.interactiveShellInit = ''
-    ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
-  ''; 
+  environment.shells = with pkgs; [ fish ];
+  environment.systemPackages = with pkgs; [ fzf ];
 }

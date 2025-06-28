@@ -18,14 +18,16 @@ in {
 
   config = mkIf cfg.enable {
     boot = {
+    consoleLogLevel = 0;
       loader.efi = {
         canTouchEfiVariables = true;
       };
-      loader.timeout = 3;
+      loader.timeout = 0;
       loader.systemd-boot = {
         enable = true;
-        consoleMode = "auto";
+        consoleMode = "max";
         configurationLimit = 8;
+        editor = false;
       };
       tmp = {
         useTmpfs = false;

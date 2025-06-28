@@ -12,6 +12,12 @@
     walkern = spawn "${inputs.walker.packages.${pkgs.system}.default}/bin/walker";
     wallPicker = spawn "walker" "-m" "wallpaper";
     walker-clip = spawn "niri-clip";
+    brightness-up = spawn "~/.local/bin/brightness" "--inc";
+    brightness-down = spawn "~/.local/bin/brightness" "--dec";
+    wlogout-new = spawn "~/.local/bin/wlogout-new";
+   # eww-bar = spawn "~/.local/bin/eww-bar";
+    toggle-waybar = spawn "~/.local/bin/toggle-waybar";
+    qs-lock = spawn "~/.local/bin/lock-qs";
   in {
     "XF86AudioMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
     "XF86AudioMicMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle";
@@ -24,25 +30,27 @@
     "XF86AudioRaiseVolume".action = set-volume "5%+";
     "XF86AudioLowerVolume".action = set-volume "5%-";
 
-    "XF86MonBrightnessUp".action = spawn "brightness" "--inc";
-    "XF86MonBrightnessDown".action = spawn "brightness" "--dec";
+    "XF86MonBrightnessUp".action = brightness-up;
+    "XF86MonBrightnessDown".action = brightness-down;
 
     "Print".action.screenshot-screen = {write-to-disk = true;};
     "Mod+Shift+Alt+S".action = screenshot-window;
     "Mod+Shift+S".action = screenshot;
     "Mod+D".action = spawn "${inputs.walker.packages.${pkgs.system}.default}/bin/walker";
-    "Mod+N".action = spawn "toggle-waybar";
+    "Mod+N".action = qs-lock;
     "Mod+Return".action = spawn "wezterm";
     "Mod+X".action = walkern "-m" "power";
     "Alt+Tab".action = walkern "-m" "windows";
     "Mod+Shift+X".action = spawn "ani-cli" "--rofi";
-    "Alt+Space".action = spawn "${pkgs.anyrun}/bin/anyrun";
-    "Mod+Shift+Return".action = spawn "foot" "--app-id=dropdown";
+    "Alt+Space".action = spawn "fuzzel";
+    "Mod+Shift+Return".action = spawn "kitty";
     "Ctrl+Alt+L".action = spawn "hyprlock";
     "Mod+T".action = spawn "thunar";
+    "Mod+O".action = spawn "fuzzel";
+    "Mod+I".action = spawn "fuzzel-clip";
     "Mod+U".action = control-center;
     "Mod+E".action = wallPicker;
-    "Mod+Backspace".action = spawn "wlogout-new";
+    "Mod+Backspace".action = wlogout-new;
     "Mod+B".action = spawn "eww-bar";
     "Mod+Q".action = close-window;
     "Mod+S".action = switch-preset-column-width;
@@ -56,8 +64,8 @@
     "Mod+Comma".action = consume-window-into-column;
     "Mod+Period".action = expel-window-from-column;
     "Mod+C".action = center-window;
-    "Mod+Tab".action = switch-focus-between-floating-and-tiling;
-
+    "Mod+grave".action = switch-focus-between-floating-and-tiling;
+    "Mod+Tab".action = toggle-overview;
     "Mod+1".action = focus-workspace 1;
     "Mod+2".action = focus-workspace 2;
     "Mod+3".action = focus-workspace 3;

@@ -4,6 +4,7 @@
     ./cava.nix
     ./nixy.nix
     ./fhsenv.nix
+    ./fish.nix
     ./btop.nix
     ./foot.nix
     ./shell.nix

@@ -4,15 +4,22 @@
   inputs,
   ...
 }: let
-  #pointer = config.home.pointerCursor;
   makeCommand = command: {
     command = [command];
   };
   wallpaperScript = pkgs.writeScriptBin "niri-wallpaper" (builtins.readFile ./wallpaperAutoChange.sh);
 in {
-  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-gnome pkgs.gnome-keyring];
-  home.packages = [pkgs.wl-clipboard inputs.astal-bar.packages.${pkgs.system}.default inputs.astal.packages.${pkgs.system}.default wallpaperScript];
-
+  xdg.portal.extraPortals = [
+         pkgs.xdg-desktop-portal-gtk
+         pkgs.xdg-desktop-portal-gnome
+         pkgs.gnome-keyring
+  ];
+  home.packages = [
+         pkgs.wl-clipboard
+         inputs.astal-bar.packages.${pkgs.system}.default
+         inputs.astal.packages.${pkgs.system}.default
+         wallpaperScript
+  ];
   programs.niri = {
     enable = true;
     package = pkgs.niri-unstable;
@@ -35,8 +42,7 @@ in {
         ELECTRON_ENABLE_HARDWARE_ACCELERATION = "1";
         XDG_SESSION_TYPE = "wayland";
         XDG_CURRENT_DESKTOP = "niri";
-        #DISPLAY = ":0";
-        DISPLAY = null;
+        DISPLAY = null; #  DISPLAY = ":0";
       };
       spawn-at-startup = [
         (makeCommand "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1")
@@ -46,6 +52,12 @@ in {
         (makeCommand "swww-daemon")
         (makeCommand "python /home/antonio/wayland-idle-inhibitor/wayland-idle-inhibitor.py")
         (makeCommand "qs")
+        (makeCommand "arrpc")
+        (makeCommand "systemctl --user restart walker.service")
+        (makecommand "systemctl --user restart arrpc.service")
+        (makeCommand "systemctl --user restart arRPC.service")
+        (makeCommand "walker --gapplication-service")
+        (makeCommand "~/.local/bin/mod-qs")
         (makeCommand "uwsm-app ${wallpaperScript}/bin/niri-wallpaper")
         (makeCommand "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
         (makeCommand "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
@@ -150,18 +162,30 @@ in {
         enable = true;
         slowdown = 2.0;
         window-open = {
-          easing = {
-            curve = "linear";
-            duration-ms = 200;
+          kind = {
+            easing = {
+              curve = "linear";
+              duration-ms = 200;
+            };
           };
         };
         window-close = {
-          easing = {
-            curve = "linear";
-            duration-ms = 250;
+          kind = {
+            easing = {
+              curve = "linear";
+              duration-ms = 250;
+            };
           };
-        }; 
-        shaders.window-open = ''
+        };
+        window-resize = {
+          kind = {
+            easing = {
+              curve = "linear";
+              duration-ms = 250;
+            };
+          };
+        };
+        window-open.custom-shader = ''
                               vec4 expanding_circle(vec3 coords_geo, vec3 size_geo) {
                               vec3 coords_tex = niri_geo_to_tex * coords_geo;
                               vec4 color = texture2D(niri_tex, coords_tex.st);
@@ -177,7 +201,7 @@ in {
                              return expanding_circle(coords_geo, size_geo);
             }
         '';
-        shaders.window-close = ''
+        window-close.custom-shader = ''
                              vec4 fall_and_rotate(vec3 coords_geo, vec3 size_geo) {
                              float progress = niri_clamped_progress * niri_clamped_progress;
                              vec2 coords = (coords_geo.xy - vec2(0.5, 1.0)) * size_geo.xy;
@@ -202,7 +226,7 @@ in {
 
         '';
       };
-      animations.shaders.window-resize = ''
+      animations.window-resize.custom-shader = ''
           vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
           vec3 coords_next_geo = niri_curr_geo_to_next_geo * coords_curr_geo;
 

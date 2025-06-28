@@ -2,10 +2,15 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
-}: {
+}:
+let
+  wezterm = inputs.wezterm.packages.${pkgs.system}.default;
+in
+{
   hj = {
-    packages = [pkgs.wezterm];
+    packages = [ wezterm ];
     files = {
       ".config/wezterm/wezterm.lua".text = ''
                            local utils = require("utils")
@@ -69,13 +74,13 @@
 
         -- fonts
         c.font = wezterm.font_with_fallback({
+           "IoshelfkaMono Nerd Font",
           "JetBrainsMono Nerd Font",
-          "Symbols Nerd Font",
         })
         c.font_size = 14
         c.adjust_window_size_when_changing_font_size = false
         c.window_frame = {
-          font = wezterm.font("Maple Mono"),
+          font = wezterm.font("IoshelfkaMono Nerd Font"),
           font_size = c.font_size,
         }
 
