@@ -2,7 +2,7 @@
   description = "MaotseNyein NixOS-Hyprland";
 
   inputs = {
-    # Core Nixpkgs sources testing
+    # Core Nixpkgs sources
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
