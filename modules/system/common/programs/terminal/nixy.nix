@@ -4,7 +4,7 @@
   inputs,
   ...
 }: let
-  configDirectory = "/home/antonio/shizuru/";
+  configDirectory = "/home/dotempo/procastinator/";
   hostname = "shizuru";
 
   nixy =
@@ -56,7 +56,7 @@
         sudo /run/current-system/bin/switch-to-configuration boot
       elif [[ $1 == "remote" ]];then
         cd ~/shizuru/ && git add . && git commit -m "update" && git push
-        ssh jack -S -C "cd /home/antonio/shizuru && git pull && sudo -S nixos-rebuild switch --flake ~/shizuru/hosts/.#shizuru"
+        ssh jack -S -C "cd /home/dotempo/procastinator && git pull && sudo -S nixos-rebuild switch --flake ~/procastinator/hosts/.#shizuru"
       elif [[ $1 == "loop" ]];then
         while true; do
           nixy

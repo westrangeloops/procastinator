@@ -9,7 +9,7 @@
     enable = true;
     settings = {
       main = {
-        include = "/home/antonio/.config/fuzzel/rosewater.ini";
+        include = "/home/dotempo/.config/fuzzel/rosewater.ini";
         font = "JetBrainsMono Nerd Font:size=7";
         anchor = "top-left";
         prompt = " 󰊠 : Search..";

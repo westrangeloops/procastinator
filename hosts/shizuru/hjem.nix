@@ -16,7 +16,7 @@
     users.${username} = {
       enable = true;
       user = "${username}";
-      directory = "/home/antonio";
+      directory = "/home/dotempo";
       environment = {
         sessionVariables = {
           NIXPKGS_ALLOW_UNFREE = "1";

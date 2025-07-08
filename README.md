@@ -1,18 +1,18 @@
 <h1 align="center">
    <img src="./.github/assets/logo/flake.png  " width="100px" /> 
    <br>
-      Shizuru  
+      Procastinator  
    <br>
      <img src="./.github/assets/pallet/macchiato.png" width="600px" /> <br>
 
    <div align="center">
       <p></p>
       <div align="center">
-         <a href="https://github.com/Frost-Phoenix/nixos-config/stargazers">
-            <img src="https://img.shields.io/github/stars/maotseantonio/NixOS-Hyprland?color=A5ADCB&labelColor=1E1E2E&style=for-the-badge&logo=starship&logoColor=c6a0f6">
+         <a href="https://github.com/westrangeloops/procastinator/stargazers">
+            <img src="https://img.shields.io/github/stars/westrangeloops/procastinator?color=A5ADCB&labelColor=1E1E2E&style=for-the-badge&logo=starship&logoColor=c6a0f6">
          </a>
-         <a href="https://github.com/maotseantonio/NixOS-Hyprland/">
-            <img src="https://img.shields.io/github/repo-size/maotseantonio/NixOS-Hyprland?color=A5ADCB&labelColor=1E1E2E&style=for-the-badge&logo=github&logoColor=C6A0F6">
+         <a href="https://github.com/westrangeloops/procastinator/">
+            <img src="https://img.shields.io/github/repo-size/westrangeloops/procastinator?color=A5ADCB&labelColor=1E1E2E&style=for-the-badge&logo=github&logoColor=C6A0F6">
          </a>
          <a = href="https://nixos.org">
             <img src="https://img.shields.io/badge/NixOS-unstable-blue.svg?style=for-the-badge&labelColor=1E1E2E&logo=NixOS&logoColor=C6A0F6&color=A5ADCB">

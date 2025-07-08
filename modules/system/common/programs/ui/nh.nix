@@ -19,7 +19,7 @@ in {
   programs.nh = {
     enable = true;
     package = custom-nh;
-    flake = "/home/antonio/shizuru/";
+    flake = "/home/dotempo/procastinator/";
     clean = {
       enable = true;
       extraArgs = "--keep-since 3d --keep 3";

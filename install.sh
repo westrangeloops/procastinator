@@ -127,10 +127,10 @@ printf "\n%.0s" {1..2}
 # Set the Nix configuration for experimental features
 NIX_CONFIG="experimental-features = nix-command flakes"
 #sudo nix flake update
-sudo nixos-rebuild switch --flake ~/shizuru/#"${hostName}"
+sudo nixos-rebuild switch --flake ~/procastinator/#"${hostName}"
 
 #return to flakes directory
-cd ~/shizuru
+cd ~/procastinator
 
 
 printf "\n%.0s" {1..2}

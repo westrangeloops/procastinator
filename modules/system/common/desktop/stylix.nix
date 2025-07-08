@@ -22,7 +22,7 @@
     };
   };
   stylix.polarity = "dark";
-  stylix.image = "/home/antonio/Pictures/wallpapers/Catpuccin_carv1.png";
+  stylix.image = "/home/dotempo/Pictures/wallpapers/Catpuccin_carv1.png";
   stylix = {
     fonts = {
       sizes = {

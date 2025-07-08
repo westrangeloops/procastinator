@@ -10,7 +10,7 @@
 file="$1"
 
 if [[ -z "$file" ]]; then
-  echo "❌ Usage: $0 ~/shizuru/modules/system/common/programs/foot.nix"
+  echo "❌ Usage: $0 ~/procastinator/modules/system/common/programs/foot.nix"
   exit 1
 fi
 

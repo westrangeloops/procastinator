@@ -18,7 +18,7 @@
         set -e
         echo "Cleaning up stale Home Manager systemd services..."
 
-        HM_SERVICE_DIR="/home/antonio/.config/systemd/user"
+        HM_SERVICE_DIR="/home/dotempo/.config/systemd/user"
 
         if [[ -d "$HM_SERVICE_DIR" ]]; then
           # Get current user session bus address

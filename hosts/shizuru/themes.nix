@@ -39,7 +39,7 @@
     };
 
     wallpapers = {
-      primary = "/home/antonio/Pictures/wallpapers/guts-5k-berserk-3840x2160-13631.jpg";
+      primary = "/home/dotempo/Pictures/wallpapers/guts-5k-berserk-3840x2160-13631.jpg";
     };
   };
 }

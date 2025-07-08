@@ -1,7 +1,7 @@
 {
   # Git Configuration ( For Pulling Software Repos )
 
-  configDirectory = "/home/antonio/shizuru/";
+  configDirectory = "/home/dotempo/procastinator/";
   gitUsername = "maotseantonio";
   gitEmail = "thetzinantonio@gmail.com";
   extraMonitorSettings = "";
