@@ -11,7 +11,6 @@
     fish-flake = {
       url = "github:maotseantonio/fish-flakes";
     };
-
     custom-nixpkgs = {
       url = "github:maotseantonio/custom-nixpkgs";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -54,7 +54,7 @@ in {
         (makeCommand "qs")
         (makeCommand "arrpc")
         (makeCommand "systemctl --user restart walker.service")
-        (makecommand "systemctl --user restart arrpc.service")
+        (makeCommand "systemctl --user restart arrpc.service")
         (makeCommand "systemctl --user restart arRPC.service")
         (makeCommand "walker --gapplication-service")
         (makeCommand "~/.local/bin/mod-qs")

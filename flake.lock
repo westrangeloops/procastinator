@@ -5034,11 +5034,11 @@
     "nvchad-on-steroids": {
       "flake": false,
       "locked": {
-        "lastModified": 1751436645,
-        "narHash": "sha256-LtSR3+GvUT0RCAvOCpghF9M1gr10WWXdrj57RmQA67M=",
+        "lastModified": 1751993743,
+        "narHash": "sha256-oSJVH9a5m2owWRI87JAGaAcmiStjNRfdZvYTpOVhg/Y=",
         "owner": "maotseantonio",
         "repo": "nvchad_config",
-        "rev": "6a1a878c264b367972154a455971341da1867169",
+        "rev": "d476576dcf2b7391a654ef083f5ffa87c66999da",
         "type": "github"
       },
       "original": {
