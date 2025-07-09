@@ -25,7 +25,7 @@
    </div>
 </h1>
 
-
+# THIS IS JUST A PERSONAL COPY FROM https://github.com/maotseantonio/shizuru
 ### 🖼️ Gallery for Hyprland (qs config is from this guy https://github.com/caelestia-dots/shell.git)
 
 <p align="center">
