@@ -3,7 +3,7 @@
 
   #  hostname = "${hostname}";
   #  username = "${username}";
-  configDirectory = "/home/antonio/NixOS-Hyprland/";
+  configDirectory = "/home/dotempo/NixOS-Hyprland/";
   gitUsername = "maotseantonio";
   gitEmail = "thetzinantonio@gmail.com";
 

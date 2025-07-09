@@ -19,12 +19,12 @@
   boot.initrd.supportedFilesystems = ["zfs"];
   boot.zfs.devNodes = "{$DISK_PATH}";
   #boot.zfs.devNodes = "/dev/disk/by-partuuid";
-  networking.hostName = "shizuru"; # Define your hostname.
+  networking.hostName = "dotempo"; # Define your hostname.
   networking.hostId = "$(head -c 8 /etc/machine-id)";
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
-  time.timeZone = "Asia/Yangon";
+  time.timeZone = "America/SaoPaulo";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -34,6 +34,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
   services.xserver.enable = true;
   services.xserver.xkb.layout = "us";
+  services.xserver.xkb.variant = "intl";
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -42,10 +43,10 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.antonio = {
+  # Define a user account. Don't forget to set a password with 'passwd'.
+  users.users.dotempo = {
     isNormalUser = true;
-    extraGroups = ["wheel" "networkmanager"]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "networkmanager"]; # Enable 'sudo' for the user.
     packages = with pkgs; [
       tree
     ];
@@ -76,8 +77,8 @@
   nix = {
     package = pkgs.lix;
     settings = {
-      allowed-users = ["root" "@wheel" "antonio"];
-      trusted-users = ["root" "@wheel" "antonio" "@builders"];
+      allowed-users = ["root" "@wheel" "dotempo"];
+      trusted-users = ["root" "@wheel" "dotempo" "@builders"];
       warn-dirty = false;
       auto-optimise-store = true;
       experimental-features = [

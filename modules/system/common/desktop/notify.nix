@@ -1,9 +1,10 @@
 {
   config,
+  lib,
   pkgs,
   ...
-}: let
-  username = "antonio"; # CHANGE THIS to your username
+}: {
+  username = "dotempo"; # CHANGE THIS to your username
 
   # 1. NH wrapper with immediate notification
   nhWithNotify = pkgs.writeShellScriptBin "nh" ''

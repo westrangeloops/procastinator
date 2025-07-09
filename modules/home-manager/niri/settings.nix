@@ -50,7 +50,7 @@ in {
         (makeCommand "wl-paste --type text --watch cliphist store")
         (makeCommand "wl-paste --watch walker --update-clipboard")
         (makeCommand "swww-daemon")
-        (makeCommand "python /home/antonio/wayland-idle-inhibitor/wayland-idle-inhibitor.py")
+        (makeCommand "python /home/dotempo/wayland-idle-inhibitor/wayland-idle-inhibitor.py")
         (makeCommand "qs")
         (makeCommand "arrpc")
         (makeCommand "systemctl --user restart walker.service")

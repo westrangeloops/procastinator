@@ -1,4 +1,4 @@
-list=$(find -L "/home/antonio/Pictures/wallpapers/" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \))
+list=$(find -L "/home/dotempo/Pictures/wallpapers/" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \))
 
 while walls= read -r path; do
   name=$(b=${path##*/}; echo ${b%.*})
@@ -8,5 +8,5 @@ while walls= read -r path; do
   name=${name//-/ };
   name=${name//   / };
 
-  printf "image=$path;label=${name};exec=swww img --transition-fps 144 --transition-duration 1 -t any $path && cp $path /home/antonio/Pictures/wallpapers/.wallpaper && /home/antonio/.local/bin/bde rl thunar;\n"
+  printf "image=$path;label=${name};exec=swww img --transition-fps 144 --transition-duration 1 -t any $path && cp $path /home/dotempo/Pictures/wallpapers/.wallpaper && /home/dotempo/.local/bin/bde rl thunar;\n"
 done <<< "$list"

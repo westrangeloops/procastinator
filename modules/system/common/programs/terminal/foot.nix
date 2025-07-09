@@ -12,7 +12,7 @@ in {
           main = {
             term = "foot";
             font = "IoshelfkaMono Nerd Font:size=14";
-            include = "/home/antonio/.config/foot/catppuccin-mocha.ini";
+            include = "/home/dotempo/.config/foot/catppuccin-mocha.ini";
           };
           mouse = {
             hide-when-typing = "yes";

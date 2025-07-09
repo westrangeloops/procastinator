@@ -99,7 +99,7 @@
       menus.dashboard.shortcuts.left.shortcut1.command = "zen-browser";
       menus.dashboard.shortcuts.left.shortcut1.tooltip = "Zen-Browser";
       menus.dashboard.shortcuts.left.shortcut1.icon = "󰈹";
-      menus.dashboard.powermenu.avatar.image = "/home/antonio/Pictures/wallpapers/berserk-1359162.png";
+      menus.dashboard.powermenu.avatar.image = "/home/dotempo/Pictures/wallpapers/berserk-1359162.png";
       menus.dashboard.shortcuts.left.shortcut3.command = "vesktop";
       theme.matugen_settings.scheme_type = "expressive";
       theme.matugen_settings.variation = "standard_2";

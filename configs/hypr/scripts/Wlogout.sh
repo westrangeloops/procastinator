@@ -30,7 +30,7 @@ if ((resolution >= 2160)); then
     T_val=$(awk "BEGIN {printf \"%.0f\", $A_2160 * 2160 * $hypr_scale / $resolution}")
     B_val=$(awk "BEGIN {printf \"%.0f\", $B_2160 * 2160 * $hypr_scale / $resolution}")
     echo "Setting parameters for resolution >= 4k"
-    wlogout --protocol layer-shell -b 5 -T $T_val -B $B_val -l /home/antonio/.config/wlogout/layout -C /home/antonio/.config/wlogout/nova.css -r 40 -c 40 &
+    wlogout --protocol layer-shell -b 5 -T $T_val -B $B_val -l /home/dotempo/.config/wlogout/layout -C /home/dotempo/.config/wlogout/nova.css -r 40 -c 40 &
 elif ((resolution >= 1600 && resolution < 2160)); then
     T_val=$(awk "BEGIN {printf \"%.0f\", $A_1600 * 1600 * $hypr_scale / $resolution}")
     B_val=$(awk "BEGIN {printf \"%.0f\", $B_1600 * 1600 * $hypr_scale / $resolution}")

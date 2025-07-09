@@ -30,8 +30,8 @@ Singleton {
                     settings.weatherLocation = content.weatherLocation ?? "Dinslaken"
                     settings.useFahrenheit = content.useFahrenheit ?? false
                     settings.displayTime = content.displayTime ?? 6000
-                    settings.videoPath = content.videoPath ?? "/home/antonio/Videos/"
-                    settings.wallpaperDirectory = content.wallpaperDirectory ?? "/home/antonio/Pictures/wallpapers/"
+                    settings.videoPath = content.videoPath ?? "/home/dotempo/Videos/"
+                    settings.wallpaperDirectory = content.wallpaperDirectory ?? "/home/dotempo/Pictures/wallpapers/"
                     settings.lastWallpaperPath = content.lastWallpaperPath ?? ""
                     settings.customDarkAccent = content.customDarkAccent ?? "#be95ff"
                     settings.customLightAccent = content.customLightAccent ?? "#8a3ffc"
@@ -67,8 +67,8 @@ Singleton {
     property int displayTime: 6000  // Notification display time in ms
     property var ignoredApps: []  // Apps to ignore notifications from (case-insensitive)
     property int historyLimit: 25  // Notification history limit
-    property string videoPath: "/home/antonio/Videos/"
-    property string wallpaperDirectory: "/home/antonio/Pictures/wallpapers/"
+    property string videoPath: "/home/dotempo/Videos/"
+    property string wallpaperDirectory: "/home/dotempo/Pictures/wallpapers/"
     property string lastWallpaperPath: ""
     property string customDarkAccent: "#be95ff"
     property string customLightAccent: "#8a3ffc"

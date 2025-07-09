@@ -133,7 +133,6 @@ in {
       libqalculate
       dbus-glib
       gtkmm4
-      komikku
       master.mangayomi
       mangal
       mangareader

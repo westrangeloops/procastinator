@@ -41,8 +41,8 @@ in {
   ];
 
   drivers.amdgpu.enable = true;
-  drivers.intel.enable = false;
-  drivers.nvidia.enable = true;
+  #drivers.intel.enable = false;
+  #drivers.nvidia.enable = true;
   #  drivers.nvidia-prime = {
   #    enable = true;
   #    intelBusID = "PCI:0:2:0";

@@ -169,11 +169,7 @@
       match app-id="^(xdg-desktop-portal-gtk)$"
       scroll-factor 0.85
   }
-  window-rule {
-      match app-id="^(Komikku|info.febvre.Komikku.*)$"
-      match app-id="^(xdg-desktop-portal-gtk)$"
-      scroll-factor 0.15
-  }
+
 
   window-rule {
       match app-id="^(zen|firefox|equibop|chromium-browser|edge|chrome-.*|zen-.*)$"

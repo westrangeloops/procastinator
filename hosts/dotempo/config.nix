@@ -28,15 +28,6 @@ in {
     ../../modules
   ];
 
-  # GPU drivers
-  #drivers.intel.enable = true;
-  #drivers.nvidia.enable = true;
-  #drivers.nvidia-prime = {
-  #  enable = true;
-  #  intelBusID = "PCI:0:2:0";
-  #  nvidiaBusID = "PCI:1:0:0";
-  #};
-
   # System services
   vm.guest-services.enable = false;
   local.hardware-clock.enable = true;
@@ -55,9 +46,6 @@ in {
   system.zram.enable = true;
   catppuccin.tty.enable = true;
 
-  # Drivers to load (use "nvidia" and "modesetting" for XWayland fallback)
-  services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
-
   # Nixpkgs and users
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;
@@ -67,19 +55,17 @@ in {
   # Packages
   environment.systemPackages =
     (with pkgs; [
-      libva-utils
-      libvdpau-va-gl
-      intel-compute-runtime
-      intel-vaapi-driver
-      vaapiVdpau
-      vaapi-intel-hybrid
       mesa
-      egl-wayland
       master.waybar
+      google-chrome
+      code-cursor
     ]) ++ [ python-packages ];
 
-  # OpenGL config
-  hardware.graphics.enable = true;
+  # AMD graphics configuration
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
 
   # Console
   console.keyMap = "${keyboardLayout}";
@@ -96,8 +82,6 @@ in {
     NIXOS_OZONE_WL = "1";
     ZDOTDIR = "$HOME/.config/zsh";
   };
-
-  # Removed: all global GPU env vars and kernel modules — handled in `drivers/*.nix`
 
   system.stateVersion = "25.05";
 }

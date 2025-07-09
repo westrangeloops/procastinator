@@ -230,8 +230,8 @@
     ...
   }: let
     system = "x86_64-linux";
-    host = "shizuru";
-    username = "antonio";
+    host = "dotempo";
+    username = "dotempo";
 
     # Import nixpkgs for main and master channels
     pkgs = import nixpkgs {
@@ -274,9 +274,9 @@
         };
     };
 
-    # NixOS configuration for host 'shizuru'
+    # NixOS configuration for host 'dotempo'
     nixosConfigurations = {
-      shizuru = nixpkgs.lib.nixosSystem {
+      dotempo = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit system inputs username host chaotic pkgs-master;
         };

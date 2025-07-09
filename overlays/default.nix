@@ -15,7 +15,7 @@ in [
     stable = import inputs.nixpkgs-stable {
       inherit system;
       config.allowUnfree = true;
-      config.nvidia.acceptLicense = true;
+      #config.nvidia.acceptLicense = true;
     };
     unstable = prev; # Explicit alias for nixos-unstable
     master = nixpkgs-master; # Already defined

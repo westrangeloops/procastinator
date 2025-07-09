@@ -49,10 +49,10 @@ main() {
         9) file="$UserConfigs/zfs.nix" ;;
         10) file="$UserConfigs/services.nix" ;;
         11) file="$flake/hosts/shizuru/config.nix" ;;
-        12) file="/home/antonio/NixOS-Hyprland/flake.nix" ;;
-        13) file="/home/antonio/NixOS-Hyprland/hosts/shizuru/config.nix" ;;
-        14) file="/home/antonio/NixOS-Hyprland/modules/system/packages.nix" ;;
-        15) file="/home/antonio/NixOS-Hyprland/modules/home-manager/home-packages.nix" ;;
+        12) file="/home/dotempo/NixOS-Hyprland/flake.nix" ;;
+        13) file="/home/dotempo/NixOS-Hyprland/hosts/shizuru/config.nix" ;;
+        14) file="/home/dotempo/NixOS-Hyprland/modules/system/packages.nix" ;;
+        15) file="/home/dotempo/NixOS-Hyprland/modules/home-manager/home-packages.nix" ;;
         *) return ;;  # Do nothing for invalid choices
     esac
 
