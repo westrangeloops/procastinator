@@ -1,197 +1,89 @@
-<h1 align="center">
-   <img src="./.github/assets/logo/flake.png  " width="100px" /> 
-   <br>
-      Procastinator  
-   <br>
-     <img src="./.github/assets/pallet/macchiato.png" width="600px" /> <br>
-
-   <div align="center">
-      <p></p>
-      <div align="center">
-         <a href="https://github.com/westrangeloops/procastinator/stargazers">
-            <img src="https://img.shields.io/github/stars/westrangeloops/procastinator?color=A5ADCB&labelColor=1E1E2E&style=for-the-badge&logo=starship&logoColor=c6a0f6">
-         </a>
-         <a href="https://github.com/westrangeloops/procastinator/">
-            <img src="https://img.shields.io/github/repo-size/westrangeloops/procastinator?color=A5ADCB&labelColor=1E1E2E&style=for-the-badge&logo=github&logoColor=C6A0F6">
-         </a>
-         <a = href="https://nixos.org">
-            <img src="https://img.shields.io/badge/NixOS-unstable-blue.svg?style=for-the-badge&labelColor=1E1E2E&logo=NixOS&logoColor=C6A0F6&color=A5ADCB">
-         </a>
-         <a>
-            <img src="https://img.shields.io/static/v1.svg?style=for-the-badge&label=License&message=MIT&colorA=1E1E2E&colorB=A5ADCB&logo=unlicense&logoColor=C6A0F6&"/>
-         </a>
-      </div>
-      <br>
-   </div>
-</h1>
-
-# THIS IS JUST A PERSONAL COPY FROM https://github.com/maotseantonio/shizuru
-### 🖼️ Gallery for Hyprland (qs config is from this guy https://github.com/caelestia-dots/shell.git)
+<h1 align="center">:coffee: Procastinator :hourglass:</h1>
 
 <p align="center">
-   <img src="./.github/assets/screenshots/1.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/2.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/3.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/4.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/5.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/sddm.png" style="margin-bottom: 10px;"/> <br>
-
-  Screenshots last updated <b>2025-4-29</b>
+	<a href="https://github.com/westrangeloops/procastinator/stargazers">
+		<img alt="Stargazers" src="https://img.shields.io/github/stars/westrangeloops/procastinator?style=for-the-badge&logo=starship&color=C9CBFF&logoColor=D9E0EE&labelColor=302D41"></a>
+    <a href="https://nixos.org/">
+        <img src="https://img.shields.io/badge/NixOS-25.05-informational.svg?style=for-the-badge&logo=nixos&color=F2CDCD&logoColor=D9E0EE&labelColor=302D41"></a>
+    <a href="https://github.com/ryan4yin/nixos-and-flakes-book">
+        <img src="https://img.shields.io/github/repo-size/westrangeloops/procastinator?style=for-the-badge&logo=nixos&color=DDB6F2&logoColor=D9E0EE&labelColor=302D41"></a>
+  </a>
 </p>
 
-### 🖼️ Gallery for Niri the Goat
+> **Procastinator** is the living embodiment of what happens when a graduate student discovers that configuring NixOS is infinitely more appealing than writing a thesis. Behold this magnificent monument to academic avoidance—a flake so unnecessarily complex that it required approximately 147 cups of coffee and the abandonment of all scholarly responsibilities to create.
 
 <p align="center">
-   <img src="./.github/assets/screenshots/niri-1.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/niri-2.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/niri-3.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/niri-4.png" style="margin-bottom: 10px;"/> <br>
-   <img src="./.github/assets/screenshots/niri-5.png" style="margin-bottom: 10px;"/> <br>  
-   <img src="./.github/assets/screenshots/quickshell-lock.png" style="margin-bottom: 10px;"/> <br>
-
-  Screenshots last updated <b>2025-6-23</b>
+  <img width="80%" src="https://github.com/user-attachments/assets/f3ef7b27-825f-4bca-bf01-9ff92096f040" />   
+  <img src="https://github.com/user-attachments/assets/47fae1d6-b54b-4801-8c93-6f1d22918049" width="40%" />
+  <img src="https://github.com/user-attachments/assets/b678d830-9a9e-48c0-943c-a5e5ff524e8e" width="40%" />
+  <img src="https://github.com/user-attachments/assets/16f18fbe-81fc-41d1-ad99-e393342d19af" width="40%" />
+  <img src="https://github.com/user-attachments/assets/5ac2d6f9-3102-4281-a8bf-72d35e8d0e6a" width="40%" />
 </p>
 
+## :sparkles: The Art of Academic Evasion
 
-## ✨ Features
+Every line of this configuration represents approximately one paragraph that should have been written for my thesis. Each carefully crafted module stands as a testament to the extraordinary lengths one will go to avoid actual productive work. This repository contains roughly 10,000 lines of code, which, coincidentally, is exactly the word count my advisor was expecting for chapter three.
 
-- ❄️ Flakes - for precise dependency management of the entire system.
-- 🏡 hjem - to configure symlink to user directory.
-- 💽 hjem-rum - hjem with modules system support.
-- 📁 home-manager - on this time i do not fully change to hjem and hjem-rum so optional.
-- ⚠️ Hyprland - As my window manager But secondary.  
-- 💈 Niri - My Main WM (Niri The Goat).
-- 💽 QuickShell - for my desktop enviornment.
+The code quality ranges from "surprisingly functional" to "dear god what was I thinking at 3 AM," yet somehow it all works—unlike my academic career, which remains in perpetual limbo. The commit history reads like the diary of a madman, with timestamps that clearly indicate when normal people would be sleeping or, you know, writing their dissertations.
 
+## :scroll: Inspirational Enablers of My Procrastination
 
-## 📚 Layout
+This monstrosity wouldn't exist without the following repositories, which I discovered while searching for "how to extend thesis deadline" and somehow ended up in a three-week NixOS configuration rabbit hole:
 
--   [flake.nix](flake.nix) base of the configuration
--   [hosts](hosts) 🌳 per-host configurations that contain machine specific configurations
-    - [default](hosts/default/) 🖥️Default configurations for my desktop if you have laptop, use hostname as shizuru
-    - [shizuru](hosts/shizuru/) 💻 Laptop specific configuration for my like
-        - [config](hosts/shizuru/config.nix) kernel packages(cachyos kernel), scx enable(scx_lavd) and system level packages
-        - [hardware](hosts/shizuru/hardware.nix) hardware configuration
-        - [user](hosts/shizuru/user.nix) user specific packages(shell)
-        - [variables](hosts/shizuru/variables.nix) user variables git username email
-        - [hjem](hosts/shizuru/hjem.nix) hjem and hjem-rum modules 
-        - [home](hosts/shizuru/home.nix) home-manager module
-        - [theme](hosts/shizuru/theme.nix) theme related config
--   [modules](modules) 🍱 for more modularize
-  - [system](system) for system wide config
-    - [common](modules/system/common) kernel packages(cachyos kernel) systemd boot plymouth theme(catppuccin)
-    - [desktop](modules/system/desktop) desktop related modules
-    - [options](modules/system/options) options for laptop and desktop
-    - [share](modules/system/share) share modules for laptop and desktop
-  - [home-manager](home-manager) home-manager config
-    - [ags](modules/home-manager/ags) ags home-manager modules(dont use) 
-    - [Editor](modules/home-manager/editors) editor modules for nvchad
-    - [Fabric-Bar](modules/home-manager/fabric) fabric bar config 
-    - [Hana](modules/home-manager/hana) desktop related modules
-    - [Media](modules/home-manager/media) media related modules
-    - [Niri](modules/home-manager/niri) niri modules and config
-    - [Ui](modules/home-manager/ui) ui related modules and config
-    - [Zellij](modules/home-manager/zellij) zellij(not used) 
-   
+- [Rudra](https://github.com/vasujain275/rudra) - The primary enabler of my academic downfall
+- [Shizuru](https://github.com/kagurazakei/Shizuru) - A shining beacon that lured me away from LaTeX documents
+- [Kaku](https://github.com/linuxmobile/kaku) - The final nail in the coffin of my productivity
 
-## 📓 Components
-|                             | NixOS + Hyprland                                                                              |
-| --------------------------- | :---------------------------------------------------------------------------------------------:
-| **Window Manager**          | [Hyprland] |
-| **Bar**                     | [HyprPanel] |
-| **Application Launcher**    | [walker] |
-| **Notification Daemon**     | ags|
-| **Terminal Emulator**       | Wezterm + kitty |
-| **Shell**                   | fish + atuin + [Starship] |
-| **Text Editor**             | [VSCodium] + nix4nvchad |
-| **network management tool** | [NetworkManager] + [network-manager-applet] |
-| **System resource monitor** | Btop + Bottom |
-| **File Manager**            | thunar + [yazi] |
-| **Fonts**                   | LigaMono Nerd Font + JetBrainsMono Nerd Font|
-| **Color Scheme**            | Catppuccin-Mocha + Catppuccin-Dark |
-| **Cursor**                  | Chiharu |
-| **Icons**                   | [Papirus-Dark] |
-| **Lockscreen**              | [Hyprlock] |
-| **Image Viewer**            |  imv |
-| **Media Player**            | [mpv] |
-| **Music Player**            | spotify |
-| **Screenshot Software**     | [grimblast] |
-| **kernel**                  | [linux cachyos kernel] |
-| **Clipboard**               | [wl-clip-persist] |
-| **Color Picker**            | [hyprpicker] |
+## 🍖 Requirements
 
-# 👥 Credits
+- You must be running on NixOS.
+- The procastinator folder (this repo) is expected to be in your home directory.
+- Must have installed using GPT & UEFI. Grub is what is supported, for SystemD you will have to brave the internet for a how-to. ☺️
+- Manually editing your host specific files. The host is the specific computer your installing on.
+- A profound desire to work on literally anything except what you're supposed to be doing.
 
-Other dotfiles that I learned / copy from:
+### ⬇️ Install
 
-- I really thanksful for frost-phoenix making this template and i credits to this man
- - [https://github.com/Frost-Phoenix/nixos-config/tree/catppuccin?tab=readme-ov-file]
-- Nix Flakes
-  - [nomadics9/NixOS-Flake](https://github.com/nomadics9/NixOS-Flake): This is where I start my nixos / hyprland journey.
-  - [samiulbasirfahim/Flakes](https://github.com/samiulbasirfahim/Flakes): General flake / files structure
-  - [justinlime/dotfiles](https://github.com/justinlime/dotfiles): Mainly waybar (old design)
-  - [skiletro/nixfiles](https://github.com/skiletro/nixfiles): Vscodium config (that prevent it to crash)
-  - [fufexan/dotfiles](https://github.com/fufexan/dotfiles)
-  - [tluijken/.dotfiles](https://github.com/tluijken/.dotfiles): base rofi config
-  - [mrh/dotfiles](https://codeberg.org/mrh/dotfiles): base waybar config
-  - [JaKooLit/NixOS-Hyprland](https://github.com/JaKooLit/NixOS-Hyprland): my base config
-  - [Matt-FTW/dotfiles](https://github.com/Matt-FTW/dotfiles.git): most of my dotfiles
-  - [orangc/dots](https://github.com/orangci/dots.git): shout out to this man. He helps me in my begining of nixos jorney. If i didnt get help from this people i will leave this beautiful world.
+Run this command to ensure Git & Vim are installed (and your academic responsibilities are properly ignored):
 
-  -[hmajid2301/nixicle](https://github.com/hmajid2301/nixicle.git): for some config idea
-  - [nix-community/nix4nvchad](https://github.com/nix-community/nix4nvchad.git)
-- README
-  - [ryan4yin/nix-config](https://github.com/ryan4yin/nix-config)
-  - [NotAShelf/nyx](https://github.com/NotAShelf/nyx)
-  - [sioodmy/dotfiles](https://github.com/sioodmy/dotfiles)
-  - [Ruixi-rebirth/flakes](https://github.com/Ruixi-rebirth/flakes)
-  - [LinuxMobile](https://github.com/linuxmobile/kaku.git): for niri config and astal bar i love u man
+```
+nix-shell -p git vim
+```
 
-- now my config is move to hjem and hjem-rum so sometime it breaks 
- - [hjem](https://github.com/feel-co/hjem.git)
- - [hjem-rum](https://github.com/snugnug/hjem-rum.git)
+Clone this repo & enter it (much like I entered the void of procrastination):
 
+```
+git clone https://github.com/westrangeloops/procastinator
+cd procastinator
+```
 
-<!-- # ✨ Stars History -->
+- _You should stay in this folder for the rest of the install (I've been here for months)_
 
-<!-- <p align="center"><img src="https://api.star-history.com/svg?repos=frost-phoenix/nixos-config&type=Timeline&theme=dark" /></p> -->
+Create the host folder for your machine(s) (this step alone took me three days):
 
-<p align="center"><img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/footers/gray0_ctp_on_line.svg?sanitize=true" /></p>
+```
+cp -r hosts/default hosts/<your-desired-hostname>
+```
 
-<!-- end of page, send back to the top -->
+**🪧🪧🪧 Edit your configuration files 🪧🪧🪧**
 
-<div align="right">
-  <a href="#readme">Back to the Top</a>
-</div>
+Generate your hardware.nix like so (I spent a week "perfecting" mine):
 
-<!-- Links -->
-[Hyprland]: https://github.com/hyprwm/Hyprland
-[HyprPanel]: https://github.com/Jas-SinghFSU/HyprPanel
-[Wezterm]: https://wezfurlong.org/wezterm/index.html
-[Starship]: https://github.com/starship/starship
-[Waybar]: https://github.com/Alexays/Waybar
-[walker]: https://github.com/abenz1267/walker
-[Btop]: https://github.com/aristocratos/btop
-[nemo]: https://github.com/linuxmint/nemo/
-[yazi]: https://github.com/sxyazi/yazi
-[zsh]: https://ohmyz.sh/
-[oh-my-zsh]: https://ohmyz.sh/
-[Swaylock-effects]: https://github.com/mortie/swaylock-effects
-[Hyprlock]: https://github.com/hyprwm/hyprlock
-[audacious]: https://audacious-media-player.org/
-[mpv]: https://github.com/mpv-player/mpv
-[VSCodium]:https://vscodium.com/
-[Neovim]: https://github.com/neovim/neovim
-[grimblast]: https://github.com/hyprwm/contrib
-[qview]: https://interversehq.com/qview/
-[swaync]: https://github.com/ErikReider/SwayNotificationCenter
-[Nerd fonts]: https://github.com/ryanoasis/nerd-fonts
-[NetworkManager]: https://wiki.gnome.org/Projects/NetworkManager
-[network-manager-applet]: https://gitlab.gnome.org/GNOME/network-manager-applet/
-[wl-clip-persist]: https://github.com/Linus789/wl-clip-persist
-[wf-recorder]: https://github.com/ammen99/wf-recorder
-[hyprpicker]: https://github.com/hyprwm/hyprpicker
-[Catppuccin]: https://github.com/catppuccin 
-[Papirus-Dark]: https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
-[Bibata-Modern-Ice]: https://www.gnome-look.org/p/1197198
-[maxfetch]: https://github.com/jobcmax/maxfetch
+```
+nixos-generate-config --show-hardware-config > hosts/<your-desired-hostname>/hardware-configuration.nix
+```
+
+- _Edit All the instances of the username "dotempo" and replace it with your name_
+
+- _Change to amd/intel modules from nvidia one according to your gpu in configuration.nix_
+
+Run this to enable flakes and install the flake replacing hostname with whatever you put as the hostname:
+
+```
+NIX_CONFIG="experimental-features = nix-command flakes"
+sudo nixos-rebuild switch --flake .#hostname
+```
+
+Now when you want to rebuild the configuration you can execute the last command, that will rebuild the flake!
+
+May your computing experience be as unnecessarily complex as my methods of avoiding real work. My advisor sends their regards.

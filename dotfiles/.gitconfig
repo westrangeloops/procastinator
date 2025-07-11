@@ -1,0 +1,7 @@
+[init]
+	defaultBranch = main
+[user]
+	email = jesus.diaz.olivella@gmail.com
+	name = westrangeloops
+[pull]
+	rebase = true
