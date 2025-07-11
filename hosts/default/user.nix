@@ -17,5 +17,8 @@ in {
       extraGroups = ["wheel" "docker" "wireshark" "libvirtd" "kvm"];
     };
     programs.zsh.enable = true;
+  # Enable auto-login to TTY1 (optional, for convenience)
+  services.getty.autologinUser = "dotempo";
+
   };
 }
