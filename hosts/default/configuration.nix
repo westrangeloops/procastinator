@@ -278,7 +278,7 @@ in
     qbittorrent
     cloudflare-warp
     tailscale
-    onedrive
+
 
     # Audio and video
     pulseaudio
@@ -513,18 +513,6 @@ in
   # powerManagement.powertop.enable = true;
 
   systemd.services = {
-    onedrive = {
-      description = "Onedrive Sync Service";
-      after = [ "network-online.target" ];
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        Type = "simple";
-        User = username;
-        ExecStart = "${pkgs.onedrive}/bin/onedrive --monitor";
-        Restart = "always";
-        RestartSec = 10;
-      };
-    };
     flatpak-repo = {
       path = [ pkgs.flatpak ];
       script = "flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo";
