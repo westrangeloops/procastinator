@@ -23,7 +23,6 @@ in {
       # Top Level Files symlinks
       ".zshrc".source = ../../dotfiles/.zshrc;
       ".gitconfig".source = ../../dotfiles/.gitconfig;
-      ".ideavimrc".source = ../../dotfiles/.ideavimrc;
       ".nirc".source = ../../dotfiles/.nirc;
       ".local/bin/wallpaper".source = ../../dotfiles/.local/bin/wallpaper;
 
@@ -38,7 +37,8 @@ in {
       ".config/yazi".source = ../../dotfiles/.config/yazi;
       ".config/wezterm".source = ../../dotfiles/.config/wezterm;
       ".config/ghostty".source = ../../dotfiles/.config/ghostty;
-      ".config/nvim".source = ../../dotfiles/.config/nvim;
+      # Removing nvim symlink as it's managed by nvchad module
+      # ".config/nvim".source = ../../dotfiles/.config/nvim;
 
       # Individual config files
       ".config/kwalletrc".source = ../../dotfiles/.config/kwalletrc;
@@ -90,33 +90,10 @@ in {
   imports = [
     ../../config/rofi/rofi.nix
     ../../config/wlogout.nix
-    inputs.nvchad4nix.homeManagerModule
+    ../../modules/nvchad.nix
   ];
 
-  programs.nvchad = {
-    enable = true;
-    neovim = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
-    extraPackages = with pkgs; [
-      nodePackages.bash-language-server 
-      nodePackages.prettier
-      nodePackages.typescript-language-server
-      nixfmt-rfc-style
-      rustfmt
-      shfmt
-      emmet-language-server
-      nixd
-      vscode-langservers-extracted
-      vue-language-server
-      (python3.withPackages(ps: with ps; [
-        python-lsp-server
-        python-lsp-ruff
-        flake8
-      ]))
-    ];
-    extraConfig = ../../dotfiles/.config/nvim;
-    hm-activation = true;
-    backup = false;
-  };
+  # Removing nvchad configuration since it's now in the module
 
   # Styling
   stylix.targets.waybar.enable = false;

@@ -2,20 +2,6 @@
 
 ---@alias PluginName string
 
----@class (exact) NvImportSpec: LazySpecImport
---- Name of the module to be imported.
---- It should be a string for `require()`, and it should return a table containing the plugin config
---- If this field is inside a table, all other keys inside such table will not be used, except for `enabled`
---- This will import **all files** with its module name starting with `import_name`.
---- For example, if the `import` key is:
---- ```lua
----     import = "foo.bar",
---- ```
---- Then all lua files that is under lua/foo/bar will be sourced, such as:
----     - `lua/foo/bar/baz.lua`
----     - `lua/foo/bar/baz/someLuaFile.lua`
----@field import? string
-
 ---@class LazyPluginSpecExtra: LazyPluginSpec
 --- Specify the plugin to load when opening a file with one of the specified filetypes
 ---@field ft? string|string[]|fun(_: LazyPlugin, ft: string[]):string[] 

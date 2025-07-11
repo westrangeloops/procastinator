@@ -152,5 +152,3 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Turso
 export PATH="$PATH:/home/dotempo/.turso"
-
-source "$HOME/.sdkman/bin/sdkman-init.sh"
