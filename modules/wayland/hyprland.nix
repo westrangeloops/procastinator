@@ -21,12 +21,23 @@
 
       # Autostart
       exec-once = [
+      # Conditional lock on startup
+        "${pkgs.writeShellScript "conditional-lock" ''
+            #!/bin/bash
+            # Only lock if this is a fresh login (not a reload)
+            if [ "$HYPRLAND_FRESH_LOGIN" = "1" ]; then
+            hyprlock
+            # Unset the variable so reloads don't trigger lock
+            unset HYPRLAND_FRESH_LOGIN
+            fi
+        ''}"
         "nm-applet &"
         "hyprpanel"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
         "hypridle &"
         "swww-daemon &"
+
       ];
 
       # Environment variables
@@ -229,20 +240,6 @@
         "SUPER, Escape, submap, reset"
         "reset"
       ];
-
-        # Conditional lock on startup
-  exec-once = [
-    # Create the conditional lock script and run it
-    ''${pkgs.writeShellScript "conditional-lock" ''
-      #!/bin/bash
-      # Only lock if this is a fresh login (not a reload)
-      if [ "$HYPRLAND_FRESH_LOGIN" = "1" ]; then
-          hyprlock
-          # Unset the variable so reloads don't trigger lock
-          unset HYPRLAND_FRESH_LOGIN
-      fi
-    ''}''
-    ];
     # End of settings
     };
 
