@@ -20,7 +20,7 @@ in {
 
       # Top Level Files symlinks
       ".zshrc".source = ../../dotfiles/.zshrc;
-      ".zprodile".source = ../../dotfiles/.zprofile;
+      ".zprofile".source = ../../dotfiles/.zprofile;
       ".gitconfig".source = ../../dotfiles/.gitconfig;
       ".nirc".source = ../../dotfiles/.nirc;
       ".local/bin/wallpaper".source = ../../dotfiles/.local/bin/wallpaper;
