@@ -2,7 +2,7 @@
   description = "Procastinator flake";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    stylix.url = "github:danth/stylix";
+    stylix.url = "github:nix-community/stylix";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,6 +39,9 @@
       url = "github:Jas-SinghFSU/HyprPanel";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Others
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";  # This provides the cachyos
   };
 
   outputs =

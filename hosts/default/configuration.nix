@@ -11,7 +11,7 @@ let
   userDescription = "Camilooou";
   homeDirectory = "/home/${username}";
   hostName = "dotempo";
-  timeZone = "America/SaoPaulo";
+  timeZone = "America/Brazil/SaoPaulo";
 in
 {
   imports = [
@@ -22,19 +22,25 @@ in
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_zen;
-    kernelModules = [ "v4l2loopback" ];
+    kernelPackages = inputs.chaotic.packages.${pkgs.system}.linuxPackages_cachyos;
+    kernelModules = ["amdgpu" "v4l2loopback" "i2c-dev"];
     extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
     kernel.sysctl = {
-      "vm.max_map_count" = 2147483642;
+      "vm.swappiness" = 10;
+      "vm.vfs_cache_pressure" = 50;
+      "vm.dirty_ratio" = 10;
+      "vm.dirty_background_ratio" = 5;
+      "kernel.nmi_watchdog" = 0;
     };
     kernelParams = [
-      "intel_pstate=active"
-      "i915.enable_psr=1" # Panel self refresh
-      "i915.enable_fbc=1" # Framebuffer compression
-      "i915.enable_dc=2" # Display power saving
-      "nvme.noacpi=1" # Helps with NVME power consumption
+      "amd_pstate=active"
+      "amd_iommu"
+      "mitigations=off"
+      "nvme_core.default_ps_max_latency_us=0"
     ];
+    extraModprobeConfig = ''
+      options v4l2loopback exclusive_caps=1 card_label="OBS Virtual Output"
+    '';
     loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -414,6 +420,26 @@ in
   };
 
   services = {
+    # Ananicy - process scheduler enhancer
+    ananicy = {
+      enable = true;
+      package = pkgs.ananicy-cpp;
+      rulesProvider = pkgs.ananicy-rules-cachyos_git.overrideAttrs (prevAttrs: {
+        patches = [
+          (pkgs.fetchpatch {
+            # Revert removal of Compiler rules
+            url = "https://github.com/CachyOS/ananicy-rules/commit/5459ed81c0e006547b4f3a3bc40c00d31ad50aa9.patch";
+            revert = true;
+            hash = "sha256-vc6FDwsAA6p5S6fR1FSdIRC1kCx3wGoeNarG8uEY2xM=";
+          })
+        ];
+      });
+    };
+
+    # SCX scheduler for SSD/NVME optimization
+    scx.enable = true;
+    scx.scheduler = "scx_rusty";
+    
     xserver = {
       enable = false;
       xkb = {
@@ -427,27 +453,12 @@ in
       wayland.enable = true; # Enable Wayland backend
       theme = "rose-pine"; # Your custom theme name
     };
-    # greetd = {
-    #   enable = true;
-    #   vt = 3;
-    #   settings = {
-    #     default_session = {
-    #       user = username;
-    #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-    #     };
-    #   };
-    # };
     logind = {
       extraConfig = ''
         HandlePowerKey=suspend
       '';
     };
     cloudflare-warp.enable = true;
-    # supergfxd.enable = true;
-    # asusd = {
-    #   enable = true;
-    #   enableUserService = true;
-    # };
     tailscale = {
       enable = true;
       useRoutingFeatures = "client";
@@ -545,6 +556,7 @@ in
 
   security = {
     rtkit.enable = true;
+    tpm2.enable = true;
     polkit = {
       enable = true;
       extraConfig = ''
