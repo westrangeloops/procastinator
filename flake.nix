@@ -49,18 +49,6 @@
     let
       system = "x86_64-linux";
 
-      # Define the custom SDDM theme as an overlay
-      customSddmThemeOverlay = final: prev: {
-        customSddmTheme = prev.stdenv.mkDerivation {
-          name = "rose-pine";
-          src = ./modules/sddm-theme;
-          installPhase = ''
-            mkdir -p $out/share/sddm/themes/rose-pine
-            cp -r $src/* $out/share/sddm/themes/rose-pine
-          '';
-        };
-      };
-
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
@@ -79,7 +67,6 @@
 
               # Add the custom theme overlay
               nixpkgs.overlays = [
-                customSddmThemeOverlay
                 # hyprpanel overlay is removed as it's now in nixpkgs
                 inputs.neovim-nightly-overlay.overlays.default
                 # Add chaotic overlay for CachyOS packages

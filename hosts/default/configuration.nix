@@ -11,7 +11,7 @@ let
   userDescription = "dotempo";
   homeDirectory = "/home/${username}";
   hostName = "dotempo";
-  timeZone = "America/Brazil/SaoPaulo";
+  timeZone = "America/Sao_Paulo";
 in
 {
   imports = [
@@ -20,6 +20,7 @@ in
     ../../modules/amd-drivers.nix
     ../../modules/boot.nix
     ../../modules/wayland/security.nix
+    ../../modules/power.nix
     inputs.home-manager.nixosModules.default
   ];
 
@@ -379,7 +380,6 @@ in
 
     # Miscellaneous
     greetd.tuigreet
-    customSddmTheme
     libsForQt5.qt5.qtgraphicaleffects
   ];
 
@@ -441,11 +441,6 @@ in
         variant = "intl";
       };
       videoDrivers = [ "modesetting" ];
-    };
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true; # Enable Wayland backend
-      theme = "rose-pine"; # Your custom theme name
     };
     logind = {
       extraConfig = ''
