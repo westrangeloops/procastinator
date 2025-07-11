@@ -14,16 +14,17 @@ in {
     stateVersion = stateVersion;
     file = {
       # Remove the .config/hypr directory linking since we're using the module
-      
+
       # wlogout icons
       ".config/wlogout/icons".source = ../../config/wlogout;
-      
+
       # Top Level Files symlinks
       ".zshrc".source = ../../dotfiles/.zshrc;
+      ".zprodile".source = ../../dotfiles/.zprofile;
       ".gitconfig".source = ../../dotfiles/.gitconfig;
       ".nirc".source = ../../dotfiles/.nirc;
       ".local/bin/wallpaper".source = ../../dotfiles/.local/bin/wallpaper;
-      
+
       # Config directories
       ".config/alacritty".source = ../../dotfiles/.config/alacritty;
       ".config/dunst".source = ../../dotfiles/.config/dunst;
@@ -35,7 +36,7 @@ in {
       ".config/yazi".source = ../../dotfiles/.config/yazi;
       ".config/wezterm".source = ../../dotfiles/.config/wezterm;
       ".config/ghostty".source = ../../dotfiles/.config/ghostty;
-      
+
       # Individual config files
       ".config/kwalletrc".source = ../../dotfiles/.config/kwalletrc;
       ".config/starship.toml".source = ../../dotfiles/.config/starship.toml;
@@ -73,7 +74,7 @@ in {
       pkgs.brillo  # for brightness control
     ];
   };
-  
+
   imports = [
     ../../config/rofi/rofi.nix
     ../../config/wlogout.nix
@@ -83,11 +84,11 @@ in {
     # Use the new hyprland module
     ../../modules/wayland/hyprland.nix
   ];
-  
+
   # Styling
   stylix.targets.waybar.enable = false;
   stylix.targets.hyprlock.enable = false;
-  
+
   gtk = {
     iconTheme = {
       name = "Papirus-Dark";
@@ -100,12 +101,12 @@ in {
       gtk-application-prefer-dark-theme = 1;
     };
   };
-  
+
   qt = {
     enable = true;
     style.name = "kvantum";
     platformTheme.name = "qtct";
   };
-  
+
   programs.home-manager.enable = true;
 }

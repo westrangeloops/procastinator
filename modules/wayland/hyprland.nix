@@ -6,19 +6,19 @@
 }: {
   wayland.windowManager.hyprland = {
     enable = true;
-    
+
     # Main Hyprland configuration
     settings = {
       # Monitors
       monitor = [
         ",1920x1080@60,auto,1"
       ];
-      
+
       # Variables
       "$terminal" = "kitty";
       "$menu" = "rofi -show drun";
       "$scrPath" = "$HOME/.dotfiles/scripts";
-      
+
       # Autostart
       exec-once = [
         "nm-applet &"
@@ -28,7 +28,7 @@
         "hypridle &"
         "swww-daemon &"
       ];
-      
+
       # Environment variables
       env = [
         "HYPRCURSOR_SIZE,24"
@@ -37,12 +37,12 @@
         "GBM_BACKEND,nvidia-drm"
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
       ];
-      
+
       # Cursor
       cursor = {
         no_hardware_cursors = true;
       };
-      
+
       # General settings
       general = {
         gaps_in = 10;
@@ -51,13 +51,13 @@
         allow_tearing = false;
         layout = "dwindle";
       };
-      
+
       # Decoration
       decoration = {
         rounding = 10;
         active_opacity = 1.0;
         inactive_opacity = 1.0;
-        
+
         blur = {
           enabled = true;
           size = 3;
@@ -65,7 +65,7 @@
           vibrancy = 0.1696;
         };
       };
-      
+
       # Animations
       animations = {
         enabled = true;
@@ -79,19 +79,19 @@
           "workspaces, 1, 6, default"
         ];
       };
-      
+
       # Dwindle layout
       dwindle = {
         pseudotile = true;
         preserve_split = true;
       };
-      
+
       # Misc
       misc = {
         disable_hyprland_logo = true;
         disable_hyprland_qtutils_check = true;
       };
-      
+
       # Input
       input = {
         kb_layout = "us";
@@ -101,23 +101,23 @@
         kb_rules = "";
         follow_mouse = 1;
         sensitivity = 0;
-        
+
         touchpad = {
           natural_scroll = false;
         };
       };
-      
+
       # Gestures
       gestures = {
         workspace_swipe = false;
       };
-      
+
       # Device specific
       device = {
         name = "epic-mouse-v1";
         sensitivity = -0.5;
       };
-      
+
       # Variables for keybindings
       "$mainMod" = "SUPER";
       "$term" = "kitty";
@@ -128,7 +128,7 @@
       "$telegram" = "telegram-desktop";
       "$powermenu" = "rofi -show power-menu -modi power-menu:/home/dotempo/.local/bin/rofi-power-menu";
       "$lock" = "hyprlock";
-      
+
       # Keybindings
       bind = [
         # Basic bindings
@@ -145,7 +145,7 @@
         "$mainMod, A, exec, $menu"
         "$mainMod, BACKSPACE, exec, wlogout"
         "$mainMod, SPACE, exec, rofimoji"
-        
+
         # Function keys
         ", XF86MonBrightnessUp, exec, brightnessctl -q s +10%"
         ", XF86MonBrightnessDown, exec, brightnessctl -q s 10%-"
@@ -157,20 +157,20 @@
         ", XF86AudioNext, exec, playerctl next"
         ", XF86AudioPrev, exec, playerctl previous"
         ", XF86AudioMicMute, exec, pactl set-source-mute @DEFAULT_SOURCE@ toggle"
-        
+
         # Clipboard
         "ALT, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
-        
+
         # Screenshots
         "CTRL, print, exec, hyprshot -m output -o ~/Pictures/Screenshots"
         "CTRL SHIFT, print, exec, hyprshot -m region -o ~/Pictures/Screenshots"
-        
+
         # Movement
         "$mainMod, h, movefocus, l"
         "$mainMod, l, movefocus, r"
         "$mainMod, j, movefocus, u"
         "$mainMod, k, movefocus, d"
-        
+
         # Workspaces
         "$mainMod, 1, workspace, 1"
         "$mainMod, 2, workspace, 2"
@@ -182,7 +182,7 @@
         "$mainMod, 8, workspace, 8"
         "$mainMod, 9, workspace, 9"
         "$mainMod, 0, workspace, 10"
-        
+
         # Move to workspace
         "$mainMod SHIFT, 1, movetoworkspace, 1"
         "$mainMod SHIFT, 2, movetoworkspace, 2"
@@ -194,25 +194,25 @@
         "$mainMod SHIFT, 8, movetoworkspace, 8"
         "$mainMod SHIFT, 9, movetoworkspace, 9"
         "$mainMod SHIFT, 0, movetoworkspace, 10"
-        
+
         # Special workspace
         "$mainMod, S, togglespecialworkspace, magic"
         "$mainMod SHIFT, S, movetoworkspace, special:magic"
-        
+
         # Mouse workspace navigation
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
-        
+
         # VM passthrough
         "$mainMod, P, submap, passthru"
       ];
-      
+
       # Mouse bindings
       bindm = [
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
       ];
-      
+
       # Window rules
       windowrulev2 = [
         "suppressevent maximize, class:.*"
@@ -222,15 +222,30 @@
         "opacity 0.95 0.95,class:^(obsidian)$"
         "opacity 0.95 0.95,class:^(intellij-idea-ultimate-edition)$"
       ];
-      
+
       # Submaps
       submap = [
         "passthru"
         "SUPER, Escape, submap, reset"
         "reset"
       ];
+
+        # Conditional lock on startup
+  exec-once = [
+    # Create the conditional lock script and run it
+    ''${pkgs.writeShellScript "conditional-lock" ''
+      #!/bin/bash
+      # Only lock if this is a fresh login (not a reload)
+      if [ "$HYPRLAND_FRESH_LOGIN" = "1" ]; then
+          hyprlock
+          # Unset the variable so reloads don't trigger lock
+          unset HYPRLAND_FRESH_LOGIN
+      fi
+    ''}''
+    ];
+    # End of settings
     };
-    
+
     # Extra config for things that don't fit in settings
     extraConfig = ''
       # VM Passthrough submap
