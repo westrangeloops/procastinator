@@ -99,13 +99,13 @@ in {
     extraPackages = with pkgs; [
       nodePackages.bash-language-server 
       nodePackages.prettier
+      nodePackages.typescript-language-server
       nixfmt-rfc-style
       rustfmt
       shfmt
       emmet-language-server
       nixd
       vscode-langservers-extracted
-      typescript-language-server
       vue-language-server
       (python3.withPackages(ps: with ps; [
         python-lsp-server
