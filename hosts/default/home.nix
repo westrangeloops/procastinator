@@ -37,8 +37,7 @@ in {
       ".config/yazi".source = ../../dotfiles/.config/yazi;
       ".config/wezterm".source = ../../dotfiles/.config/wezterm;
       ".config/ghostty".source = ../../dotfiles/.config/ghostty;
-      # Removing nvim symlink as it's managed by nvchad module
-      # ".config/nvim".source = ../../dotfiles/.config/nvim;
+
 
       # Individual config files
       ".config/kwalletrc".source = ../../dotfiles/.config/kwalletrc;
@@ -114,27 +113,5 @@ in {
     style.name = "kvantum";
     platformTheme.name = "qtct";
   };
-
-  services.hypridle = {
-    settings = {
-      general = {
-        after_sleep_cmd = "hyprctl dispatch dpms on";
-        ignore_dbus_inhibit = false;
-        lock_cmd = "hyprlock";
-      };
-      listener = [
-        {
-          timeout = 900;
-          on-timeout = "hyprlock";
-        }
-        {
-          timeout = 1200;
-          on-timeout = "hyprctl dispatch dpms off";
-          on-resume = "hyprctl dispatch dpms on";
-        }
-      ];
-    };
-  };
-
   programs.home-manager.enable = true;
 }

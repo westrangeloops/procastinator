@@ -8,7 +8,7 @@
 }:
 let
   username = "dotempo";
-  userDescription = "Camilooou";
+  userDescription = "dotempo";
   homeDirectory = "/home/${username}";
   hostName = "dotempo";
   timeZone = "America/Brazil/SaoPaulo";
@@ -18,11 +18,13 @@ in
     ./hardware-configuration.nix
     ./user.nix
     ../../modules/amd-drivers.nix
+    ../../modules/boot.nix
+    ../../modules/wayland
     inputs.home-manager.nixosModules.default
   ];
 
   boot = {
-    kernelPackages = inputs.chaotic.packages.${pkgs.system}.linuxPackages_cachyos;
+    kernelPackages = pkgs.linuxPackages_cachyos;
     kernelModules = ["amdgpu" "v4l2loopback" "i2c-dev"];
     extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
     kernel.sysctl = {
@@ -45,12 +47,6 @@ in
       efi = {
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot";
-      };
-      grub = {
-        enable = true;
-        device = "nodev";
-        efiSupport = true;
-        useOSProber = true;
       };
     };
     tmp = {
@@ -340,7 +336,6 @@ in
 
     # Wayland specific
     hyprshot
-    hypridle
     grim
     slurp
     waybar
@@ -521,7 +516,16 @@ in
     pulseaudio.enable = false;
   };
 
-  # powerManagement.powertop.enable = true;
+  powerManagement = {
+    enable = true;
+    powerDownCommands = ''
+      # Lock all sessions
+      loginctl lock-sessions
+
+      # Wait for lockscreen(s) to be up
+      sleep 1
+    '';
+  };
 
   systemd.services = {
     flatpak-repo = {

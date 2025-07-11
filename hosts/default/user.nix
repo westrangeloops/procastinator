@@ -5,14 +5,14 @@
   ...
 }: let
   userName = "dotempo";
-  userDescription = "Camilooou";
+  userDescription = "dotempo";
 in {
   options = {
   };
   config = {
     users.users.${userName} = {
       isNormalUser = true;
-      description = lib.mkForce userDescription;
+      description = userDescription;
       shell = pkgs.zsh;
       extraGroups = ["wheel" "docker" "wireshark" "libvirtd" "kvm"];
     };

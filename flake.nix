@@ -25,7 +25,6 @@
     
     # HYPRLAND
     hyprland.url = "github:hyprwm/Hyprland";
-    hypridle.url = "github:hyprwm/hypridle";
     hyprlock.url = "github:hyprwm/hyprlock";
     hyprsunset.url = "github:hyprwm/hyprsunset";
     hyprland-qt-support.url = "github:hyprwm/hyprland-qt-support";
@@ -42,10 +41,11 @@
 
     # Others
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";  # This provides the cachyos
+    lanzaboote.url = "github:nix-community/lanzaboote";
   };
 
   outputs =
-    { self, nixpkgs, home-manager, stylix, zen-browser, nixvim, neovim-nightly-overlay, nvchad4nix, hyprpanel, ... }@inputs:
+    { self, nixpkgs, home-manager, stylix, zen-browser, nixvim, neovim-nightly-overlay, nvchad4nix, hyprpanel, chaotic, lanzaboote, ... }@inputs:
     let
       system = "x86_64-linux";
 
@@ -82,12 +82,16 @@
                 customSddmThemeOverlay
                 # hyprpanel overlay is removed as it's now in nixpkgs
                 inputs.neovim-nightly-overlay.overlays.default
+                # Add chaotic overlay for CachyOS packages
+                inputs.chaotic.overlays.default
               ];
             }
           )
           ./hosts/default/configuration.nix
           inputs.stylix.nixosModules.stylix
           inputs.home-manager.nixosModules.default
+          # Add chaotic module
+          inputs.chaotic.nixosModules.default
         ];
       };
     };
