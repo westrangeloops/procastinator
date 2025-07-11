@@ -114,7 +114,7 @@ in
       base0E = "f6c177";
       base0F = "524f67";
     };
-    image = ../../config/assets/wall.png;
+    image = ../../dotfiles/wallpapers/wallwhale.jpg;
     polarity = "dark";
     opacity.terminal = 0.8;
     cursor.package = pkgs.bibata-cursors;
@@ -433,7 +433,7 @@ in
     # SCX scheduler for SSD/NVME optimization
     scx.enable = true;
     scx.scheduler = "scx_rusty";
-    
+
     xserver = {
       enable = false;
       xkb = {

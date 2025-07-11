@@ -35,7 +35,7 @@ in {
       ];
     };
   };
-  
+
   # Configure hyprlock as well
   programs.hyprlock = {
     enable = true;
@@ -48,7 +48,7 @@ in {
       background = [
         {
           monitor = "";
-          path = "~/Downloads/Wallpapers/Fractal-Neurona.jpg";
+          path = "../../dotfiles/wallpapers/wallwhale.jpg";
           blur_passes = 3;
           blur_size = 12;
           noise = "0.1";
