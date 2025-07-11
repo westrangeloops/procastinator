@@ -26,7 +26,6 @@
     # HYPRLAND
     hyprland.url = "github:hyprwm/Hyprland";
     hyprlock.url = "github:hyprwm/hyprlock";
-    hypridle.url = "github:hyprwm/hypridle";
     hyprsunset.url = "github:hyprwm/hyprsunset";
     hyprland-qt-support.url = "github:hyprwm/hyprland-qt-support";
     hyprland-qtutils.url = "github:hyprwm/hyprland-qtutils";
@@ -46,7 +45,7 @@
   };
 
   outputs =
-    { self, nixpkgs, home-manager, stylix, zen-browser, nixvim, neovim-nightly-overlay, nvchad4nix, hyprpanel, chaotic, lanzaboote, hyprland, hyprlock, hypridle, ... }@inputs:
+    { self, nixpkgs, home-manager, stylix, zen-browser, nixvim, neovim-nightly-overlay, nvchad4nix, hyprpanel, chaotic, lanzaboote, ... }@inputs:
     let
       system = "x86_64-linux";
 
@@ -93,9 +92,6 @@
           inputs.home-manager.nixosModules.default
           # Add chaotic module
           inputs.chaotic.nixosModules.default
-          # Add Hyprland ecosystem modules
-          inputs.hyprlock.nixosModules.default
-          inputs.hypridle.nixosModules.default
         ];
       };
     };

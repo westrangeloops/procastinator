@@ -19,7 +19,7 @@ in
     ./user.nix
     ../../modules/amd-drivers.nix
     ../../modules/boot.nix
-    ../../modules/wayland
+    ../../modules/wayland/security.nix
     inputs.home-manager.nixosModules.default
   ];
 
@@ -294,7 +294,6 @@ in
     gimp
     hyprpicker
     swww
-    hyprlock
     waypaper
     imv
 
