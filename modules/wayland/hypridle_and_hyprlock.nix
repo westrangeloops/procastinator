@@ -35,21 +35,20 @@ in {
       ];
     };
   };
-
   # Configure hyprlock as well
   programs.hyprlock = {
     enable = true;
     settings = {
       general = {
-        disable_loading_bar = true;
+        # Removed disable_loading_bar as it doesn't exist in your version
         immediate_render = true;
         hide_cursor = false;
       };
       background = [
         {
           monitor = "";
-          path = "../../dotfiles/wallpapers/wallwhale.jpg";
-          blur_passes = 3;
+          path = "~/Pictures/wallpapers/wallwhale.jpg";
+          blur_passes = 1;
           blur_size = 12;
           noise = "0.1";
           contrast = "1.3";
@@ -73,7 +72,7 @@ in {
           placeholder_text = "Enter Password";
           dots_spacing = 0.2;
           dots_center = true;
-          dots_fade_time = 100;
+          # Removed dots_fade_time as it doesn't exist in your version
           shadow_color = "rgba(5, 7, 5, 0.1)";
           shadow_size = 7;
           shadow_passes = 2;
@@ -87,7 +86,7 @@ in {
           '';
           font_size = 300;
           font_family = "Adwaita Sans Thin";
-          color = "rgb(8a9e6b)";
+          color = "rgb(6b859e)";
           position = "0%, 2%";
           valign = "center";
           halign = "center";
@@ -99,7 +98,6 @@ in {
       ];
     };
   };
-
   # Ensure the systemd service starts after the graphical session
   systemd.user.services.hypridle.Unit.After = lib.mkForce "graphical-session.target";
 }

@@ -21,14 +21,13 @@
 
       # Autostart
       exec-once = [
-      # Conditional lock on startup
         "${pkgs.writeShellScript "conditional-lock" ''
-            #!/bin/bash
-            # Only lock if this is a fresh login (not a reload)
-            if [ "$HYPRLAND_FRESH_LOGIN" = "1" ]; then
-            hyprlock
-            # Unset the variable so reloads don't trigger lock
-            unset HYPRLAND_FRESH_LOGIN
+            #!/bin/zsh
+            # Check if system uptime is less than 2 minutes (fresh boot)
+            UPTIME=$(cut -d. -f1 /proc/uptime)
+            if [[ $UPTIME -lt 120 ]]; then
+                sleep 2
+                hyprlock
             fi
         ''}"
         "nm-applet &"
