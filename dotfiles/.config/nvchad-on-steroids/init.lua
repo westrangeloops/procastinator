@@ -40,6 +40,36 @@ require "genghis"
 local format_on_save = require("format-on-save")
 local formatters = require("format-on-save.formatters")
 
+-- Custom nvdash loading fix
+vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+        -- Only proceed if no files were opened
+        if vim.fn.argc() == 0 then
+            -- Schedule the nvdash opening after all initialization is complete
+            vim.schedule(function()
+                -- Add a small delay to ensure UI is fully initialized
+                vim.defer_fn(function()
+                    -- Force refresh terminal dimensions
+                    vim.cmd("redraw!")
+
+                    -- Check if we're still in an empty buffer
+                    if vim.bo.filetype == "" and vim.fn.line('$') == 1 and vim.fn.getline(1) == '' then
+                        -- Disable line numbers and other UI elements that might interfere
+                        vim.opt_local.number = false
+                        vim.opt_local.relativenumber = false
+                        vim.opt_local.signcolumn = "no"
+                        vim.opt_local.foldcolumn = "0"
+                        vim.opt_local.cursorline = false
+
+                        -- Now open nvdash
+                        require("nvchad.nvdash").open()
+                    end
+                end, 150) -- Increase delay to 150ms
+            end)
+        end
+    end,
+})
+
 format_on_save.setup({
     exclude_path_patterns = {
         "/node_modules/",

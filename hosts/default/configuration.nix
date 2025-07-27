@@ -225,6 +225,14 @@ in
     gcc
     openssl
     nodePackages_latest.live-server
+    
+    # Python with essential packages
+    python3
+    python3Packages.pip
+    python3Packages.requests
+    python3Packages.urllib3
+    python3Packages.certifi
+    python3Packages.setuptools
 
 
     # Version control and development tools
