@@ -391,7 +391,7 @@ in
     libsForQt5.qt5.qtgraphicaleffects
 
     # PDF
-    adobe-reader
+    pympress
   ];
 
   environment.etc."sddm/wayland-sessions/hyprland.desktop".text = ''
