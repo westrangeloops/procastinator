@@ -225,7 +225,7 @@ in
     gcc
     openssl
     nodePackages_latest.live-server
-    
+
     # Python with essential packages
     python3
     python3Packages.pip
@@ -389,6 +389,9 @@ in
     # Miscellaneous
     greetd.tuigreet
     libsForQt5.qt5.qtgraphicaleffects
+
+    # PDF
+    adobe-reader
   ];
 
   environment.etc."sddm/wayland-sessions/hyprland.desktop".text = ''
