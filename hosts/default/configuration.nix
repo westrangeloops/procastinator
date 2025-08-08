@@ -391,7 +391,7 @@ in
     libsForQt5.qt5.qtgraphicaleffects
 
     # PDF
-    pympress
+    kdePackages.okular
   ];
 
   environment.etc."sddm/wayland-sessions/hyprland.desktop".text = ''
