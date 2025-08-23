@@ -241,8 +241,6 @@ in
     lazygit
     lazydocker
     bruno
-    postman
-    bruno-cli
     gnumake
     coreutils
     nixfmt-rfc-style
@@ -282,12 +280,10 @@ in
     lm_sensors
     inxi
     # nvtopPackages.nvidia
-    anydesk
 
     # Network and internet tools
     aria2
     qbittorrent
-    cloudflare-warp
     tailscale
 
 
@@ -308,6 +304,7 @@ in
 
     # Productivity and office
     obsidian
+    smassh
 
 
     # Communication and social

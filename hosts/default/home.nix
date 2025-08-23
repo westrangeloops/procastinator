@@ -111,5 +111,68 @@ in {
     platformTheme.name = "qtct";
   };
 
+  programs.hyprpanel = {
+    enable = true;
+
+    settings = {
+      # 1. GENERAL AESTHETICS (Inspired by maotseantonio's style)
+      "theme.bar.transparent" = true;
+      "theme.bar.position" = "top";
+      "theme.font.name" = "JetBrainsMono Nerd Font"; # A popular, clean font
+      "theme.font.size" = "16px";
+
+      # Define a simple, elegant color scheme
+      "theme.colors.rosewater" = "#f5e0dc";
+      "theme.colors.mauve" = "#cba6f7";
+      "theme.colors.surface0" = "#313244";
+      "theme.colors.overlay0" = "#6c7086";
+      "theme.colors.text" = "#cdd6f4";
+
+      # Apply colors to the bar elements
+      "theme.bar.background" = "rgba(49, 50, 68, 0.7)"; # Semi-transparent dark background
+      "theme.bar.menus.background" = "rgba(49, 50, 68, 0.95)";
+      "theme.bar.buttons.background" = "rgba(0,0,0,0)"; # Fully transparent buttons
+      "theme.bar.buttons.foreground" = "@rosewater";
+      "theme.bar.buttons.hover.foreground" = "@mauve";
+      "theme.bar.workspaces.foreground" = "@overlay0";
+      "theme.bar.workspaces.active.foreground" = "@text";
+      "theme.bar.workspaces.special.foreground" = "@mauve";
+
+      # 2. WORKSPACE CONFIGURATION (Chinese Numerals)
+      "bar.workspaces.show_icons" = true;
+      "bar.workspaces.icons" = {
+        "1" = "一"; # One
+        "2" = "二"; # Two
+        "3" = "三"; # Three
+        "4" = "四"; # Four
+        "5" = "五"; # Five
+        "6" = "六"; # Six
+        "7" = "七"; # Seven
+        "8" = "八"; # Eight
+        "9" = "九"; # Nine
+        "10" = "十";# Ten
+      };
+
+      # Optional: To only show icons without the number
+      "bar.workspaces.show_numbers" = false;
+
+      # 3. OTHER MODULES
+      "bar.launcher.autoDetectIcon" = true;
+      "menus.clock.time.military" = true;
+      "menus.dashboard.stats.enable_gpu" = true;
+    };
+
+    # 4. BAR LAYOUT (Workspaces in the center)
+    layout = {
+      "bar.layouts" = {
+        "0" = {
+          left = [ "dashboard" "media" ];
+          middle = [ "workspaces" ];
+          right = [ "volume" "systray" "clock" "notifications" ];
+        };
+      };
+    };
+  };
+
   programs.home-manager.enable = true;
 }
