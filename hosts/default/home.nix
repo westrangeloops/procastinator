@@ -111,68 +111,54 @@ in {
     platformTheme.name = "qtct";
   };
 
-  programs.hyprpanel = {
-    enable = true;
+programs.hyprpanel = {
+  enable = true;
 
-    settings = {
-      # 1. GENERAL AESTHETICS (Inspired by maotseantonio's style)
-      "theme.bar.transparent" = true;
-      "theme.bar.position" = "top";
-      "theme.font.name" = "JetBrainsMono Nerd Font"; # A popular, clean font
-      "theme.font.size" = "16px";
+  # Everything must be inside the 'settings' block.
+  settings = {
+    # --- General & Theme ---
+    "theme.bar.transparent" = true;
+    "theme.bar.background" = "rgba(49, 50, 68, 0.7)";
+    "theme.font.name" = "JetBrainsMono Nerd Font";
+    "theme.font.size" = "16px";
+    "theme.bar.buttons.monochrome" = true;
+    "theme.bar.buttons.spacing" = "0.1em";
 
-      # Define a simple, elegant color scheme
-      "theme.colors.rosewater" = "#f5e0dc";
-      "theme.colors.mauve" = "#cba6f7";
-      "theme.colors.surface0" = "#313244";
-      "theme.colors.overlay0" = "#6c7086";
-      "theme.colors.text" = "#cdd6f4";
-
-      # Apply colors to the bar elements
-      "theme.bar.background" = "rgba(49, 50, 68, 0.7)"; # Semi-transparent dark background
-      "theme.bar.menus.background" = "rgba(49, 50, 68, 0.95)";
-      "theme.bar.buttons.background" = "rgba(0,0,0,0)"; # Fully transparent buttons
-      "theme.bar.buttons.foreground" = "@rosewater";
-      "theme.bar.buttons.hover.foreground" = "@mauve";
-      "theme.bar.workspaces.foreground" = "@overlay0";
-      "theme.bar.workspaces.active.foreground" = "@text";
-      "theme.bar.workspaces.special.foreground" = "@mauve";
-
-      # 2. WORKSPACE CONFIGURATION (Chinese Numerals)
-      "bar.workspaces.show_icons" = true;
-      "bar.workspaces.icons" = {
-        "1" = "一"; # One
-        "2" = "二"; # Two
-        "3" = "三"; # Three
-        "4" = "四"; # Four
-        "5" = "五"; # Five
-        "6" = "六"; # Six
-        "7" = "七"; # Seven
-        "8" = "八"; # Eight
-        "9" = "九"; # Nine
-        "10" = "十";# Ten
-      };
-
-      # Optional: To only show icons without the number
-      "bar.workspaces.show_numbers" = false;
-
-      # 3. OTHER MODULES
-      "bar.launcher.autoDetectIcon" = true;
-      "menus.clock.time.military" = true;
-      "menus.dashboard.stats.enable_gpu" = true;
+    # --- Workspaces (with Chinese Numerals) ---
+    "bar.workspaces.show_numbered" = false;
+    "bar.workspaces.show_icons" = true;
+    "bar.workspaces.icons" = {
+      "1" = "一"; "2" = "二"; "3" = "三"; "4" = "四"; "5" = "五";
+      "6" = "六"; "7" = "七"; "8" = "八"; "9" = "九"; "10" = "十";
     };
 
-    # 4. BAR LAYOUT (Workspaces in the center)
-    layout = {
-      "bar.layouts" = {
-        "0" = {
-          left = [ "dashboard" "media" ];
-          middle = [ "workspaces" ];
-          right = [ "volume" "systray" "clock" "notifications" ];
-        };
+    # --- Other Bar Modules & Menus ---
+    "bar.launcher.icon" = "❄️"; # Kept your NixOS icon
+    "menus.clock.time.military" = true;
+    "bar.volume.label" = false;
+    "bar.network.label" = false;
+
+    # ❗️ CHANGE THESE PATHS AND KEYS
+    "menus.clock.weather.location" = "São Paulo";
+    "menus.clock.weather.key" = "YOUR_API_KEY";
+
+    # --- Bar Layout (Correctly placed AND using Nix list syntax) ---
+    "bar.layouts" = {
+      "0" = {
+        # ❗️ Lists are now space-separated
+        "left" = [ "dashboard" "media" ];
+        "middle" = [ "workspaces" ];
+        "right" = [
+          "volume"
+          "network"
+          "systray"
+          "clock"
+          "notifications"
+        ];
       };
     };
-  };
+  }; # End of settings
+};   # End of programs.hyprpanel
 
   programs.home-manager.enable = true;
 }

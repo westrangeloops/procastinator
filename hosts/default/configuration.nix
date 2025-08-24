@@ -21,6 +21,8 @@ in
     ../../modules/boot.nix
     ../../modules/wayland/security.nix
     ../../modules/power.nix
+    ../../modules/vesta.nix
+    ../../modules/vesta-desktop.nix
     inputs.home-manager.nixosModules.default
   ];
 
@@ -389,6 +391,10 @@ in
 
     # PDF
     kdePackages.okular
+
+    # Chinese
+    noto-fonts-cjk-sans
+
   ];
 
   environment.etc."sddm/wayland-sessions/hyprland.desktop".text = ''
