@@ -86,9 +86,6 @@ alias lg='lazygit'
 # Nixos Aliases
 alias rebuild='sudo nixos-rebuild switch --flake ~/procastinator/.#default'
 
-# VESTA
-alias VESTA='~/VESTA/VESTA'
-
 # Downloads Aliases
 alias yd='yt-dlp -f "bestvideo+bestaudio" --embed-chapters --external-downloader aria2c --concurrent-fragments 8 --throttled-rate 100K'
 alias td='yt-dlp --external-downloader aria2c -o "%(title)s."'

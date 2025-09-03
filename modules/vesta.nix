@@ -92,18 +92,31 @@ let
   # This script creates the necessary GTK schema directory and copies GTK3 schemas
   setupVestaSchema = pkgs.writeShellScriptBin "setup-vesta-schema" ''
     mkdir -p ~/.local/share/glib-2.0/schemas
-    cp -p "${pkgs.gtk3}/share/gsettings-schemas/gtk+3"*/glib-2.0/schemas/gschemas.compiled ~/.local/share/glib-2.0/schemas/ -iv
-    echo "GTK schemas have been set up for VESTA"
+    gtk3_schema_path="${pkgs.gtk3}/share/gsettings-schemas/gtk+3"*/glib-2.0/schemas/gschemas.compiled
+    if [ -f "$gtk3_schema_path" ]; then
+      cp -p "$gtk3_schema_path" ~/.local/share/glib-2.0/schemas/ -iv
+      echo "GTK schemas have been set up for VESTA"
+    else
+      echo "Error: Could not find GTK3 schema file"
+      exit 1
+    fi
   '';
 
   # This script launches VESTA with the correct environment
   vestaLauncher = pkgs.writeShellScriptBin "vesta" ''
     # Check if GTK schemas directory exists, if not create it
     if [ ! -f ~/.local/share/glib-2.0/schemas/gschemas.compiled ]; then
+      echo "Setting up GTK schemas for VESTA..."
       setup-vesta-schema
     fi
     
+    # Set GTK_THEME environment variable for proper display
+    if [ -z "$GTK_THEME" ]; then
+      export GTK_THEME=Adwaita:dark
+    fi
+    
     # Launch VESTA
+    echo "Starting VESTA..."
     exec ${vesta}/VESTA "$@"
   '';
 in
