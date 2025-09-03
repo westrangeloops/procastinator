@@ -383,6 +383,7 @@ in
 
 
     # Music and streaming
+    steam
     spotify
 
     # Miscellaneous
