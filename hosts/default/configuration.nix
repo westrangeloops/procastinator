@@ -398,9 +398,6 @@ in
     # Chinese
     noto-fonts-cjk-sans
 
-    # Scientific computing
-    (pkgs.callPackage ../../modules/vaspkit.nix { })
-
   ];
 
   environment.etc."sddm/wayland-sessions/hyprland.desktop".text = ''
