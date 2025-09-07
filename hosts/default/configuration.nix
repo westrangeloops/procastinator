@@ -23,6 +23,7 @@ in
     ../../modules/power.nix
     ../../modules/vesta.nix
     ../../modules/vesta-desktop.nix
+    ../../modules/vaspkit.nix
     inputs.home-manager.nixosModules.default
   ];
 
@@ -384,6 +385,7 @@ in
 
     # Music and streaming
     steam
+    lutris
     spotify
 
     # Miscellaneous
@@ -395,6 +397,9 @@ in
 
     # Chinese
     noto-fonts-cjk-sans
+
+    # Scientific computing
+    (pkgs.callPackage ../../modules/vaspkit.nix { })
 
   ];
 
@@ -457,11 +462,13 @@ in
       };
       videoDrivers = [ "modesetting" ];
     };
-    logind = {
-      extraConfig = ''
-        HandlePowerKey=suspend
-      '';
+ logind = {
+  settings = {
+    Login = {
+      HandlePowerKey = "suspend";
     };
+  };
+};
     cloudflare-warp.enable = true;
     tailscale = {
       enable = true;
