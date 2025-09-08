@@ -11,7 +11,8 @@
     settings = {
       # Monitors
       monitor = [
-        ",1920x1080@60,auto,1"
+        "HDMI-A-1,1920x1080@60,1080x0,1"
+        "HDMI-A-2,1920x1080@71.91,0x0,1,transform,1"
       ];
 
       # Variables
