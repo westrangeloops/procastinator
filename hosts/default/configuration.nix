@@ -17,7 +17,7 @@ in
   imports = [
     ./hardware-configuration.nix
     ./user.nix
-    ../../modules/amd-drivers.nix
+    ../../modules/intel-drivers.nix
     ../../modules/boot.nix
     ../../modules/wayland/security.nix
     ../../modules/power.nix
@@ -289,6 +289,15 @@ in
     qbittorrent
     tailscale
 
+    # Work
+    openbabel2
+    marvin
+    molsketch
+    avogadrolibs
+    avogadro2
+    atomix
+    chemtool
+
 
     # Audio and video
     pulseaudio
@@ -311,7 +320,6 @@ in
 
 
     # Communication and social
-    zoom-us
     vesktop
 
     # Browsers
@@ -382,11 +390,6 @@ in
     # Networking
     networkmanagerapplet
 
-
-    # Music and streaming
-    steam
-    lutris
-    spotify
 
     # Miscellaneous
     greetd.tuigreet
