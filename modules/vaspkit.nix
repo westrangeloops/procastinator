@@ -11,19 +11,26 @@ let
 
     src = pkgs.fetchurl {
       url = "https://sourceforge.net/projects/vaspkit/files/Binaries/vaspkit.${version}.linux.x64.tar.gz/download";
-      sha256 = "09yda5ks62icv1sx0vh0fnrzrv0a8blp5mzhhnaxw15d0i26z3ny";
+      sha256 = "QbvcB1n3LNQ+9+L1QdIopjm9lduipUk5iyj0fXYNcrE=";
     };
 
     nativeBuildInputs = with pkgs; [ 
       autoPatchelfHook
       gcc
       glibc
+      pkgs.gzip
+      pkgs.gnutar
     ];
 
     buildInputs = with pkgs; [
       glibc
       gcc.cc.lib
     ];
+
+    unpackPhase = ''
+      mkdir -p $sourceRoot
+      tar -xzf $src -C $sourceRoot --strip-components=1
+    '';
 
     sourceRoot = "vaspkit.${version}";
 

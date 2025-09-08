@@ -4,21 +4,18 @@
   inputs,
   ...
 }:
-# lanzaboote config
+# GRUB bootloader config
 {
-  imports = [
-    inputs.lanzaboote.nixosModules.lanzaboote
-  ];
-
   boot = {
-    lanzaboote = {
-      enable = true;
-      pkiBundle = "/var/lib/sbctl";
+    loader = {
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
+        useOSProber = true;
+      };
     };
-
-    # we let lanzaboote install systemd-boot
-    loader.systemd-boot.enable = lib.mkForce false;
   };
 
-  environment.systemPackages = [pkgs.sbctl];
+  environment.systemPackages = [pkgs.grub2_efi];
 }

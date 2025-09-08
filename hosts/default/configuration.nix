@@ -28,9 +28,9 @@ in
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_cachyos;
+    kernelPackages = pkgs.linuxPackages;
     kernelModules = ["amdgpu" "v4l2loopback" "i2c-dev"];
-    extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
+    extraModulePackages = [ pkgs.linuxPackages.v4l2loopback ];
     kernel.sysctl = {
       "vm.swappiness" = 10;
       "vm.vfs_cache_pressure" = 50;
@@ -392,7 +392,7 @@ in
 
 
     # Miscellaneous
-    greetd.tuigreet
+    tuigreet
     libsForQt5.qt5.qtgraphicaleffects
 
     # PDF
