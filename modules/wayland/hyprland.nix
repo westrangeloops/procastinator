@@ -121,7 +121,7 @@
 
       # Gestures
       gestures = {
-        workspace_swipe = True;
+        workspace_swipe = true;
       };
 
       # Device specific
