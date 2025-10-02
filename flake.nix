@@ -1,28 +1,36 @@
 {
   description = "Procastinator flake";
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     stylix.url = "github:nix-community/stylix";
+
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     zen-browser = {
       url = "github:pfaj/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     # VIM
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+
     nvchad4nix = {
       url = "github:MOIS3Y/nvchad4nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
+    # GRUB2 themes
+    grub2-themes.url = "github:vinceliuice/grub2-themes";
+
     # HYPRLAND
     hyprland.url = "github:hyprwm/Hyprland";
     hyprlock.url = "github:hyprwm/hyprlock";
@@ -34,52 +42,65 @@
       url = "github:ItsOhen/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
+
     hyprpanel = {
       url = "github:Jas-SinghFSU/HyprPanel";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Others
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";  # This provides the cachyos
-    lanzaboote.url = "github:nix-community/lanzaboote";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   };
 
-  outputs =
-    { self, nixpkgs, home-manager, stylix, zen-browser, nixvim, neovim-nightly-overlay, nvchad4nix, hyprpanel, chaotic, lanzaboote, ... }@inputs:
-    let
-      system = "x86_64-linux";
+  outputs = inputs@{
+    self,
+    nixpkgs,
+    home-manager,
+    stylix,
+    zen-browser,
+    nixvim,
+    neovim-nightly-overlay,
+    nvchad4nix,
+    hyprland,
+    hyprlock,
+    hyprsunset,
+    hyprland-qt-support,
+    hyprland-qtutils,
+    hyprland-plugins,
+    hyprpanel,
+    chaotic,
+    grub2-themes,
+    ...
+  }:
 
-      pkgs = nixpkgs.legacyPackages.${system};
-    in
-    {
-      nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit inputs; };
-        modules = [
-          (
-            {
-              config,
-              pkgs,
-              ...
-            }:
-            {
-              nixpkgs.config.allowUnfree = true;
+  let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+  in
+  {
+    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+      inherit system;
+      specialArgs = { inherit inputs; };
+      modules = [
+        (
+          { config, pkgs, ... }:
+          {
+            nixpkgs.config.allowUnfree = true;
 
-              # Add the custom theme overlay
-              nixpkgs.overlays = [
-                # hyprpanel overlay is removed as it's now in nixpkgs
-                inputs.neovim-nightly-overlay.overlays.default
-                # Add chaotic overlay for CachyOS packages
-                inputs.chaotic.overlays.default
-              ];
-            }
-          )
-          ./hosts/default/configuration.nix
-          inputs.stylix.nixosModules.stylix
-          inputs.home-manager.nixosModules.default
-          # Add chaotic module
-          inputs.chaotic.nixosModules.default
-        ];
-      };
+            # Add the custom overlays
+            nixpkgs.overlays = [
+              neovim-nightly-overlay.overlays.default
+              chaotic.overlays.default
+            ];
+          }
+        )
+        ./hosts/default/configuration.nix
+        inputs.stylix.nixosModules.stylix
+        inputs.home-manager.nixosModules.default
+        inputs.hyprland.homeManagerModules.default
+        inputs.chaotic.nixosModules.default
+      ];
     };
+  };
 }
+

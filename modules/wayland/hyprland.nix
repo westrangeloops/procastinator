@@ -2,10 +2,12 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }: {
   wayland.windowManager.hyprland = {
     enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.default;
 
     # Main Hyprland configuration
     settings = {
@@ -119,7 +121,7 @@
 
       # Gestures
       gestures = {
-        workspace_swipe = false;
+        workspace_swipe = True;
       };
 
       # Device specific

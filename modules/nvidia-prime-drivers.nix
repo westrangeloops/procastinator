@@ -11,7 +11,7 @@ in
 {
   options.drivers.nvidia-prime = {
     enable = mkEnableOption "Enable Nvidia Prime Hybrid GPU Offload";
-    intelBusID = mkOption {
+    amdBusID = mkOption {
       type = types.str;
       default = "PCI:1:0:0";
     };

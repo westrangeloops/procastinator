@@ -10,27 +10,36 @@ let
     version = "1.5.1";
 
     src = pkgs.fetchurl {
-      url = "https://sourceforge.net/projects/vaspkit/files/Binaries/vaspkit.${version}.linux.x64.tar.gz/download";
-      sha256 = "09yda5ks62icv1sx0vh0fnrzrv0a8blp5mzhhnaxw15d0i26z3ny";
+      url = "https://sourceforge.net/projects/vaspkit/files/latest/download";
+      sha256 = "41bbdc0759f72cd43ef7e2f541d228a639bd95dba2a549398b28f47d760d72b1";
     };
 
-    nativeBuildInputs = with pkgs; [ 
+    # Add this phase to manually unpack the tarball
+    unpackPhase = ''
+      runHook preUnpack
+      tar -xzvf $src --strip-components=1
+      runHook postUnpack
+    '';
+
+    nativeBuildInputs = with pkgs; [
       autoPatchelfHook
-      gcc
-      glibc
+      # gcc and glibc are not needed here, autoPatchelfHook finds them
     ];
 
+    # These are runtime dependencies that autoPatchelfHook will find
     buildInputs = with pkgs; [
       glibc
       gcc.cc.lib
     ];
 
-    sourceRoot = "vaspkit.${version}";
+    # sourceRoot is no longer needed because unpackPhase handles changing into the directory
 
     installPhase = ''
+      runHook preInstall
       mkdir -p $out/bin
       cp bin/vaspkit $out/bin/
       chmod +x $out/bin/vaspkit
+      runHook postInstall
     '';
 
     meta = with lib; {

@@ -18,6 +18,8 @@ in
     ./hardware-configuration.nix
     ./user.nix
     ../../modules/amd-drivers.nix
+    ../../modules/nvidia-drivers.nix
+    ../../modules/nvidia-prime-drivers.nix
     ../../modules/boot.nix
     ../../modules/wayland/security.nix
     ../../modules/power.nix
@@ -73,9 +75,8 @@ in
     networkmanager.enable = true;
     timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
     firewall = {
+      enable = true; # It's good practice to explicitly enable it
       allowedTCPPorts = [ 8003 ];
-    };
-    firewall = {
       checkReversePath = "loose";
     };
   };
@@ -544,11 +545,6 @@ in
     flatpak-repo = {
       path = [ pkgs.flatpak ];
       script = "flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo";
-    };
-    libvirtd = {
-      enable = true;
-      wantedBy = [ "multi-user.target" ];
-      requires = [ "virtlogd.service" ];
     };
   };
 

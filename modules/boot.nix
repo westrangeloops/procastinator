@@ -1,24 +1,41 @@
+# boot.nix
+{ pkgs, lib, inputs, ... }:
+
 {
-  pkgs,
-  lib,
-  inputs,
-  ...
-}:
-# lanzaboote config
-{
+  # Import grub2-themes module (provides Vimix, Tela, Stylish, etc.)
   imports = [
-    inputs.lanzaboote.nixosModules.lanzaboote
+    inputs.grub2-themes.nixosModules.default
   ];
 
-  boot = {
-    lanzaboote = {
+  boot.loader = {
+    # Enable GRUB with EFI and Windows detection
+    grub = {
       enable = true;
-      pkiBundle = "/var/lib/sbctl";
+      efiSupport = true;
+      device = "nodev";                 # EFI only, no MBR
+      useOSProber = pkgs.lib.mkForce true;   # detect Windows
+      gfxmodeEfi = pkgs.lib.mkForce "2560x1440"; # QHD resolution
+
+      # Your custom splash image
+      splashImage = pkgs.lib.mkForce ../dotfiles/wallpapers/lockwhale.jpg;
     };
 
-    # we let lanzaboote install systemd-boot
-    loader.systemd-boot.enable = lib.mkForce false;
+    # Enable grub2-themes (choose theme: tela, stylish, vimix, whitesur, etc.)
+    grub2-theme = {
+      enable = true;
+      theme = "vimix";
+      footer = true;
+    };
   };
 
-  environment.systemPackages = [pkgs.sbctl];
+  # Needed packages
+  environment.systemPackages = with pkgs; [
+    os-prober   # auto-detect Windows
+    sbctl       # optional: secure boot helper
+  ];
+
+  # Disable Stylix's grub theming to avoid conflicts
+  stylix.targets.grub.enable = false;
 }
+
+
