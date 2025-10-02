@@ -79,6 +79,7 @@ in {
   };
 
   imports = [
+    inputs.hyprland.homeManagerModules.default
     ../../config/rofi/rofi.nix
     ../../config/wlogout.nix
     ../../modules/nvchad.nix

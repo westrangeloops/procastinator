@@ -97,7 +97,6 @@
         ./hosts/default/configuration.nix
         inputs.stylix.nixosModules.stylix
         inputs.home-manager.nixosModules.default
-        inputs.hyprland.homeManagerModules.default
         inputs.chaotic.nixosModules.default
       ];
     };
