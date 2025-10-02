@@ -13,7 +13,7 @@
     settings = {
       # Monitors
       monitor = [
-        ",1920x1080@60,auto,1"
+        "eDP-1,2880x1800@120,auto,1.5"
       ];
 
       # Variables
@@ -117,11 +117,6 @@
         touchpad = {
           natural_scroll = false;
         };
-      };
-
-      # Gestures
-      gestures = {
-        workspace_swipe = true;
       };
 
       # Device specific

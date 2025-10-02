@@ -26,6 +26,7 @@ in
     ../../modules/vesta.nix
     ../../modules/vesta-desktop.nix
     ../../modules/vaspkit.nix
+    ../../modules/asus-rog.nix
     inputs.home-manager.nixosModules.default
   ];
 
@@ -390,7 +391,7 @@ in
     spotify
 
     # Miscellaneous
-    greetd.tuigreet
+    tuigreet
     libsForQt5.qt5.qtgraphicaleffects
 
     # PDF
