@@ -14,10 +14,10 @@
       efiSupport = true;
       device = "nodev";                 # EFI only, no MBR
       useOSProber = pkgs.lib.mkForce true;   # detect Windows
-      gfxmodeEfi = pkgs.lib.mkForce "2560x1440"; # QHD resolution
+      gfxmodeEfi = "2880x1800"; # Match your laptop's native resolution
 
-      # Your custom splash image
-      splashImage = pkgs.lib.mkForce ../dotfiles/wallpapers/lockwhale.jpg;
+      # Use theme background instead of custom splash to avoid flickering
+      splashImage = null;
     };
 
     # Enable grub2-themes (choose theme: tela, stylish, vimix, whitesur, etc.)
@@ -25,6 +25,7 @@
       enable = true;
       theme = "vimix";
       footer = true;
+      # The vimix theme has its own background that will be used consistently
     };
   };
 

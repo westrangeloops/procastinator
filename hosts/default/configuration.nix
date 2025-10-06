@@ -46,6 +46,14 @@ in
       "amd_iommu"
       "mitigations=off"
       "nvme_core.default_ps_max_latency_us=0"
+      # Silent boot parameters for smooth transitions
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "loglevel=3"
+      "rd.systemd.show_status=false"
+      "rd.udev.log_level=3"
+      "udev.log_priority=3"
     ];
     extraModprobeConfig = ''
       options v4l2loopback exclusive_caps=1 card_label="OBS Virtual Output"
@@ -68,7 +76,14 @@ in
       mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
       magicOrExtension = ''\x7fELF....AI\x02'';
     };
-    plymouth.enable = true;
+    plymouth = {
+      enable = true;
+      # Use a theme that matches better with GRUB
+      # Available themes: breeze, bgrt, glow, script, solar, spinfinity, spinner, text, tribar
+      theme = "breeze";
+    };
+    # Add silent boot for smoother transition
+    consoleLogLevel = 0;
   };
 
   networking = {
@@ -145,6 +160,8 @@ in
         popups = 12;
       };
     };
+    # Disable Stylix's Plymouth theming to use custom theme
+    targets.plymouth.enable = false;
   };
 
   virtualisation = {
@@ -227,6 +244,7 @@ in
     bun
     maven
     mongodb-compass
+    neo4j-desktop
     gcc
     openssl
     nodePackages_latest.live-server
@@ -473,10 +491,16 @@ in
       enable = true;
       useRoutingFeatures = "client";
     };
-    # ollama = {
-    #   enable=true;
-    #   acceleration = "cuda";
-    # };
+    ollama = {
+      enable = true;
+      acceleration = "cuda";
+      # Preload models - uncomment and modify as needed
+      # loadModels = ["phi3:14b"];
+    };
+    neo4j = {
+      enable = true;
+      # Default port 7474 for HTTP, 7687 for Bolt
+    };
     cron = {
       enable = true;
     };

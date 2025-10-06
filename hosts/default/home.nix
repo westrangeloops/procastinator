@@ -138,6 +138,13 @@ programs.hyprpanel = {
     "menus.clock.time.military" = true;
     "bar.volume.label" = false;
     "bar.network.label" = false;
+    
+    # Battery settings
+    "bar.battery.label" = true;
+    "bar.battery.show_percentage" = true;
+    
+    # Brightness settings
+    "bar.brightness.label" = false;
 
     # ❗️ CHANGE THESE PATHS AND KEYS
     "menus.clock.weather.location" = "São Paulo";
@@ -151,6 +158,8 @@ programs.hyprpanel = {
         "middle" = [ "workspaces" ];
         "right" = [
           "volume"
+          "brightness"
+          "battery"
           "network"
           "systray"
           "clock"
