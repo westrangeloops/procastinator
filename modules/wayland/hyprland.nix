@@ -38,6 +38,7 @@
         "wl-paste --type image --watch cliphist store"
         "hypridle &"
         "swww-daemon &"
+        "sleep 1 && swww img ~/Pictures/wallpapers/wallwhale.png --transition-type fade --transition-duration 2"
         "oled-theme-rotate &"  # Start OLED burn-in protection theme rotation
 
       ];
