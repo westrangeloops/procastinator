@@ -514,21 +514,8 @@ in
       enable = true;
       drivers = [ pkgs.hplipWithPlugin ];
     };
-    power-profiles-daemon.enable = false;
-    thermald.enable = true;
-    auto-cpufreq = {
-      enable = true;
-      settings = {
-        battery = {
-          governor = "powersave";
-          turbo = "never";
-        };
-        charger = {
-          governor = "performance";
-          turbo = "auto";
-        };
-      };
-    };
+    # Power management is now handled by TLP in power.nix module
+    # auto-cpufreq conflicts with TLP, so it's disabled
     gnome.gnome-keyring.enable = true;
     avahi = {
       enable = true;

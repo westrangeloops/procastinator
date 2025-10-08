@@ -73,6 +73,7 @@ in {
     ];
     packages = [
       (import ../../scripts/rofi-launcher.nix {inherit pkgs;})
+      (import ../../scripts/oled-theme-rotate.nix {inherit pkgs;})
       # Add packages that might be needed for hypridle/hyprlock
       pkgs.brillo  # for brightness control
     ];
@@ -118,11 +119,12 @@ programs.hyprpanel = {
   # Everything must be inside the 'settings' block.
   settings = {
     # --- General & Theme ---
+    # Semi-transparent to reduce OLED burn-in
     "theme.bar.transparent" = true;
-    "theme.bar.background" = "rgba(49, 50, 68, 0.7)";
-    "theme.font.name" = "JetBrainsMono Nerd Font";
+    "theme.bar.background" = "rgba(49, 50, 68, 0.6)";  # More transparent
+    "theme.font.name" = "Noto Sans";
     "theme.font.size" = "16px";
-    "theme.bar.buttons.monochrome" = true;
+    "theme.bar.buttons.monochrome" = false;  # Dynamic colors help prevent burn-in
     "theme.bar.buttons.spacing" = "0.1em";
 
     # --- Workspaces (with Chinese Numerals) ---

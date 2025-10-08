@@ -38,6 +38,7 @@
         "wl-paste --type image --watch cliphist store"
         "hypridle &"
         "swww-daemon &"
+        "oled-theme-rotate &"  # Start OLED burn-in protection theme rotation
 
       ];
 
@@ -62,13 +63,18 @@
         resize_on_border = false;
         allow_tearing = false;
         layout = "dwindle";
+        
+        # Dynamic border colors to prevent OLED burn-in
+        # Colors will cycle through different hues
+        "col.active_border" = lib.mkForce "rgba(c4a7e7ee) rgba(9ccfd8ee) rgba(31748fee) 45deg";
+        "col.inactive_border" = lib.mkForce "rgba(26233a99)";
       };
 
       # Decoration
       decoration = {
         rounding = 10;
-        active_opacity = 1.0;
-        inactive_opacity = 1.0;
+        active_opacity = 0.98;  # Slightly transparent to reduce burn-in
+        inactive_opacity = 0.95;
 
         blur = {
           enabled = true;
@@ -76,6 +82,12 @@
           passes = 1;
           vibrancy = 0.1696;
         };
+        
+        # Drop shadow to add variation
+        drop_shadow = true;
+        shadow_range = 4;
+        shadow_render_power = 3;
+        "col.shadow" = "rgba(1a1a1aee)";
       };
 
       # Animations

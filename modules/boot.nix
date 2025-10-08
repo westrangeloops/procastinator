@@ -14,10 +14,10 @@
       efiSupport = true;
       device = "nodev";                 # EFI only, no MBR
       useOSProber = pkgs.lib.mkForce true;   # detect Windows
-      gfxmodeEfi = "2880x1800"; # Match your laptop's native resolution
+      gfxmodeEfi = pkgs.lib.mkForce "2880x1800"; # Match your laptop's native resolution
 
       # Use theme background instead of custom splash to avoid flickering
-      splashImage = null;
+      splashImage = pkgs.lib.mkForce null;
     };
 
     # Enable grub2-themes (choose theme: tela, stylish, vimix, whitesur, etc.)
