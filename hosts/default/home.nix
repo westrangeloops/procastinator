@@ -93,6 +93,7 @@ in {
   # Styling
   stylix.targets.waybar.enable = false;
   stylix.targets.hyprlock.enable = false;
+  stylix.targets.hyprland.enable = false;  # Disable to use custom OLED-friendly colors
 
   gtk = {
     iconTheme = {
