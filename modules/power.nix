@@ -62,10 +62,13 @@
         PCIE_ASPM_ON_AC = "default";
         PCIE_ASPM_ON_BAT = "powersupersave";
         
-        # USB autosuspend
+        # USB autosuspend - Exclude input devices to prevent mouse/keyboard freezing
         USB_AUTOSUSPEND = 1;
         USB_EXCLUDE_BTUSB = 1;  # Don't autosuspend Bluetooth
         USB_EXCLUDE_PHONE = 1;
+        USB_EXCLUDE_WWAN = 1;
+        # Exclude USB input devices (mice, keyboards)
+        USB_DENYLIST = "046d:* 093a:* 1bcf:* 05ac:*";  # Logitech, Pixart, others, Apple
         
         # Wi-Fi power saving
         WIFI_PWR_ON_AC = "off";
@@ -145,4 +148,12 @@
     acpi
     tlp
   ];
+  
+  # Prevent USB input devices from suspending
+  services.udev.extraRules = ''
+    # Disable USB autosuspend for input devices (mice, keyboards)
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="046d", ATTR{power/autosuspend}="-1"
+    ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usbhid", ATTR{power/autosuspend}="-1"
+    ACTION=="add", SUBSYSTEM=="input", ATTR{power/autosuspend}="-1"
+  '';
 }

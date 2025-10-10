@@ -11,9 +11,10 @@
 
     # Main Hyprland configuration
     settings = {
-      # Monitors
+      # Monitors - laptop display and external monitors
       monitor = [
-        "eDP-1,2880x1800@120,auto,1.5"
+        "eDP-1,2880x1800@120,0x0,1.5"        # Laptop display
+        ",preferred,auto,1"                   # Any other monitor (auto-detect)
       ];
 
       # Variables
