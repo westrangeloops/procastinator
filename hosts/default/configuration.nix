@@ -19,7 +19,7 @@ in
     ./user.nix
     ../../modules/amd-drivers.nix
     ../../modules/nvidia-drivers.nix
-    ../../modules/nvidia-prime-drivers.nix
+    ../../modules/nvidia-prime-drivers-offload.nix
     ../../modules/boot.nix
     ../../modules/wayland/security.nix
     ../../modules/power.nix
@@ -31,7 +31,7 @@ in
 
   # Enable NVIDIA drivers with PRIME for hybrid graphics
   drivers.nvidia.enable = true;
-  drivers.nvidia-prime.enable = true;
+  drivers.nvidia-prime-offload.enable = true;
 
   boot = {
     kernelPackages = pkgs.linuxPackages_cachyos;

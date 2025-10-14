@@ -6,11 +6,11 @@
 }:
 with lib;
 let
-  cfg = config.drivers.nvidia-prime;
+  cfg = config.drivers.nvidia-prime-offload;
 in
 {
-  options.drivers.nvidia-prime = {
-    enable = mkEnableOption "Enable Nvidia Prime Hybrid GPU Offload";
+  options.drivers.nvidia-prime-offload = {
+    enable = mkEnableOption "Enable Nvidia Prime Offload (Alternative to ReverseSync)";
     amdBusID = mkOption {
       type = types.str;
       default = "PCI:101:0:0";  # AMD Radeon 890M (65:00.0 in hex)
@@ -28,10 +28,14 @@ in
       "nvidia-drm.modeset=1" 
       "mem_sleep_default=deep"
       "amdgpu.dcdebugmask=0x10"
-      # Additional parameters for external monitor support
+      # Offload mode parameters
       "nvidia-drm.fbdev=1"
       "nvidia.NVreg_EnableGpuFirmware=1"
       "nvidia.NVreg_UsePageAttributeTable=1"
+      # Force NVIDIA to create DRM devices
+      "nvidia-drm.modeset=1"
+      "nvidia.NVreg_EnableGpuFirmware=1"
+      "nvidia.NVreg_EnableMSI=1"
     ];
     boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
     boot.blacklistedKernelModules = [ "nouveau" ];
@@ -40,22 +44,19 @@ in
     boot.kernel.sysctl."vm.max_map_count" = 2147483642;
     
     # Video drivers
-    # Per NVIDIA wiki: For offload mode, "modesetting" is needed for the iGPU
-    # to prevent X-server from running permanently on nvidia
+    # For offload mode, "modesetting" is needed for the iGPU
     services.xserver.videoDrivers = [ "amdgpu" "nvidia" ];
     services.udev.packages = with pkgs; [ linuxPackages.nvidia_x11 ];
     
     # AMD GPU initialization
     hardware.amdgpu.initrd.enable = lib.mkDefault true;
     
-    # NVIDIA configuration
+    # NVIDIA configuration for offload mode
     hardware.nvidia = {
       # Use latest driver for RTX 5070 Ti Mobile (Blackwell architecture)
       package = config.boot.kernelPackages.nvidiaPackages.latest;
       
       # RTX 5070 Ti requires open-source kernel modules (Blackwell and newer)
-      # Per NVIDIA wiki: "Data center GPUs starting from Grace Hopper or Blackwell 
-      # must use open-source modules — proprietary modules are no longer supported"
       open = true;
       
       # Modesetting is required
@@ -65,23 +66,20 @@ in
       nvidiaSettings = true;
       
       # Power management for laptops
-      # Enable basic power management (recommended for laptops)
       powerManagement = {
         enable = true;
-        # Fine-grained power management is only compatible with offload mode
-        # Since we use Reverse Sync (for HDMI support), we disable it
-        finegrained = false;
+        # Fine-grained power management is compatible with offload mode
+        finegrained = true;
       };
       
-      # PRIME Reverse Sync mode for hybrid graphics
-      # Uses dGPU as primary for external displays (HDMI wired to dGPU)
-      # Note: This is experimental but necessary when HDMI is wired to dGPU
+      # PRIME Offload mode for hybrid graphics
+      # Uses iGPU for display, dGPU for rendering when requested
       prime = {
-        # Reverse sync: dGPU renders, displays on both internal and external
-        reverseSync.enable = true;
+        # Offload mode: iGPU handles display, dGPU handles rendering
+        offload.enable = true;
         
-        # Offload and sync modes are incompatible with reverseSync
-        offload.enable = false;
+        # Reverse sync and sync modes are incompatible with offload
+        reverseSync.enable = false;
         sync.enable = false;
         
         # Bus IDs - verified with: lspci | grep -E "VGA|3D"
@@ -90,8 +88,15 @@ in
       };
       
       # Additional configuration for external monitor support
-      # Force NVIDIA to create DRM devices for display output
       forceFullCompositionPipeline = true;
+      
+      # Additional options to force DRM device creation
+      # These options help with external monitor detection
+      options = {
+        "NVreg_EnableGpuFirmware" = "1";
+        "NVreg_UsePageAttributeTable" = "1";
+        "NVreg_EnableMSI" = "1";
+      };
     };
     
     # Graphics drivers
