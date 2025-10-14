@@ -8,32 +8,57 @@ with lib; let
   cfg = config.drivers.nvidia;
 in {
   options.drivers.nvidia = {
-    enable = mkEnableOption "Enable Nvidia Drivers";
+    enable = mkEnableOption "Enable Nouveau Drivers (Open-Source NVIDIA)";
   };
 
   config = mkIf cfg.enable {
-    services.xserver.videoDrivers = ["nvidia"];
-    hardware.nvidia = {
-      # Modesetting is required.
-      modesetting.enable = true;
-      # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-      powerManagement.enable = false;
-      # Fine-grained power management. Turns off GPU when not in use.
-      # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-      powerManagement.finegrained = false;
-      # Use the NVidia open source kernel module (not to be confused with the
-      # independent third-party "nouveau" open source driver).
-      # Support is limited to the Turing and later architectures. Full list of
-      # supported GPUs is at:
-      # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
-      # Only available from driver 515.43.04+
-      # Currently alpha-quality/buggy, so false is currently the recommended setting.
-      open = false;
-      # Enable the Nvidia settings menu,
-      # accessible via `nvidia-settings`.
-      nvidiaSettings = true;
-      # Optionally, you may need to select the appropriate driver version for your specific GPU.
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    # Enable graphics - Nouveau is enabled by default when graphics are enabled
+    hardware.graphics.enable = true;
+    
+    # Don't specify videoDrivers - let Nouveau be used by default
+    # services.xserver.videoDrivers = []; # Nouveau is the default
+    
+    # Blacklist all proprietary NVIDIA drivers to ensure Nouveau is used
+    boot.blacklistedKernelModules = [
+      "nvidia"
+      "nvidiafb"
+      "nvidia-drm"
+      "nvidia-uvm"
+      "nvidia-modeset"
+      "nvidia-peermem"
+      "nvidia-utils"
+    ];
+    
+    # Environment variables for Nouveau
+    environment.variables = {
+      "LIBVA_DRIVER_NAME" = "nouveau";
+      "GBM_BACKEND" = "nouveau";
     };
+    
+    # Kernel parameters for Nouveau stability and performance
+    boot.kernelParams = [
+      "nouveau.modeset=1" # Enable modesetting for proper Wayland support
+      "nouveau.config=NvClkMode=3" # Try to enable higher performance mode
+      "nouveau.config=NvFBC=1" # Enable framebuffer compression if available
+      "nouveau.config=NvMSI=1" # Enable MSI interrupts for better performance
+      "nouveau.config=NvReg=EnableVgaScaler=1" # Enable VGA scaler
+      "nouveau.config=NvReg=EnableHeadless=0" # Disable headless mode
+      "nouveau.config=NvReg=UseVBios=1" # Use VBIOS for initialization
+      "nouveau.config=NvReg=PowerManagement=0" # Disable power management for max performance
+      "nouveau.config=NvReg=ForceMonitors=1" # Force monitor detection
+    ];
+    
+    # Additional Nouveau optimization
+    boot.extraModprobeConfig = ''
+      options nouveau modeset=1
+      options nouveau config=NvClkMode=3
+      options nouveau config=NvFBC=1
+      options nouveau config=NvMSI=1
+      options nouveau config=NvReg=EnableVgaScaler=1
+      options nouveau config=NvReg=EnableHeadless=0
+      options nouveau config=NvReg=UseVBios=1
+      options nouveau config=NvReg=PowerManagement=0
+      options nouveau config=NvReg=ForceMonitors=1
+    '';
   };
 }

@@ -61,9 +61,9 @@ in {
       XDG_SESSION_TYPE = "wayland";
       XDG_CURRENT_DESKTOP = "Hyprland";
       XDG_SESSION_DESKTOP = "Hyprland";
-      # NVIDIA specific
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      GBM_BACKEND = "nvidia-drm";
+      # Nouveau specific (open-source NVIDIA)
+      LIBVA_DRIVER_NAME = "nouveau";
+      GBM_BACKEND = "nouveau";
       # Localization
       LC_ALL = "en_US.UTF-8";
     };
@@ -119,7 +119,7 @@ programs.hyprpanel = {
     # --- General & Theme ---
     "theme.bar.transparent" = true;
     "theme.bar.background" = "rgba(49, 50, 68, 0.7)";
-    "theme.font.name" = "JetBrainsMono Nerd Font";
+    "theme.font.name" = "Noto Sans CJK SC";
     "theme.font.size" = "16px";
     "theme.bar.buttons.monochrome" = true;
     "theme.bar.buttons.spacing" = "0.1em";
@@ -141,6 +141,18 @@ programs.hyprpanel = {
     # ❗️ CHANGE THESE PATHS AND KEYS
     "menus.clock.weather.location" = "São Paulo";
     "menus.clock.weather.key" = "YOUR_API_KEY";
+
+    # --- Dashboard Configuration ---
+    "dashboard.workspaces.show_numbered" = false;
+    "dashboard.workspaces.show_icons" = true;
+    "dashboard.workspaces.icons" = {
+      "1" = "一"; "2" = "二"; "3" = "三"; "4" = "四"; "5" = "五";
+      "6" = "六"; "7" = "七"; "8" = "八"; "9" = "九"; "10" = "十";
+    };
+    
+    # Alternative: Use regular numbers if Chinese numerals don't work
+    # "dashboard.workspaces.show_numbered" = true;
+    # "dashboard.workspaces.show_icons" = false;
 
     # --- Bar Layout (Correctly placed AND using Nix list syntax) ---
     "bar.layouts" = {
