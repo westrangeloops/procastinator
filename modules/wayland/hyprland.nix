@@ -9,10 +9,16 @@
 
     # Main Hyprland configuration
     settings = {
-      # Monitors
+      # Monitors - Correct configuration for your setup with VGA adapter
       monitor = [
-        "HDMI-A-1,1920x1080@60,1080x900,1"
-        "HDMI-A-2,1920x1080@71.91,0x0,1,transform,1"
+        # 24" Samsung C24F390 - Vertical orientation (VGA to DisplayPort adapter)
+        # Using transform 3 for 90-degree rotation, positioned on the left
+        "DP-2,1920x1080@60,0x0,1,transform,3"
+        # 27" Samsung C27F390 - Horizontal orientation (mini DisplayPort to HDMI)
+        # Using 71.91Hz for smoother experience (highest available), positioned on the right
+        "DP-1,1920x1080@71.91,1080x0,1"
+        # Disable VGA-1 since you're using the adapter (DP-2)
+        "VGA-1,disable"
       ];
 
       # Variables
@@ -43,10 +49,9 @@
       # Environment variables
       env = [
         "HYPRCURSOR_SIZE,24"
-        "LIBVA_DRIVER_NAME,nvidia"
+        "LIBVA_DRIVER_NAME,nouveau"
         "XDG_SESSION_TYPE,wayland"
-        "GBM_BACKEND,nvidia-drm"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        "GBM_BACKEND,nouveau"
       ];
 
       # Cursor
@@ -59,7 +64,7 @@
         gaps_in = 10;
         gaps_out = 12;
         resize_on_border = false;
-        allow_tearing = false;
+        allow_tearing = false; # Keep false for stability with Nouveau
         layout = "dwindle";
       };
 
@@ -116,11 +121,6 @@
         touchpad = {
           natural_scroll = false;
         };
-      };
-
-      # Gestures
-      gestures = {
-        workspace_swipe = false;
       };
 
       # Device specific
@@ -245,6 +245,17 @@
 
     # Extra config for things that don't fit in settings
     extraConfig = ''
+      # Monitor optimizations
+      # Enable variable refresh rate if supported (though Nouveau may not support it)
+      # monitor=DP-1,1920x1080@71.91,1080x0,1,vrr,1
+      
+      # Monitor-specific settings for better performance
+      monitor=DP-2,1920x1080@60,0x0,1,transform,3
+      monitor=DP-1,preferred,1080x0,1
+      
+      # Disable VGA-1 since using adapter (DP-2)
+      monitor=VGA-1,disable
+      
       # VM Passthrough submap
       submap = passthru
       bind = SUPER, Escape, submap, reset

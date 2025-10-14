@@ -17,8 +17,9 @@ in
   imports = [
     ./hardware-configuration.nix
     ./user.nix
-    ../../modules/intel-drivers.nix
+    # ../../modules/intel-drivers.nix  # Disabled - no integrated graphics on Xeon
     ../../modules/boot.nix
+    ../../modules/nvidia-drivers.nix
     ../../modules/wayland/security.nix
     ../../modules/power.nix
     ../../modules/vesta.nix
@@ -29,7 +30,7 @@ in
 
   boot = {
     kernelPackages = pkgs.linuxPackages;
-    kernelModules = ["amdgpu" "v4l2loopback" "i2c-dev"];
+    kernelModules = ["v4l2loopback" "i2c-dev"];
     extraModulePackages = [ pkgs.linuxPackages.v4l2loopback ];
     kernel.sysctl = {
       "vm.swappiness" = 10;
@@ -39,8 +40,6 @@ in
       "kernel.nmi_watchdog" = 0;
     };
     kernelParams = [
-      "amd_pstate=active"
-      "amd_iommu"
       "mitigations=off"
       "nvme_core.default_ps_max_latency_us=0"
     ];
@@ -151,11 +150,6 @@ in
     };
     libvirtd = {
       enable = true;
-      qemu = {
-        swtpm.enable = true;
-        ovmf.enable = true;
-        runAsRoot = true;
-      };
     };
     spiceUSBRedirection.enable = true;
   };
@@ -290,14 +284,7 @@ in
     tailscale
 
     # Work
-    openbabel2
-    marvin
-    molsketch
-    avogadrolibs
-    avogadro2
-    atomix
-    chemtool
-
+    openbabel
 
     # Audio and video
     pulseaudio
@@ -398,7 +385,7 @@ in
     # PDF
     kdePackages.okular
 
-    # Chinese
+    # Chinese fonts
     noto-fonts-cjk-sans
 
   ];
@@ -496,10 +483,6 @@ in
     auto-cpufreq = {
       enable = true;
       settings = {
-        battery = {
-          governor = "powersave";
-          turbo = "never";
-        };
         charger = {
           governor = "performance";
           turbo = "auto";
@@ -565,14 +548,11 @@ in
       enable = true;
       enableGraphical = true;
     };
-    bluetooth = {
-      enable = true;
-      powerOnBoot = true;
-    };
     graphics.enable = true;
   };
 
-  services.blueman.enable = true;
+  # Enable NVIDIA drivers for dedicated GPU (no Intel integrated graphics)
+  drivers.nvidia.enable = true;
 
   security = {
     rtkit.enable = true;
