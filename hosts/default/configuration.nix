@@ -26,7 +26,6 @@ in
     ../../modules/vesta.nix
     ../../modules/vesta-desktop.nix
     ../../modules/vaspkit.nix
-    ../../modules/asus-rog.nix
     inputs.home-manager.nixosModules.default
   ];
 

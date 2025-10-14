@@ -47,7 +47,7 @@
         RADEON_DPM_STATE_ON_AC = "performance";
         RADEON_DPM_STATE_ON_BAT = "battery";
         
-        # Platform profile (ASUS laptop specific)
+        # Platform profile (laptop specific)
         PLATFORM_PROFILE_ON_AC = "performance";
         PLATFORM_PROFILE_ON_BAT = "low-power";
         
@@ -85,10 +85,7 @@
       };
     };
     
-    # Power profiles daemon is required by asusd (ASUS laptop control)
-    # Note: This conflicts with TLP, but asusd needs it
-    # We disable TLP's conflicting features and let power-profiles-daemon
-    # work with asusd for ASUS-specific power management
+    # Power profiles daemon for power management
     power-profiles-daemon.enable = true;
     
     # Thermald for thermal management with aggressive cooling
@@ -98,10 +95,10 @@
       configFile = pkgs.writeText "thermald.conf" ''
         <?xml version="1.0"?>
         <ThermalConfiguration>
-          <Platform>
-            <Name>ASUS ROG Laptop</Name>
-            <ProductName>*</ProductName>
-            <Preference>QUIET</Preference>
+        <Platform>
+          <Name>Gaming Laptop</Name>
+          <ProductName>*</ProductName>
+          <Preference>QUIET</Preference>
             <ThermalZones>
               <ThermalZone>
                 <Type>cpu</Type>

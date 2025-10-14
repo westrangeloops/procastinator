@@ -64,9 +64,9 @@ in
       # Enable basic power management (recommended for laptops)
       powerManagement = {
         enable = true;
-        # Fine-grained power management - turns off GPU when not in use
-        # Works with Turing and newer (your RTX 5070 Ti is Blackwell)
-        finegrained = true;
+        # Fine-grained power management is only compatible with offload mode
+        # Since we use Reverse Sync (for HDMI support), we disable it
+        finegrained = false;
       };
       
       # PRIME Reverse Sync mode for hybrid graphics
@@ -91,8 +91,8 @@ in
       enable = true;
       enable32Bit = true;
       extraPackages = with pkgs; [
-        rocm-opencl-icd
-        rocm-opencl-runtime
+        # AMD ROCm OpenCL support for compute workloads
+        rocmPackages.clr.icd
       ];
     };
   };
