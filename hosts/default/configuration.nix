@@ -20,18 +20,22 @@ in
     ../../modules/amd-drivers.nix
     ../../modules/nvidia-drivers.nix
     ../../modules/nvidia-prime-drivers.nix
-    ../../modules/asus-rog.nix
     ../../modules/boot.nix
     ../../modules/wayland/security.nix
     ../../modules/power.nix
     ../../modules/vesta.nix
     ../../modules/vesta-desktop.nix
     ../../modules/vaspkit.nix
+    ../../modules/asus-rog.nix
     inputs.home-manager.nixosModules.default
   ];
 
+  # Enable NVIDIA drivers with PRIME for hybrid graphics
+  drivers.nvidia.enable = true;
+  drivers.nvidia-prime.enable = true;
+
   boot = {
-    # kernelPackages set by asus-kernel.nix module
+    kernelPackages = pkgs.linuxPackages_cachyos;
     kernelModules = ["amdgpu" "v4l2loopback" "i2c-dev"];
     extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
     kernel.sysctl = {
@@ -459,6 +463,16 @@ in
     ananicy = {
       enable = true;
       package = pkgs.ananicy-cpp;
+      rulesProvider = pkgs.ananicy-rules-cachyos_git.overrideAttrs (prevAttrs: {
+        patches = [
+          (pkgs.fetchpatch {
+            # Revert removal of Compiler rules
+            url = "https://github.com/CachyOS/ananicy-rules/commit/5459ed81c0e006547b4f3a3bc40c00d31ad50aa9.patch";
+            revert = true;
+            hash = "sha256-vc6FDwsAA6p5S6fR1FSdIRC1kCx3wGoeNarG8uEY2xM=";
+          })
+        ];
+      });
     };
 
     # SCX scheduler for SSD/NVME optimization
