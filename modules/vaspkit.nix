@@ -11,7 +11,7 @@ let
 
     src = pkgs.fetchurl {
       url = "https://sourceforge.net/projects/vaspkit/files/latest/download";
-      sha256 = "41bbdc0759f72cd43ef7e2f541d228a639bd95dba2a549398b28f47d760d72b1";
+      sha256 = "sha256-4KZx7b3PamAZXxrU6hTvJOceg5eZt+dUNp1hBB35ATQ=";
     };
 
     # Add this phase to manually unpack the tarball

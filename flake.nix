@@ -48,8 +48,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Others
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    # Removed chaotic/CachyOS - using ASUS-optimized kernel instead
   };
 
   outputs = inputs@{
@@ -68,7 +67,6 @@
     hyprland-qtutils,
     hyprland-plugins,
     hyprpanel,
-    chaotic,
     grub2-themes,
     ...
   }:
@@ -90,14 +88,12 @@
             # Add the custom overlays
             nixpkgs.overlays = [
               neovim-nightly-overlay.overlays.default
-              chaotic.overlays.default
             ];
           }
         )
         ./hosts/default/configuration.nix
         inputs.stylix.nixosModules.stylix
         inputs.home-manager.nixosModules.default
-        inputs.chaotic.nixosModules.default
       ];
     };
   };

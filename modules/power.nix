@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   services = {
+    # Login daemon settings
     logind = {
       settings = {
         Login = {
@@ -10,7 +11,7 @@
       };
     };
     
-    # Battery info and power management
+    # Battery info
     upower = {
       enable = true;
       percentageLow = 30;
@@ -19,141 +20,24 @@
       criticalPowerAction = "Hibernate";
     };
     
-    # TLP - Advanced power management (better than auto-cpufreq for laptops)
-    tlp = {
-      enable = true;
-      settings = {
-        # CPU settings - More aggressive thermal management
-        CPU_SCALING_GOVERNOR_ON_AC = "ondemand";  # Better thermal management than performance
-        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-        
-        # AMD P-State EPP (Energy Performance Preference)
-        CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";  # Balanced for thermals
-        CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-        
-        CPU_MIN_PERF_ON_AC = 0;
-        CPU_MAX_PERF_ON_AC = 80;  # Limit to 80% even on AC to reduce heat
-        CPU_MIN_PERF_ON_BAT = 0;
-        CPU_MAX_PERF_ON_BAT = 30;  # Limit CPU to 30% on battery
-        
-        # Boost settings
-        CPU_BOOST_ON_AC = 1;
-        CPU_BOOST_ON_BAT = 0;  # Disable turbo boost on battery
-        
-        # AMD GPU power management
-        RADEON_DPM_PERF_LEVEL_ON_AC = "auto";
-        RADEON_DPM_PERF_LEVEL_ON_BAT = "low";
-        RADEON_DPM_STATE_ON_AC = "performance";
-        RADEON_DPM_STATE_ON_BAT = "battery";
-        
-        # Platform profile (ASUS laptop specific)
-        PLATFORM_PROFILE_ON_AC = "performance";
-        PLATFORM_PROFILE_ON_BAT = "low-power";
-        
-        # Battery charge thresholds (prolongs battery life)
-        START_CHARGE_THRESH_BAT0 = 75;  # Start charging at 75%
-        STOP_CHARGE_THRESH_BAT0 = 80;   # Stop charging at 80%
-        
-        # Runtime power management for devices
-        RUNTIME_PM_ON_AC = "on";
-        RUNTIME_PM_ON_BAT = "auto";
-        
-        # PCIe Active State Power Management
-        PCIE_ASPM_ON_AC = "default";
-        PCIE_ASPM_ON_BAT = "powersupersave";
-        
-        # USB autosuspend - Exclude input devices to prevent mouse/keyboard freezing
-        USB_AUTOSUSPEND = 1;
-        USB_EXCLUDE_BTUSB = 1;  # Don't autosuspend Bluetooth
-        USB_EXCLUDE_PHONE = 1;
-        USB_EXCLUDE_WWAN = 1;
-        # Exclude USB input devices (mice, keyboards)
-        USB_DENYLIST = "046d:* 093a:* 1bcf:* 05ac:*";  # Logitech, Pixart, others, Apple
-        
-        # Wi-Fi power saving
-        WIFI_PWR_ON_AC = "off";
-        WIFI_PWR_ON_BAT = "on";
-        
-        # Disable Wake-on-LAN
-        WOL_DISABLE = "Y";
-        
-        # Audio power saving
-        SOUND_POWER_SAVE_ON_AC = 0;
-        SOUND_POWER_SAVE_ON_BAT = 1;
-        
-        # NVMe power management
-        AHCI_RUNTIME_PM_ON_AC = "on";
-        AHCI_RUNTIME_PM_ON_BAT = "auto";
-      };
-    };
-    
-    # Power profiles daemon conflicts with TLP, disable it
-    power-profiles-daemon.enable = false;
-    
-    # Thermald for thermal management with aggressive cooling
-    thermald = {
-      enable = true;
-      # More aggressive thermal management
-      configFile = pkgs.writeText "thermald.conf" ''
-        <?xml version="1.0"?>
-        <ThermalConfiguration>
-          <Platform>
-            <Name>ASUS ROG Laptop</Name>
-            <ProductName>*</ProductName>
-            <Preference>QUIET</Preference>
-            <ThermalZones>
-              <ThermalZone>
-                <Type>cpu</Type>
-                <TripPoints>
-                  <TripPoint>
-                    <Temperature>60000</Temperature>
-                    <Type>passive</Type>
-                    <SensorType>cpu</SensorType>
-                    <CoolingDevice>cpufreq</CoolingDevice>
-                    <TargetState>1</TargetState>
-                  </TripPoint>
-                  <TripPoint>
-                    <Temperature>70000</Temperature>
-                    <Type>passive</Type>
-                    <SensorType>cpu</SensorType>
-                    <CoolingDevice>cpufreq</CoolingDevice>
-                    <TargetState>2</TargetState>
-                  </TripPoint>
-                  <TripPoint>
-                    <Temperature>80000</Temperature>
-                    <Type>passive</Type>
-                    <SensorType>cpu</SensorType>
-                    <CoolingDevice>cpufreq</CoolingDevice>
-                    <TargetState>3</TargetState>
-                  </TripPoint>
-                </TripPoints>
-              </ThermalZone>
-            </ThermalZones>
-          </Platform>
-        </ThermalConfiguration>
-      '';
-    };
+    # Thermald for CPU thermal management
+    thermald.enable = true;
   };
   
-  # PowerTop for additional power savings
+  # Basic power management
   powerManagement = {
     enable = true;
-    powertop.enable = true;
-    cpuFreqGovernor = "powersave";  # Default governor
+    cpuFreqGovernor = "powersave";
+    powerDownCommands = ''
+      # Lock all sessions before suspend
+      loginctl lock-sessions
+      sleep 1
+    '';
   };
   
-  # Additional power-saving packages
+  # Useful power monitoring tools
   environment.systemPackages = with pkgs; [
     powertop
     acpi
-    tlp
   ];
-  
-  # Prevent USB input devices from suspending
-  services.udev.extraRules = ''
-    # Disable USB autosuspend for input devices (mice, keyboards)
-    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="046d", ATTR{power/autosuspend}="-1"
-    ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usbhid", ATTR{power/autosuspend}="-1"
-    ACTION=="add", SUBSYSTEM=="input", ATTR{power/autosuspend}="-1"
-  '';
 }

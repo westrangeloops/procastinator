@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: 
+{ pkgs, lib, config, ... }:
 let
   # nvidia-offload script for running apps on dGPU
   nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
@@ -36,52 +36,110 @@ let
         ;;
     esac
   '';
-in {
-  # ASUS ROG laptop support
-  # Requires Linux 6.10 or newer for best compatibility
+in
+{
+  # ASUS G14/G16 Patched Kernel based off of Arch Linux Kernel
+  # Source: https://github.com/Kamokuma5/nix_config/blob/main/nixos_config/nixos_modules/asus-kernel.nix
+  # This kernel includes patches specifically for ASUS ROG laptops
   
-  # Supergfxctl - Graphics switching daemon for GPU management
+  boot.kernelPackages =
+    let
+      linux_g14_pkg =
+        {
+          fetchzip,
+          fetchgit,
+          buildLinux,
+          ...
+        }@args:
+        let
+          # Get all patches from the asus-linux for Arch project
+          patch_dir = fetchgit {
+            fetchSubmodules = false;
+            url = "https://gitlab.com/dragonn/linux-g14.git/";
+            rev = "83010b4bc2a12fe18ab3532b6eea60e90db18d91";
+            hash = "sha256-ShKxLGb7tO97onL3AopNBMnN6Yoa0Eri2eHct0zS9y0=";
+          };
+
+          ## Get all top-level patch files from patch_dir
+          patchFiles = builtins.readDir patch_dir;
+
+          ## Filter for only `.patch` files
+          unsortedPatchList = lib.mapAttrsToList (
+            name: _:
+            builtins.trace "Found patch: ${name}" {
+              inherit name;
+              patch = "${patch_dir}/${name}";
+            }
+          ) (lib.filterAttrs (name: _type: lib.hasSuffix ".patch" name) patchFiles);
+
+          patchList = builtins.sort (a: b: a.name < b.name) unsortedPatchList;
+        in
+        buildLinux (
+          args
+          // rec {
+            inherit patchList;
+
+            version = "6.13.8-arch1";
+
+            # Get kernel source from arch GitHub repo
+            defconfig = "${patch_dir}/config";
+
+            src = fetchzip {
+              url = "https://github.com/archlinux/linux/archive/refs/tags/v${version}.tar.gz";
+              hash = "sha256-VzKdm8pHbeRk099IIddDlWNldAG8iYyF7K6lExmFRQE=";
+            };
+          }
+          // (args.argsOverride or { })
+        );
+      linux_g14 = pkgs.callPackage linux_g14_pkg { };
+    in
+    pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor linux_g14);
+  
+  # ASUS ROG Laptop Services and Configuration
+  
+  # Supergfxctl - Graphics switching daemon
+  # Note: With HDMI wired to dGPU, keep in Hybrid or higher modes for external displays
   services.supergfxd = {
     enable = true;
     settings = {
-      vfio_enable = true;          # Enable GPU passthrough for VMs
+      vfio_enable = true;
       vfio_save = false;
       always_reboot = false;
       no_logind = false;
       logout_timeout_s = 20;
-      hotplug_type = "Asus";       # ASUS-specific GPU switching
-      # Default to Integrated mode for better battery life and lower temps
-      default_graphics_mode = "Integrated";
+      hotplug_type = "Asus";
     };
   };
   
-  # Fix for supergfxctl graphics card detection - add kmod for modprobe
   systemd.services.supergfxd.path = [ pkgs.pciutils pkgs.kmod ];
   
-  # Asusctl - ASUS laptop control utilities (fan curves, RGB, profiles)
+  # Asusctl - ASUS laptop control (fan curves, RGB, profiles)
   services.asusd = {
     enable = true;
     enableUserService = true;
   };
   
-  # ROG Control Center - GUI for ASUS laptop management
+  # ROG Control Center - GUI
   programs.rog-control-center.enable = true;
   
-  # CoreCtrl - GPU/CPU control utility (AMD GPU tuning)
+  # CoreCtrl - GPU/CPU control
   programs.corectrl.enable = true;
   
   # ACPI daemon for hardware events
   services.acpid.enable = true;
   
-  # Add utilities to system packages
+  # Power profiles daemon - required by asusd
+  services.power-profiles-daemon.enable = true;
+  
+  # ROG laptops benefit from killing user processes on logout
+  services.logind.settings.Login.KillUserProcesses = true;
+  
+  # Add utilities to system
   environment.systemPackages = with pkgs; [
     asusctl
     supergfxctl
-    nvidia-offload       # Custom script to run apps on NVIDIA GPU
-    gpu-mode            # Easy GPU mode switching
+    nvidia-offload
+    gpu-mode
   ];
-  
-  # ROG laptops benefit from killing user processes on logout
-  services.logind.killUserProcesses = true;
 }
 

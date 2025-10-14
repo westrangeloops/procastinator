@@ -20,18 +20,18 @@ in
     ../../modules/amd-drivers.nix
     ../../modules/nvidia-drivers.nix
     ../../modules/nvidia-prime-drivers.nix
+    ../../modules/asus-rog.nix
     ../../modules/boot.nix
     ../../modules/wayland/security.nix
     ../../modules/power.nix
     ../../modules/vesta.nix
     ../../modules/vesta-desktop.nix
     ../../modules/vaspkit.nix
-    ../../modules/asus-rog.nix
     inputs.home-manager.nixosModules.default
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_cachyos;
+    # kernelPackages set by asus-kernel.nix module
     kernelModules = ["amdgpu" "v4l2loopback" "i2c-dev"];
     extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
     kernel.sysctl = {
@@ -42,10 +42,19 @@ in
       "kernel.nmi_watchdog" = 0;
     };
     kernelParams = [
+      # AMD CPU power management
       "amd_pstate=active"
       "amd_iommu"
+      
+      # Performance optimizations
+      # Note: mitigations=off disables CPU security patches for better performance
+      # Remove this if security is a concern
       "mitigations=off"
       "nvme_core.default_ps_max_latency_us=0"
+      
+      # USB autosuspend delay - 20 minutes (1200 seconds)
+      "usbcore.autosuspend=1200"
+      
       # Silent boot parameters for smooth transitions
       "quiet"
       "splash"
@@ -170,11 +179,6 @@ in
     };
     libvirtd = {
       enable = true;
-      qemu = {
-        swtpm.enable = true;
-        ovmf.enable = true;
-        runAsRoot = true;
-      };
     };
     spiceUSBRedirection.enable = true;
   };
