@@ -17,26 +17,24 @@ in
   imports = [
     ./hardware-configuration.nix
     ./user.nix
-    ../../modules/amd-drivers.nix
-    ../../modules/nvidia-drivers.nix
-    ../../modules/nvidia-prime-drivers-offload.nix
     ../../modules/boot.nix
+    ../../modules/plymouth.nix
     ../../modules/wayland/security.nix
-    ../../modules/power.nix
     ../../modules/vesta.nix
     ../../modules/vesta-desktop.nix
     ../../modules/vaspkit.nix
     inputs.home-manager.nixosModules.default
   ];
 
-  # Enable NVIDIA drivers with PRIME for hybrid graphics
-  drivers.nvidia.enable = true;
-  drivers.nvidia-prime-offload.enable = true;
-
   boot = {
     kernelPackages = pkgs.linuxPackages_cachyos;
+    # Remove NVIDIA modules from early loading - they should load automatically when needed
+    # Loading them too early can cause boot failures
     kernelModules = ["amdgpu" "v4l2loopback" "i2c-dev"];
-    extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
+    extraModulePackages = [
+      config.boot.kernelPackages.v4l2loopback
+      config.boot.kernelPackages.nvidia_x11
+    ];
     kernel.sysctl = {
       "vm.swappiness" = 10;
       "vm.vfs_cache_pressure" = 50;
@@ -48,17 +46,17 @@ in
       # AMD CPU power management
       "amd_pstate=active"
       "amd_iommu"
-      
+
       # Performance optimizations
       # Note: mitigations=off disables CPU security patches for better performance
       # Remove this if security is a concern
       "mitigations=off"
       "nvme_core.default_ps_max_latency_us=0"
-      
+
       # USB autosuspend delay - 20 minutes (1200 seconds)
-      "usbcore.autosuspend=1200"
-      
-      # Silent boot parameters for smooth transitions
+      "usbcore.autosuspend=600"
+
+      # Boot parameters for smooth splash screen
       "quiet"
       "splash"
       "boot.shell_on_fail"
@@ -70,12 +68,6 @@ in
     extraModprobeConfig = ''
       options v4l2loopback exclusive_caps=1 card_label="OBS Virtual Output"
     '';
-    loader = {
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot";
-      };
-    };
     tmp = {
       useTmpfs = true;
       tmpfsSize = "16G";
@@ -88,14 +80,7 @@ in
       mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
       magicOrExtension = ''\x7fELF....AI\x02'';
     };
-    plymouth = {
-      enable = true;
-      # Use a theme that matches better with GRUB
-      # Available themes: breeze, bgrt, glow, script, solar, spinfinity, spinner, text, tribar
-      theme = "breeze";
-    };
-    # Add silent boot for smoother transition
-    consoleLogLevel = 0;
+    # Plymouth is configured via modules/plymouth.nix
   };
 
   networking = {
@@ -189,7 +174,7 @@ in
   programs = {
     nix-ld = {
       enable = true;
-      package = pkgs.nix-ld-rs;
+      package = pkgs.nix-ld;
     };
     firefox.enable = false;
     dconf.enable = true;
@@ -230,39 +215,19 @@ in
     nano
     code-cursor-fhs
 
-    # Zen Browser from custom input
-    inputs.zen-browser.packages."${system}".default
-
     # Programming languages and tools
-    go
-    go-blueprint
-    go-migrate
     sqlc
-    goose
-    air
     lua
     uv
     clang
-    zig
-    rustup
-    nodePackages_latest.pnpm
-    nodePackages_latest.yarn
-    fnm
-    bun
-    maven
     mongodb-compass
     neo4j-desktop
     gcc
     openssl
-    nodePackages_latest.live-server
 
     # Python with essential packages
     python3
-    python3Packages.pip
     python3Packages.requests
-    python3Packages.urllib3
-    python3Packages.certifi
-    python3Packages.setuptools
 
 
     # Version control and development tools
@@ -270,15 +235,11 @@ in
     gh
     lazygit
     lazydocker
-    bruno
     gnumake
     coreutils
     nixfmt-rfc-style
-    meson
-    ninja
 
     # Shell and terminal utilities
-    stow
     wget
     killall
     eza
@@ -292,10 +253,7 @@ in
     alacritty
     exfatprogs
 
-    # inputs.ghostty.packages.${pkgs.system}.default
-
     # File management and archives
-    yazi
     p7zip
     unzip
     zip
@@ -305,27 +263,20 @@ in
     duf
 
     # System monitoring and management
-    htop
     btop
     lm_sensors
     inxi
-    # nvtopPackages.nvidia
 
     # Network and internet tools
-    aria2
     qbittorrent
-    tailscale
-
 
     # Audio and video
     pulseaudio
     pavucontrol
     ffmpeg
-    mpv
-    deadbeef-with-plugins
+    vlc
 
     # Image and graphics
-    imagemagick
     gimp
     hyprpicker
     swww
@@ -336,13 +287,7 @@ in
     obsidian
     smassh
 
-
-    # Communication and social
-    zoom-us
-    vesktop
-
     # Browsers
-    firefox
     google-chrome
 
     # System utilities
@@ -368,6 +313,7 @@ in
     playerctl
     nh
     ansible
+    asusctl
 
     # Wayland specific
     hyprshot
@@ -379,29 +325,15 @@ in
     wl-clipboard
     swaynotificationcenter
 
-    # Virtualization
-    libvirt
-    qemu
-    virt-manager
-    spice
-    spice-gtk
-    spice-protocol
-    OVMF
-
     # File systems
     ntfs3g
     os-prober
-
-    # Downloaders
-    yt-dlp
-    localsend
 
     # Clipboard managers
     cliphist
 
     # Fun and customization
     cmatrix
-    lolcat
     fastfetch
     onefetch
     microfetch
@@ -412,8 +344,6 @@ in
 
     # Music and streaming
     steam
-    lutris
-    spotify
 
     # Miscellaneous
     tuigreet
@@ -435,7 +365,7 @@ in
   '';
 
   fonts.packages = with pkgs; [
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     fira-sans
     roboto
     noto-fonts-cjk-sans
@@ -458,6 +388,10 @@ in
   };
 
   services = {
+    asusd = {
+        enable = true;
+        enableUserService = true;
+    };
     # Ananicy - process scheduler enhancer
     ananicy = {
       enable = true;
@@ -474,61 +408,69 @@ in
       });
     };
 
+    blueman.enable = true;
+
     # SCX scheduler for SSD/NVME optimization
     scx.enable = true;
     scx.scheduler = "scx_rusty";
 
     xserver = {
-      enable = false;
       xkb = {
         layout = "us";
         variant = "intl";
       };
-      videoDrivers = [ "modesetting" ];
+      videoDrivers = [
+      "modesetting"
+      "nvidia"
+      ];
     };
- logind = {
-  settings = {
-    Login = {
-      HandlePowerKey = "suspend";
+
+     logind = {
+      settings = {
+        Login = {
+          HandlePowerKey = "suspend";
+        };
+      };
     };
-  };
-};
-    cloudflare-warp.enable = true;
-    tailscale = {
-      enable = true;
-      useRoutingFeatures = "client";
-    };
+
     ollama = {
       enable = true;
       acceleration = "cuda";
       # Preload models - uncomment and modify as needed
       # loadModels = ["phi3:14b"];
     };
+
     neo4j = {
       enable = true;
       # Default port 7474 for HTTP, 7687 for Bolt
     };
+
     cron = {
       enable = true;
     };
+
     libinput.enable = true;
     upower.enable = true;
     fstrim.enable = true;
     gvfs.enable = true;
     openssh.enable = true;
     flatpak.enable = true;
+
     printing = {
       enable = true;
       drivers = [ pkgs.hplipWithPlugin ];
     };
+
     # Power management is now handled by TLP in power.nix module
     # auto-cpufreq conflicts with TLP, so it's disabled
     gnome.gnome-keyring.enable = true;
+
     avahi = {
       enable = true;
       nssmdns4 = true;
       openFirewall = true;
     };
+
     ipp-usb.enable = true;
     syncthing = {
       enable = true;
@@ -536,6 +478,7 @@ in
       dataDir = homeDirectory;
       configDir = "${homeDirectory}/.config/syncthing";
     };
+
     pipewire = {
       enable = true;
       alsa = {
@@ -546,18 +489,13 @@ in
       jack.enable = true;
       wireplumber.enable = true;
     };
+
     pulseaudio.enable = false;
-  };
+
+};
 
   powerManagement = {
     enable = true;
-    powerDownCommands = ''
-      # Lock all sessions
-      loginctl lock-sessions
-
-      # Wait for lockscreen(s) to be up
-      sleep 1
-    '';
   };
 
   systemd.services = {
@@ -565,7 +503,39 @@ in
       path = [ pkgs.flatpak ];
       script = "flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo";
     };
+
+    # Power down NVIDIA GPU when not in use (for Prime offload setups)
+    nvidia-power-down = {
+      description = "Power down NVIDIA GPU when not in use";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "display-manager.service" ];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStart = pkgs.writeShellScript "nvidia-power-down" ''
+          # Wait a bit for system to stabilize
+          sleep 5
+          # Try to set NVIDIA GPU to D3 (powered down) if possible
+          # This only works if no processes are using the GPU
+          if [ -f /sys/bus/pci/devices/0000:64:00.0/power/control ]; then
+            echo auto > /sys/bus/pci/devices/0000:64:00.0/power/control || true
+          fi
+        '';
+      };
+    };
   };
+
+  # udev rules for consistent GPU device paths
+  # This creates symlinks /dev/dri/amd-igpu and /dev/dri/nvidia-dgpu
+  # that always point to the correct card, even if card numbers change at boot
+  # PCI bus IDs from lspci: AMD at 65:00.0, NVIDIA at 64:00.0
+  # Format: lspci shows "bus:device.function", udev KERNELS uses "0000:bus:device.function"
+  services.udev.extraRules = ''
+    # AMD iGPU at PCI:65:00.0 (from lspci: 65:00.0)
+    KERNEL=="card*", KERNELS=="0000:65:00.0", SUBSYSTEM=="drm", SUBSYSTEMS=="pci", SYMLINK+="dri/amd-igpu"
+    # NVIDIA dGPU at PCI:64:00.0 (from lspci: 64:00.0)
+    KERNEL=="card*", KERNELS=="0000:64:00.0", SUBSYSTEM=="drm", SUBSYSTEMS=="pci", SYMLINK+="dri/nvidia-dgpu"
+  '';
 
   hardware = {
     sane = {
@@ -579,12 +549,30 @@ in
     };
     bluetooth = {
       enable = true;
-      powerOnBoot = true;
+      powerOnBoot = false;
     };
+    # Drivers Graphical
     graphics.enable = true;
+    amdgpu.opencl.enable = true;
+    nvidia = {
+        modesetting.enable = true;
+        powerManagement.enable = true;
+        # Enable fine-grained power management to power down GPU when not in use
+        powerManagement.finegrained = true;
+        open = false;
+
+        prime = {
+          offload = {
+                enable = true;
+                enableOffloadCmd = true;
+              };
+          # Updated PCI bus IDs to match actual hardware (from crash report)
+          amdgpuBusId = "PCI:65:0:0";
+          nvidiaBusId = "PCI:64:0:0";
+          };
+      };
   };
 
-  services.blueman.enable = true;
 
   security = {
     rtkit.enable = true;
@@ -632,15 +620,15 @@ in
 
   xdg.mime.defaultApplications = {
     # Web and HTML
-    "x-scheme-handler/http" = "zen.desktop";
-    "x-scheme-handler/https" = "zen.desktop";
-    "x-scheme-handler/chrome" = "zen.desktop";
-    "text/html" = "zen.desktop";
-    "application/x-extension-htm" = "zen.desktop";
-    "application/x-extension-html" = "zen.desktop";
-    "application/x-extension-shtml" = "zen.desktop";
-    "application/x-extension-xhtml" = "zen.desktop";
-    "application/xhtml+xml" = "zen.desktop";
+    "x-scheme-handler/http" = "google-chrome.desktop";
+    "x-scheme-handler/https" = "google-chrome.desktop";
+    "x-scheme-handler/chrome" = "google-chrome.desktop";
+    "text/html" = "google-chrome.desktop";
+    "application/x-extension-htm" = "google-chrome.desktop";
+    "application/x-extension-html" = "google-chrome.desktop";
+    "application/x-extension-shtml" = "google-chrome.desktop";
+    "application/x-extension-xhtml" = "google-chrome.desktop";
+    "application/xhtml+xml" = "google-chrome.desktop";
 
     # File management
     "inode/directory" = "org.kde.dolphin.desktop";
@@ -669,15 +657,15 @@ in
       "libreoffice-impress.desktop";
 
     # PDF
-    "application/pdf" = "zen.desktop";
+    "application/pdf" = "okular.desktop";
 
     # Torrents
     "application/x-bittorrent" = "org.qbittorrent.qBittorrent.desktop";
     "x-scheme-handler/magnet" = "org.qbittorrent.qBittorrent.desktop";
 
     # Other handlers
-    "x-scheme-handler/about" = "zen.desktop";
-    "x-scheme-handler/unknown" = "zen.desktop";
+    "x-scheme-handler/about" = "google-chrome.desktop";
+    "x-scheme-handler/unknown" = "google-chrome.desktop";
     "x-scheme-handler/postman" = "Postman.desktop";
     "x-scheme-handler/tonsite" = "org.telegram.desktop.desktop";
   };

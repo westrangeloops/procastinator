@@ -49,7 +49,7 @@ in {
       EDITOR = "nvim";
       VISUAL = "nvim";
       TERMINAL = "kitty";
-      BROWSER = "zen";
+      BROWSER = "google-chrome";
       # XDG Base Directories
       XDG_CONFIG_HOME = "$HOME/.config";
       XDG_DATA_HOME = "$HOME/.local/share";
@@ -61,9 +61,8 @@ in {
       XDG_SESSION_TYPE = "wayland";
       XDG_CURRENT_DESKTOP = "Hyprland";
       XDG_SESSION_DESKTOP = "Hyprland";
-      # NVIDIA specific
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      GBM_BACKEND = "nvidia-drm";
+      # NVIDIA Prime offload: Applications default to AMD iGPU
+      # Use 'nvidia-offload <command>' to explicitly use NVIDIA dGPU
       # Localization
       LC_ALL = "en_US.UTF-8";
     };
@@ -141,11 +140,11 @@ programs.hyprpanel = {
     "menus.clock.time.military" = true;
     "bar.volume.label" = false;
     "bar.network.label" = false;
-    
+
     # Battery settings
     "bar.battery.label" = true;
     "bar.battery.show_percentage" = true;
-    
+
     # Brightness settings
     "bar.brightness.label" = false;
 

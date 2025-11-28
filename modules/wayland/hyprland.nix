@@ -7,7 +7,7 @@
 }: {
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.default;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
     # Main Hyprland configuration
     settings = {
@@ -44,12 +44,15 @@
       ];
 
       # Environment variables
+      # Explicitly use AMD iGPU for Hyprland compositing (lower power/heat)
+      # NVIDIA dGPU available as fallback and for offloaded applications
       env = [
         "HYPRCURSOR_SIZE,24"
-        "LIBVA_DRIVER_NAME,nvidia"
+        "AQ_DRM_DEVICES,/dev/dri/amd-igpu"
         "XDG_SESSION_TYPE,wayland"
-        "GBM_BACKEND,nvidia-drm"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        # Use AMD for compositing - applications can use nvidia-offload when needed
+        "LIBVA_DRIVER_NAME,radeonsi"
+        "GBM_BACKEND,radeonsi"
       ];
 
       # Cursor
@@ -64,7 +67,7 @@
         resize_on_border = false;
         allow_tearing = false;
         layout = "dwindle";
-        
+
         # Dynamic border colors to prevent OLED burn-in
         # Colors will cycle through different hues
         "col.active_border" = lib.mkForce "rgba(c4a7e7ee) rgba(9ccfd8ee) rgba(31748fee) 45deg";
@@ -83,7 +86,7 @@
           passes = 1;
           vibrancy = 0.1696;
         };
-        
+
         # Drop shadow to add variation (helps with OLED burn-in)
         shadow = {
           enabled = true;
@@ -116,7 +119,6 @@
       # Misc
       misc = {
         disable_hyprland_logo = true;
-        disable_hyprland_qtutils_check = true;
       };
 
       # Input

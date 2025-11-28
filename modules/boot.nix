@@ -1,42 +1,24 @@
-# boot.nix
+# boot.nix - systemd-boot configuration
 { pkgs, lib, inputs, ... }:
 
 {
-  # Import grub2-themes module (provides Vimix, Tela, Stylish, etc.)
-  imports = [
-    inputs.grub2-themes.nixosModules.default
-  ];
-
   boot.loader = {
-    # Enable GRUB with EFI and Windows detection
-    grub = {
-      enable = true;
-      efiSupport = true;
-      device = "nodev";                 # EFI only, no MBR
-      useOSProber = pkgs.lib.mkForce true;   # detect Windows
-      gfxmodeEfi = pkgs.lib.mkForce "2880x1800"; # Match your laptop's native resolution
-
-      # Use theme background instead of custom splash to avoid flickering
-      splashImage = pkgs.lib.mkForce null;
+    # EFI configuration
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot";
     };
-
-    # Enable grub2-themes (choose theme: tela, stylish, vimix, whitesur, etc.)
-    grub2-theme = {
+    
+    # systemd-boot bootloader
+    systemd-boot = {
       enable = true;
-      theme = "vimix";
-      footer = true;
-      # The vimix theme has its own background that will be used consistently
+      editor = false;
+      configurationLimit = 10;
     };
   };
 
-  # Needed packages
+  # systemd-boot automatically detects Windows
   environment.systemPackages = with pkgs; [
-    os-prober   # auto-detect Windows
-    sbctl       # optional: secure boot helper
+    os-prober   # for detecting other OSes if needed
   ];
-
-  # Disable Stylix's grub theming to avoid conflicts
-  stylix.targets.grub.enable = false;
 }
-
-

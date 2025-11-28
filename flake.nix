@@ -3,16 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; # CachyOS req
     stylix.url = "github:nix-community/stylix";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    zen-browser = {
-      url = "github:pfaj/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -48,8 +43,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Others
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   };
 
   outputs = inputs@{
@@ -57,7 +50,6 @@
     nixpkgs,
     home-manager,
     stylix,
-    zen-browser,
     nixvim,
     neovim-nightly-overlay,
     nvchad4nix,
@@ -102,4 +94,3 @@
     };
   };
 }
-

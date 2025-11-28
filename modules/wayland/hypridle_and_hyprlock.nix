@@ -47,7 +47,7 @@ in {
       background = [
         {
           monitor = "";
-          path = "~/Pictures/wallpapers/wallwhale.jpg";
+          path = "~/Pictures/wallpapers/wallwhale.png";
           blur_passes = 1;
           blur_size = 12;
           noise = "0.1";

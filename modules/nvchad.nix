@@ -9,7 +9,7 @@
   ];
   programs.nvchad = {
     enable = true;
-    neovim = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+    neovim = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default;
     extraPackages = with pkgs; [
       nodePackages.bash-language-server 
       nodePackages.prettier
