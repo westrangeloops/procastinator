@@ -237,16 +237,6 @@
         "$mainMod, mouse:273, resizewindow"
       ];
 
-      # Window rules
-      windowrulev2 = [
-        "suppressevent maximize, class:.*"
-        "opacity 0.95 0.95,class:^(firefox)$"
-        "opacity 0.95 0.95,class:^(jetbrains-idea)$"
-        "opacity 0.95 0.95,class:^(zen)$"
-        "opacity 0.95 0.95,class:^(obsidian)$"
-        "opacity 0.95 0.95,class:^(intellij-idea-ultimate-edition)$"
-      ];
-
       # Submaps
       submap = [
         "passthru"
