@@ -33,7 +33,6 @@ in
     kernelModules = ["amdgpu" "v4l2loopback" "i2c-dev"];
     extraModulePackages = [
       config.boot.kernelPackages.v4l2loopback
-      config.boot.kernelPackages.nvidia_x11
     ];
     kernel.sysctl = {
       "vm.swappiness" = 10;
@@ -46,6 +45,9 @@ in
       # AMD CPU power management
       "amd_pstate=active"
       "amd_iommu"
+      
+      # Force enable unsupported GPUs for NVIDIA open kernel module
+      "nvidia.NVreg_OpenRmEnableUnsupportedGpus=1"
 
       # Performance optimizations
       # Note: mitigations=off disables CPU security patches for better performance
@@ -215,13 +217,13 @@ in
     nano
     code-cursor-fhs
 
+
     # Programming languages and tools
     sqlc
     lua
     uv
     clang
     mongodb-compass
-    neo4j-desktop
     gcc
     openssl
 
@@ -278,6 +280,7 @@ in
 
     # Image and graphics
     gimp
+    inkscape
     hyprpicker
     swww
     waypaper
@@ -389,8 +392,8 @@ in
 
   services = {
     asusd = {
-        enable = true;
-        enableUserService = true;
+      enable = true;
+      enableUserService = true;
     };
     # Ananicy - process scheduler enhancer
     ananicy = {
@@ -435,9 +438,6 @@ in
 
     ollama = {
       enable = true;
-      acceleration = "cuda";
-      # Preload models - uncomment and modify as needed
-      # loadModels = ["phi3:14b"];
     };
 
     neo4j = {
@@ -523,6 +523,41 @@ in
         '';
       };
     };
+
+    # CRITICAL: Ensure ASUS fans are enabled and running
+    # This service ensures fans are active to prevent overheating
+    asus-fan-control = {
+      description = "Ensure ASUS fans are enabled - CRITICAL for temperature control";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "asusd.service" "network.target" ];
+      requires = [ "asusd.service" ];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        User = "root";
+        ExecStart = pkgs.writeShellScript "asus-fan-control" ''
+          # Wait for asusd to be fully ready
+          sleep 5
+          
+          # CRITICAL: Set GPU MUX to Hybrid (dGPU available for offload) by default
+          # This ensures NVIDIA dGPU is powered and available for offload
+          ${pkgs.asusctl}/bin/asusctl graphics -m Hybrid || true
+          
+          # CRITICAL: Set profile to Balanced or Performance to ensure fans are ON
+          # Quiet/Silent mode can turn fans off completely - DANGEROUS!
+          ${pkgs.asusctl}/bin/asusctl profile -P Balanced || \
+          ${pkgs.asusctl}/bin/asusctl profile -P Performance || true
+          
+          # Set fan curves to ensure active cooling
+          ${pkgs.asusctl}/bin/asusctl fan-curve -m Balanced -D cpu || true
+          ${pkgs.asusctl}/bin/asusctl fan-curve -m Balanced -D gpu || true
+          
+          # Log the current settings for debugging
+          echo "ASUS GPU mode: $(asusctl graphics -g 2>/dev/null || echo 'unknown')" || true
+          echo "ASUS fan profile: $(asusctl profile -p 2>/dev/null || echo 'unknown')" || true
+        '';
+      };
+    };
   };
 
   # udev rules for consistent GPU device paths
@@ -559,18 +594,30 @@ in
         powerManagement.enable = true;
         # Enable fine-grained power management to power down GPU when not in use
         powerManagement.finegrained = true;
-        open = false;
+
+        # REQUIRED: RTX 50-series (and Turing+) requires open kernel modules
+        # The proprietary kernel module does not support this GPU
+        open = true;
+
+        # Add parameter to enable unsupported GPUs for the open kernel module
+        # This is often needed for very new hardware (like RTX 50-series) on initial driver support
+        nvidiaSettings = true;
 
         prime = {
           offload = {
-                enable = true;
-                enableOffloadCmd = true;
-              };
-          # Updated PCI bus IDs to match actual hardware (from crash report)
-          amdgpuBusId = "PCI:65:0:0";
-          nvidiaBusId = "PCI:64:0:0";
+            enable = true;
+            enableOffloadCmd = true;
           };
-      };
+          # Updated PCI bus IDs to match actual hardware (from lspci, converted to decimal)
+          # AMD iGPU: 65:00.0 (Hex) -> 101:00:0 (Decimal)
+          amdgpuBusId = "PCI:101:0:0";
+          # NVIDIA dGPU: 64:00.0 (Hex) -> 100:00:0 (Decimal)
+          nvidiaBusId = "PCI:100:0:0";
+        };
+
+        # Use the beta driver for RTX 50-series support
+        package = config.boot.kernelPackages.nvidiaPackages.beta;
+    };
   };
 
 

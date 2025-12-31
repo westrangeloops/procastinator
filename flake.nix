@@ -84,6 +84,7 @@
               neovim-nightly-overlay.overlays.default
               chaotic.overlays.default
             ];
+
           }
         )
         ./hosts/default/configuration.nix
