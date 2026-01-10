@@ -5,7 +5,7 @@ return {
     opts = require "configs.conform",
   },
   { "chrisgrieser/nvim-genghis" },
-  { "elentok/format-on-save.nvim" },
+  -- { "elentok/format-on-save.nvim" }, -- Removed: conflicting with conform.nvim
   {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
@@ -43,50 +43,34 @@ return {
 
 
   -- load luasnips + cmp related in insert mode only
+  -- Removed redundant nvim-cmp block (it's already in core NvChad)
+  -- If you need to customize it, just use opts:
+  -- {
+  --   "hrsh7th/nvim-cmp",
+  --   opts = function() ... end
+  -- },
+
+  -- Copilot
   {
-    "hrsh7th/nvim-cmp",
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
     event = "InsertEnter",
-    dependencies = {
-      {
-        -- snippet plugin
-        "L3MON4D3/LuaSnip",
-        dependencies = "rafamadriz/friendly-snippets",
-        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-        config = function(_, opts)
-          require("luasnip").config.set_config(opts)
-          require "nvchad.configs.luasnip"
-        end,
-      },
-
-      -- autopairing of (){}[] etc
-      {
-        "windwp/nvim-autopairs",
         opts = {
-          fast_wrap = {},
-          disable_filetype = { "TelescopePrompt", "vim" },
+      suggestion = {
+        enabled = true,
+        auto_trigger = true,
+        keymap = {
+          accept = "<Tab>", -- Accept with Tab
         },
-        config = function(_, opts)
-          require("nvim-autopairs").setup(opts)
-
-          -- setup cmp for autopairs
-          local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-          require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
-        end,
       },
-
-      -- cmp sources plugins
-      {
-        "saadparwaiz1/cmp_luasnip",
-        "hrsh7th/cmp-nvim-lua",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
+      panel = { enabled = false },
+      filetypes = {
+        markdown = true,
+        help = true,
       },
-    },
-    opts = function()
-      return require "nvchad.configs.cmp"
-    end,
   },
+  },
+
   {
     "jake-stewart/multicursor.nvim",
     branch = "1.0",
@@ -212,6 +196,7 @@ return {
   },
   {
     'IogaMaster/neocord',
+    enabled = false, -- Disabled: conflicting with cord.nvim
     event = "VeryLazy"
   },
 
@@ -220,7 +205,28 @@ return {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
-      -- add any options here
+      lsp = {
+        -- override markdown rendering so that **cmp** and other plugins use Treesitter
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
+        -- Disable signature help and hover to avoid conflicts with NvChad
+        signature = {
+          enabled = false,
+        },
+        hover = {
+          enabled = false,
+        },
+      },
+      presets = {
+        bottom_search = false, -- use a classic bottom cmdline for search
+        command_palette = true, -- position the cmdline and popupmenu together
+        long_message_to_split = true, -- long messages will be sent to a split
+        inc_rename = false, -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = false, -- add a border to hover docs and signature help
+      },
     },
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
@@ -234,7 +240,7 @@ return {
 
   {
     "neovim/nvim-lspconfig",
-    dependencies = { 'saghen/blink.cmp' },
+    -- dependencies = { 'saghen/blink.cmp' }, -- Removed conflicting blink.cmp
     config = function()
       require "configs.lspconfig"
     end,
@@ -296,6 +302,7 @@ return {
 
   {
     "mattn/emmet-vim",
+    enabled = false, -- Removed: redundant with emmet-language-server
     lazy = false, -- Ensures Emmet loads on start
   },
   {

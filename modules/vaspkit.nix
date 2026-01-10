@@ -10,8 +10,8 @@ let
     version = "1.5.1";
 
     src = pkgs.fetchurl {
-      url = "https://sourceforge.net/projects/vaspkit/files/latest/download";
-      sha256 = "sha256-4KZx7b3PamAZXxrU6hTvJOceg5eZt+dUNp1hBB35ATQ=";
+      url = "https://sourceforge.net/projects/vaspkit/files/Binaries/vaspkit.1.5.1.linux.x64.tar.gz/download";
+      sha256 = "sha256-QbvcB1n3LNQ+9+L1QdIopjm9lduipUk5iyj0fXYNcrE=";
     };
 
     # Add this phase to manually unpack the tarball

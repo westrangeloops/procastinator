@@ -173,4 +173,75 @@ programs.hyprpanel = {
 };   # End of programs.hyprpanel
 
   programs.home-manager.enable = true;
+
+  # SSH configuration with proper permissions (600)
+  programs.ssh = {
+    enable = true;
+    matchBlocks = {
+      sdumont = {
+        hostname = "login.sdumont2nd.lncc.br";
+        user = "jesus.olivella";
+      };
+      romeo = {
+        hostname = "romeo.if.usp.br";
+        user = "drivera";
+      };
+      chumbo = {
+        hostname = "chumbo.if.usp.br";
+        user = "camilo";
+      };
+      hidrogenio = {
+        hostname = "10.5.1.192";
+        user = "camilo";
+        proxyJump = "chumbo";
+      };
+      "hidrogenio-admin" = {
+        hostname = "10.5.1.192";
+        user = "scherm";
+      };
+      "gateway-hpc" = {
+        hostname = "hpc.ufabc.edu.br";
+        user = "camilo.olivella";
+      };
+      carbono = {
+        hostname = "carbono.ufabc.int.br";
+        user = "camilo.olivella";
+        proxyJump = "gateway-hpc";
+      };
+    };
+  };
+
+# SSHFS
+systemd.user.services.carbono-mount = {
+  Unit = {
+    Description = "Mount carbono via SSHFS";
+    After = [ "network-online.target" ];
+    Wants = [ "network-online.target" ];
+  };
+  Service = {
+    # CHANGE 1: Use 'simple' so Systemd tracks the PID
+    Type = "simple"; 
+    
+    # CHANGE 2: Run in foreground (-f) so Systemd knows when it dies
+    ExecStart = let
+      sshfsCmd = "${pkgs.sshfs}/bin/sshfs -f -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,noatime,IdentityFile=${homeDirectory}/.ssh/id_rsa";
+    in pkgs.writeShellScript "mount-carbono" ''
+      mkdir -p ${homeDirectory}/carbono
+      export HOME="${homeDirectory}"
+      # Explicitly pointing to the key is often more stable in services than relying on config
+      exec ${sshfsCmd} carbono:/home/camilo.olivella ${homeDirectory}/carbono
+    '';
+
+    # CHANGE 3: Lazy unmount (-u -z) prevents the "rot" hang during stop
+    ExecStop = "${pkgs.fuse}/bin/fusermount -u -z ${homeDirectory}/carbono";
+    
+    # Restart automatically if the connection crashes
+    Restart = "always";
+    RestartSec = "10s";
+  };
+  Install = {
+    WantedBy = [ "default.target" ];
+  };
+};
+
 }

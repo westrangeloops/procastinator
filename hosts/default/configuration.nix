@@ -45,7 +45,7 @@ in
       # AMD CPU power management
       "amd_pstate=active"
       "amd_iommu"
-      
+
       # Force enable unsupported GPUs for NVIDIA open kernel module
       "nvidia.NVreg_OpenRmEnableUnsupportedGpus=1"
 
@@ -95,6 +95,7 @@ in
       checkReversePath = "loose";
     };
   };
+
 
   time.timeZone = timeZone;
 
@@ -185,13 +186,6 @@ in
       enable = true;
       enableSSHSupport = true;
     };
-    thunar = {
-      enable = true;
-      plugins = with pkgs.xfce; [
-        thunar-archive-plugin
-        thunar-volman
-      ];
-    };
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -216,6 +210,7 @@ in
     # Text editors and IDEs
     nano
     code-cursor-fhs
+    gemini-cli
 
 
     # Programming languages and tools
@@ -226,6 +221,8 @@ in
     mongodb-compass
     gcc
     openssl
+    sshfs
+    vpnc
 
     # Python with essential packages
     python3
@@ -538,20 +535,20 @@ in
         ExecStart = pkgs.writeShellScript "asus-fan-control" ''
           # Wait for asusd to be fully ready
           sleep 5
-          
+
           # CRITICAL: Set GPU MUX to Hybrid (dGPU available for offload) by default
           # This ensures NVIDIA dGPU is powered and available for offload
           ${pkgs.asusctl}/bin/asusctl graphics -m Hybrid || true
-          
+
           # CRITICAL: Set profile to Balanced or Performance to ensure fans are ON
           # Quiet/Silent mode can turn fans off completely - DANGEROUS!
           ${pkgs.asusctl}/bin/asusctl profile -P Balanced || \
           ${pkgs.asusctl}/bin/asusctl profile -P Performance || true
-          
+
           # Set fan curves to ensure active cooling
           ${pkgs.asusctl}/bin/asusctl fan-curve -m Balanced -D cpu || true
           ${pkgs.asusctl}/bin/asusctl fan-curve -m Balanced -D gpu || true
-          
+
           # Log the current settings for debugging
           echo "ASUS GPU mode: $(asusctl graphics -g 2>/dev/null || echo 'unknown')" || true
           echo "ASUS fan profile: $(asusctl profile -p 2>/dev/null || echo 'unknown')" || true

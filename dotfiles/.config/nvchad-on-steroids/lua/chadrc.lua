@@ -10,7 +10,7 @@ M.ui = {
     -- Custom highlight overrides
     hl_override = {
         Normal = {
-            bg = "#00070B",
+            -- bg = "#00070B",
             fg = "#A9A9A9",
         },
     },
@@ -37,7 +37,7 @@ M.ui = {
     -- Completion configuration
     cmp = {
         sources = {
-            { name = "codeium" }
+            -- { name = "codeium" }
         },
         icons_left = false,
         lspkind_text = true,

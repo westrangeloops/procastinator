@@ -37,8 +37,8 @@ vim.schedule(function()
 end)
 require "genghis"
 
-local format_on_save = require("format-on-save")
-local formatters = require("format-on-save.formatters")
+-- local format_on_save = require("format-on-save")
+-- local formatters = require("format-on-save.formatters")
 
 -- Custom nvdash loading fix
 vim.api.nvim_create_autocmd("VimEnter", {
@@ -70,6 +70,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end,
 })
 
+--[[
 format_on_save.setup({
     exclude_path_patterns = {
         "/node_modules/",
@@ -167,3 +168,18 @@ format_on_save.setup({
     -- To prevent that set `run_with_sh` to `false`.
     run_with_sh = false,
 })
+
+-- Force Transparency
+local function set_transparency()
+    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+    vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+    vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+end
+
+-- Run on startup and colorscheme change
+vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
+    pattern = "*",
+    callback = set_transparency,
+})
+--]]
